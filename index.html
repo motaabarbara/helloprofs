@@ -674,9 +674,13 @@ tbody tr:hover td{background:var(--bg)}
   </div>
 
   <div class="snav" id="nav-intermediary" style="display:none">
-    <div class="ni on" onclick="nav('dashboard')">
+    <div class="ni" id="ni-int-dashboard" onclick="nav('dashboard')">
       <span class="nic"><svg class="ic" viewBox="0 0 16 16"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg></span>
       Dashboard
+    </div>
+    <div class="ni" id="ni-int-invites" onclick="nav('invites')">
+      <span class="nic"><svg class="ic" viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" rx="1"/><path d="M8 5v6M5 8h6"/></svg></span>
+      Invites
     </div>
   </div>
 
@@ -754,15 +758,9 @@ tbody tr:hover td{background:var(--bg)}
       </div>
 
       <!-- Intermediary dashboard view -->
-      <div id="dashboard-intermediary-state" style="display:none;position:absolute;inset:0;overflow-y:auto;z-index:5;padding:20px 24px">
+      <div id="dashboard-intermediary-state" style="display:none">
 
-        <!-- Standard screen header -->
-        <div class="tw" style="margin-bottom:16px">
-          <div class="ph2">
-            <div style="font-size:13px;font-weight:600">Dashboard</div>
-            <button class="btn bk bs" onclick="toggleIntermediaryInviteForm(true)">+ New entity</button>
-          </div>
-
+        <div class="tw">
           <!-- Empty state: no organisations yet -->
           <div id="int-orgs-empty" style="padding:60px 24px;text-align:center">
             <div style="width:52px;height:52px;border-radius:50%;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 16px">
@@ -770,40 +768,11 @@ tbody tr:hover td{background:var(--bg)}
             </div>
             <div style="font-size:16px;font-weight:700;margin-bottom:8px;color:var(--t1)">Invite your first organisation</div>
             <div style="font-size:13px;color:var(--t3);line-height:1.7;max-width:360px;margin:0 auto 22px">As an intermediary you can create and manage organisations on behalf of your clients. Their Legal Representative or Admin will receive an email to complete the profile.</div>
-            <button class="btn bk bs" onclick="toggleIntermediaryInviteForm(true)">+ New entity</button>
+            <button class="btn bk bs" onclick="nav('invites')">+ New entity</button>
           </div>
 
           <!-- Organisations list (shown after first invite) -->
           <div id="int-orgs-list" style="display:none;flex-direction:column;gap:1px"></div>
-        </div>
-
-        <!-- Inline invite form (hidden by default) -->
-        <div id="int-invite-form" style="display:none">
-          <div class="tw">
-            <div class="ph2" style="justify-content:space-between">
-              <div style="font-size:13px;font-weight:600">Invite an organisation</div>
-              <button class="btn bg bx" onclick="toggleIntermediaryInviteForm(false)">✕</button>
-            </div>
-            <div style="padding:18px;display:flex;flex-direction:column;gap:14px">
-              <div style="font-size:12px;color:var(--t3);line-height:1.6">Enter the email of the organisation's <strong style="color:var(--t2)">Legal Representative</strong> or an <strong style="color:var(--t2)">Admin</strong>. They will receive a link to complete their profile on HelloProfs.</div>
-              <div class="fld" style="margin:0">
-                <label class="lbl dk">Organisation name *</label>
-                <input class="ii" id="int-form-org-name" placeholder="e.g. Bouw Installaties B.V." style="margin-top:6px">
-              </div>
-              <div class="fld" style="margin:0">
-                <label class="lbl dk">Legal Representative or Admin email *</label>
-                <input class="ii" id="int-form-org-email" type="email" placeholder="director@company.nl" style="margin-top:6px">
-              </div>
-              <div class="fld" style="margin:0">
-                <label class="lbl dk">Message <span style="font-weight:400;color:var(--t3)">(optional)</span></label>
-                <textarea class="ii" id="int-form-org-msg" style="min-height:70px;margin-top:6px" placeholder="Add a note explaining why they're being invited..."></textarea>
-              </div>
-              <div style="display:flex;gap:8px;justify-content:flex-end">
-                <button class="btn bg bs" onclick="toggleIntermediaryInviteForm(false)">Cancel</button>
-                <button class="btn bk bs" onclick="submitIntermediaryInviteInline()">Send invitation →</button>
-              </div>
-            </div>
-          </div>
         </div>
 
       </div>
@@ -844,6 +813,53 @@ tbody tr:hover td{background:var(--bg)}
         <div class="ar" onclick="nav('zzp-tasks')"><div class="adot" style="background:var(--amber)"></div><div class="at">Renovation block E, floor 1–2 — response needed</div><div class="am">26–30 May</div></div>
         <div class="ar" onclick="nav('zzp-tasks')"><div class="adot" style="background:#111111"></div><div class="at">Renovation block C, floor 3 — accepted · pending invoice</div><div class="am">19–23 May</div></div>
         <div class="ar" onclick="nav('zzp-tasks')" style="justify-content:center"><div style="font-size:12px;color:var(--t3)">View all tasks →</div></div>
+      </div>
+    </div>
+
+    <!-- INVITES (Intermediary) -->
+    <div class="sc" id="pg-invites">
+      <div class="tw">
+        <div class="ph2">
+          <div style="font-size:13px;font-weight:600">Invites</div>
+          <button class="btn bk bs" onclick="nav('invites-new')">+ New entity</button>
+        </div>
+        <!-- Empty state -->
+        <div style="padding:60px 24px;text-align:center">
+          <div style="width:52px;height:52px;border-radius:50%;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 16px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>
+          </div>
+          <div style="font-size:16px;font-weight:700;margin-bottom:8px;color:var(--t1)">Invite your first organisation</div>
+          <div style="font-size:13px;color:var(--t3);line-height:1.7;max-width:360px;margin:0 auto 22px">As an intermediary you can create and manage organisations on behalf of your clients. Their Legal Representative or Admin will receive an email to complete the profile.</div>
+          <button class="btn bk bs" onclick="nav('invites-new')">+ New entity</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- INVITES / NEW ENTITY -->
+    <div class="sc" id="pg-invites-new">
+      <div class="tw">
+        <div class="ph2">
+          <div style="font-size:13px;font-weight:600">New entity</div>
+        </div>
+        <div style="padding:18px;display:flex;flex-direction:column;gap:14px">
+          <div style="font-size:12px;color:var(--t3);line-height:1.6">Enter the email of the organisation's <strong style="color:var(--t2)">Legal Representative</strong> or an <strong style="color:var(--t2)">Admin</strong>. They will receive a link to complete their profile on HelloProfs.</div>
+          <div class="fld" style="margin:0">
+            <label class="lbl dk">Organisation name *</label>
+            <input class="ii" id="int-new-org-name" placeholder="e.g. Bouw Installaties B.V.">
+          </div>
+          <div class="fld" style="margin:0">
+            <label class="lbl dk">Legal Representative or Admin email *</label>
+            <input class="ii" id="int-new-org-email" type="email" placeholder="director@company.nl">
+          </div>
+          <div class="fld" style="margin:0">
+            <label class="lbl dk">Message <span style="font-weight:400;color:var(--t3)">(optional)</span></label>
+            <textarea class="ii" id="int-new-org-msg" style="min-height:70px" placeholder="Add a note explaining why they're being invited..."></textarea>
+          </div>
+          <div style="display:flex;gap:8px;justify-content:flex-end">
+            <button class="btn bg bs" onclick="nav('invites')">Cancel</button>
+            <button class="btn bk bs" onclick="submitNewEntityPage()">Send invitation →</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1072,7 +1088,8 @@ tbody tr:hover td{background:var(--bg)}
                 <div style="flex-shrink:0"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;flex-shrink:0"><path d="M4 2h5l3 3v9H4V2z"/><path d="M9 2v3h3"/></svg></div>
                 <div style="flex:1">
                   <div style="font-size:13px;font-weight:500">Wet DBA Questionnaire — Jan Bakker</div>
-                  <div style="font-size:11px;color:var(--t3);margin-top:1px">Completed 28 Feb 2026 · Score: 74–86% compliant</div>
+                  <div style="font-size:11px;color:var(--t3);margin-top:1px" class="chain-score-full">Completed 28 Feb 2026 · Score: 74–86% compliant</div>
+                  <div style="font-size:11px;color:var(--t3);margin-top:1px;display:none" class="chain-score-client">Completed 28 Feb 2026</div>
                 </div>
                 <span class="badge bgn">Compliant</span>
                 <button class="btn bw bx" onclick="toast('📥 Downloading...')">↓</button>
@@ -1163,9 +1180,15 @@ tbody tr:hover td{background:var(--bg)}
                       <span class="badge bga" style="font-size:10px">View score ↓</span>
                     </div>
                     <div id="chain-a1" style="display:none;padding:12px;border:1px solid var(--border);border-radius:var(--rs);background:var(--white)">
-                      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--t3);margin-bottom:4px"><span>Low risk</span><span style="font-weight:600;color:var(--amber-t)">48–58% · Elevated</span><span>High risk</span></div>
-                      <div class="sb" style="height:6px;margin-bottom:10px"><div class="sf" style="width:53%;background:linear-gradient(90deg,var(--amber),#f97316)"></div></div>
-                      <div style="font-size:12px;color:var(--t2);line-height:1.6">Elevated risk — unconfirmed insurance and no G-rekening are the primary concerns. Require Jan Bakker to confirm insurance and mandate G-rekening usage.</div>
+                      <div class="chain-score-full">
+                        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--t3);margin-bottom:4px"><span>Low risk</span><span style="font-weight:600;color:var(--amber-t)">48–58% · Elevated</span><span>High risk</span></div>
+                        <div class="sb" style="height:6px;margin-bottom:10px"><div class="sf" style="width:53%;background:linear-gradient(90deg,var(--amber),#f97316)"></div></div>
+                        <div style="font-size:12px;color:var(--t2);line-height:1.6">Elevated risk — unconfirmed insurance and no G-rekening are the primary concerns. Require Jan Bakker to confirm insurance and mandate G-rekening usage.</div>
+                      </div>
+                      <div class="chain-score-client" style="display:none">
+                        <span class="badge bgr" style="font-size:12px;padding:4px 10px">Not compliant</span>
+                        <div style="font-size:12px;color:var(--t2);line-height:1.6;margin-top:8px">This sub-contractor does not meet the compliance requirements for this contract chain.</div>
+                      </div>
                     </div>
 
                     <!-- Sub 2 -->
@@ -1180,9 +1203,15 @@ tbody tr:hover td{background:var(--bg)}
                       <span class="badge bga" style="font-size:10px">View score ↓</span>
                     </div>
                     <div id="chain-a2" style="display:none;padding:12px;border:1px solid var(--border);border-radius:var(--rs);background:var(--white)">
-                      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--t3);margin-bottom:4px"><span>Low risk</span><span style="font-weight:600;color:#111111">72–80% · Low</span><span>High risk</span></div>
-                      <div class="sb" style="height:6px;margin-bottom:10px"><div class="sf" style="width:76%"></div></div>
-                      <div style="font-size:12px;color:var(--t2);line-height:1.6">Low risk profile — multiple clients, own tools, confirmed insurance. G-rekening in use. Exposure is minimal for this sub-contractor.</div>
+                      <div class="chain-score-full">
+                        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--t3);margin-bottom:4px"><span>Low risk</span><span style="font-weight:600;color:#111111">72–80% · Low</span><span>High risk</span></div>
+                        <div class="sb" style="height:6px;margin-bottom:10px"><div class="sf" style="width:76%"></div></div>
+                        <div style="font-size:12px;color:var(--t2);line-height:1.6">Low risk profile — multiple clients, own tools, confirmed insurance. G-rekening in use. Exposure is minimal for this sub-contractor.</div>
+                      </div>
+                      <div class="chain-score-client" style="display:none">
+                        <span class="badge bgn" style="font-size:12px;padding:4px 10px">Compliant</span>
+                        <div style="font-size:12px;color:var(--t2);line-height:1.6;margin-top:8px">This sub-contractor meets the compliance requirements for this contract chain.</div>
+                      </div>
                     </div>
 
                     <!-- Sub 3 -->
@@ -1197,9 +1226,15 @@ tbody tr:hover td{background:var(--bg)}
                       <span class="badge bga" style="font-size:10px">View score ↓</span>
                     </div>
                     <div id="chain-a3" style="display:none;padding:12px;border:1px solid var(--border);border-radius:var(--rs);background:var(--white)">
-                      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--t3);margin-bottom:4px"><span>Low risk</span><span style="font-weight:600;color:var(--amber-t)">55–65% · Moderate</span><span>High risk</span></div>
-                      <div class="sb" style="height:6px;margin-bottom:10px"><div class="sf" style="width:60%;background:linear-gradient(90deg,var(--amber),#f97316)"></div></div>
-                      <div style="font-size:12px;color:var(--t2);line-height:1.6">Moderate risk — works for a single client only, which is a yellow flag. Recommend Jan Bakker requests evidence of other active clients before extending further sub-contracts.</div>
+                      <div class="chain-score-full">
+                        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--t3);margin-bottom:4px"><span>Low risk</span><span style="font-weight:600;color:var(--amber-t)">55–65% · Moderate</span><span>High risk</span></div>
+                        <div class="sb" style="height:6px;margin-bottom:10px"><div class="sf" style="width:60%;background:linear-gradient(90deg,var(--amber),#f97316)"></div></div>
+                        <div style="font-size:12px;color:var(--t2);line-height:1.6">Moderate risk — works for a single client only, which is a yellow flag. Recommend Jan Bakker requests evidence of other active clients before extending further sub-contracts.</div>
+                      </div>
+                      <div class="chain-score-client" style="display:none">
+                        <span class="badge bga" style="font-size:12px;padding:4px 10px">Not compliant</span>
+                        <div style="font-size:12px;color:var(--t2);line-height:1.6;margin-top:8px">This sub-contractor does not fully meet the compliance requirements for this contract chain.</div>
+                      </div>
                     </div>
 
                     <!-- Sub 4 -->
@@ -1214,9 +1249,15 @@ tbody tr:hover td{background:var(--bg)}
                       <span class="badge bgg" style="font-size:10px">Completed · View score ↓</span>
                     </div>
                     <div id="chain-a4" style="display:none;padding:12px;border:1px solid var(--border);border-radius:var(--rs);background:var(--white)">
-                      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--t3);margin-bottom:4px"><span>Low risk</span><span style="font-weight:600;color:#111111">78–86% · Low</span><span>High risk</span></div>
-                      <div class="sb" style="height:6px;margin-bottom:10px"><div class="sf" style="width:82%"></div></div>
-                      <div style="font-size:12px;color:var(--t2);line-height:1.6">Low risk — strong self-employment indicators across all questionnaire points. Work has been completed and invoiced. No ongoing exposure for this sub-contractor.</div>
+                      <div class="chain-score-full">
+                        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--t3);margin-bottom:4px"><span>Low risk</span><span style="font-weight:600;color:#111111">78–86% · Low</span><span>High risk</span></div>
+                        <div class="sb" style="height:6px;margin-bottom:10px"><div class="sf" style="width:82%"></div></div>
+                        <div style="font-size:12px;color:var(--t2);line-height:1.6">Low risk — strong self-employment indicators across all questionnaire points. Work has been completed and invoiced. No ongoing exposure for this sub-contractor.</div>
+                      </div>
+                      <div class="chain-score-client" style="display:none">
+                        <span class="badge bgn" style="font-size:12px;padding:4px 10px">Compliant</span>
+                        <div style="font-size:12px;color:var(--t2);line-height:1.6;margin-top:8px">This sub-contractor meets the compliance requirements for this contract chain. Work is completed and invoiced.</div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1260,9 +1301,15 @@ tbody tr:hover td{background:var(--bg)}
                     <span class="badge bga" style="font-size:10px">View score ↓</span>
                   </div>
                   <div id="chain-b1" style="display:none;padding:12px;border:1px solid var(--border);border-radius:var(--rs);background:var(--white);margin-top:6px">
-                    <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--t3);margin-bottom:4px"><span>Low risk</span><span style="font-weight:600;color:#111111">74–82% · Low</span><span>High risk</span></div>
-                    <div class="sb" style="height:6px;margin-bottom:10px"><div class="sf" style="width:78%"></div></div>
-                    <div style="font-size:12px;color:var(--t2);line-height:1.6">Low risk — strong self-employment profile. G-rekening confirmed. Exposure is minimal.</div>
+                    <div class="chain-score-full">
+                      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--t3);margin-bottom:4px"><span>Low risk</span><span style="font-weight:600;color:#111111">74–82% · Low</span><span>High risk</span></div>
+                      <div class="sb" style="height:6px;margin-bottom:10px"><div class="sf" style="width:78%"></div></div>
+                      <div style="font-size:12px;color:var(--t2);line-height:1.6">Low risk — strong self-employment profile. G-rekening confirmed. Exposure is minimal.</div>
+                    </div>
+                    <div class="chain-score-client" style="display:none">
+                      <span class="badge bgn" style="font-size:12px;padding:4px 10px">Compliant</span>
+                      <div style="font-size:12px;color:var(--t2);line-height:1.6;margin-top:8px">This sub-contractor meets the compliance requirements for this contract chain.</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1305,9 +1352,15 @@ tbody tr:hover td{background:var(--bg)}
                     <span class="badge bgg" style="font-size:10px">View score ↓</span>
                   </div>
                   <div id="chain-c1" style="display:none;padding:12px;border:1px solid var(--border);border-radius:var(--rs);background:var(--white);margin-top:6px">
-                    <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--t3);margin-bottom:4px"><span>Low risk</span><span style="font-weight:600;color:#111111">80–88% · Low</span><span>High risk</span></div>
-                    <div class="sb" style="height:6px;margin-bottom:10px"><div class="sf" style="width:84%"></div></div>
-                    <div style="font-size:12px;color:var(--t2);line-height:1.6">Low risk — work completed. No ongoing liability exposure for this sub-contractor. Audit trail is complete.</div>
+                    <div class="chain-score-full">
+                      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--t3);margin-bottom:4px"><span>Low risk</span><span style="font-weight:600;color:#111111">80–88% · Low</span><span>High risk</span></div>
+                      <div class="sb" style="height:6px;margin-bottom:10px"><div class="sf" style="width:84%"></div></div>
+                      <div style="font-size:12px;color:var(--t2);line-height:1.6">Low risk — work completed. No ongoing liability exposure for this sub-contractor. Audit trail is complete.</div>
+                    </div>
+                    <div class="chain-score-client" style="display:none">
+                      <span class="badge bgn" style="font-size:12px;padding:4px 10px">Compliant</span>
+                      <div style="font-size:12px;color:var(--t2);line-height:1.6;margin-top:8px">This sub-contractor meets the compliance requirements. Work is completed and the audit trail is complete.</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1904,6 +1957,21 @@ tbody tr:hover td{background:var(--bg)}
 
     <!-- CONTRACT DETAIL -->
     <div class="sc" id="pg-contract-detail">
+      <!-- Cancellation pending banner -->
+      <div id="cd-cancel-banner" style="display:none;background:#fff3cd;border:1px solid #fcd34d;border-radius:var(--r);padding:12px 16px;margin-bottom:14px;display:none">
+        <div style="display:flex;align-items:flex-start;gap:10px">
+          <svg viewBox="0 0 16 16" fill="none" stroke="#b45309" stroke-width="1.2" stroke-linecap="round" style="width:15px;height:15px;flex-shrink:0;margin-top:1px"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5M8 10.5v.5"/></svg>
+          <div style="flex:1">
+            <div style="font-size:13px;font-weight:600;color:#92400e;margin-bottom:2px">Cancellation requested</div>
+            <div style="font-size:12px;color:#92400e;line-height:1.6" id="cd-cancel-banner-text">You have requested cancellation of this contract. Awaiting acceptance from the other party.</div>
+          </div>
+          <div id="cd-cancel-respond-btns" style="display:none;display:flex;gap:6px;flex-shrink:0">
+            <button class="btn bg bs" style="font-size:12px;border-color:#b45309;color:#92400e" onclick="respondCancellation('deny')">Deny</button>
+            <button class="btn bs" style="font-size:12px;background:#212121;color:#fff;border-color:#212121" onclick="respondCancellation('accept')">Accept cancellation</button>
+          </div>
+        </div>
+      </div>
+
       <div class="panel" style="margin-bottom:16px">
         <div style="padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
           <div>
@@ -1911,6 +1979,7 @@ tbody tr:hover td{background:var(--bg)}
             <div style="font-size:13px;color:var(--t3);margin-top:2px" id="cd-sub">Jan Bakker · Framework</div>
             <div style="margin-top:6px"><span class="badge bga" id="cd-badge">Expiring</span></div>
           </div>
+          <button class="btn bw bs viewer-hide" id="cd-cancel-btn" onclick="openCancellationRequest()" style="font-size:12px;color:#b45309;border-color:#fcd34d">Request cancellation</button>
         </div>
         <div style="border-top:1px solid var(--border);padding:12px 20px;display:flex;gap:32px;flex-wrap:wrap">
           <div><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:2px">Contractor</div><div style="font-size:13px;font-weight:500" id="cd-contractor">Jan Bakker</div></div>
@@ -2069,7 +2138,7 @@ tbody tr:hover td{background:var(--bg)}
             <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--bg);border:1px solid var(--border);border-radius:var(--rs)">
               <div class="av" style="width:32px;height:32px;font-size:12px;background:#777">?</div>
               <div style="flex:1"><div style="font-size:13px;font-weight:500">Anonymous sub-contractor</div><div style="font-size:11px;color:var(--t3)">Identity hidden · KVK verified</div></div>
-              <span class="badge bga">74%</span>
+              <span class="badge bga">Not compliant</span>
             </div>
           </div>
 
@@ -2080,7 +2149,7 @@ tbody tr:hover td{background:var(--bg)}
 
     <!-- INVOICES -->
     <div class="sc" id="pg-invoices">
-      <div class="tw"><div class="th2"><div style="font-size:13px;font-weight:600">Invoices</div><div style="display:flex;gap:8px"><input class="src" placeholder="Search..."><button class="btn bw bs viewer-hide" id="inv-credit-btn" onclick="openCreditInvoice()">+ Credit invoice</button><button class="btn bk bs viewer-hide" id="inv-new-btn" style="display:none" onclick="openInv()">+ New invoice</button></div></div>
+      <div class="tw"><div class="th2"><div style="font-size:13px;font-weight:600">Invoices</div><div style="display:flex;gap:8px"><input class="src" placeholder="Search..."><button class="btn bw bs viewer-hide" id="inv-credit-btn" style="display:none" onclick="openCreditInvoice()">+ Credit invoice</button><button class="btn bk bs viewer-hide" id="inv-new-btn" style="display:none" onclick="openInv()">+ New invoice</button></div></div>
       <table><thead><tr><th>Invoice</th><th>Contractor</th><th>Date</th><th>Excl. BTW</th><th>Total</th><th>Status</th></tr></thead><tbody>
         <tr><td><span class="mono">#2026-014</span></td><td>Jan Bakker</td><td>19 May</td><td>€3,471</td><td>€4,200</td><td><span class="badge bgn">Paid</span></td></tr>
         <tr><td><span class="mono">#2026-013</span></td><td>Pieter Smit</td><td>15 May</td><td>€2,851</td><td>€3,450</td><td><span class="badge bgr">Overdue</span></td></tr>
@@ -2685,8 +2754,21 @@ tbody tr:hover td{background:var(--bg)}
         <table>
           <thead><tr><th>Description</th><th>Framework</th><th>Client</th><th>Period</th><th>Status</th><th>Invoiced</th></tr></thead>
           <tbody id="tasks-tbody">
-            <tr data-status="pending">
-              <td><div class="tm">Renovation block E, floor 1–2</div></td>
+            <tr data-status="extension" onclick="openTaskDetail('ext')" style="cursor:pointer">
+              <td>
+                <div class="tm">Roof repair Block D — summer works</div>
+                <div style="font-size:11px;color:#b45309;margin-top:2px;display:flex;align-items:center;gap:4px">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" style="width:11px;height:11px;flex-shrink:0"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5M8 10.5v.5"/></svg>
+                  Contract expires before task ends — action required
+                </div>
+              </td>
+              <td style="font-size:12px;color:var(--t3)">Raamopdracht Timmerwerk</td>
+              <td>Miyagami B.V.</td>
+              <td style="font-size:12px">1 Jul – 29 Aug 2026</td>
+              <td><span class="badge" style="background:#fef3c7;color:#b45309;font-weight:600">Extension required</span></td>
+              <td>—</td>
+            </tr>
+            <tr data-status="pending" onclick="openTaskDetail('normal')" style="cursor:pointer">
               <td style="font-size:12px;color:var(--t3)">Raamopdracht Timmerwerk</td>
               <td>Miyagami B.V.</td>
               <td style="font-size:12px">26–30 May 2026</td>
@@ -2737,8 +2819,83 @@ tbody tr:hover td{background:var(--bg)}
         </table>
       </div>
 
-    <!-- NOTIFICATIONS -->
     </div>
+
+    <!-- TASK DETAIL -->
+    <div class="sc" id="pg-task-detail">
+      <div class="tw" style="margin-bottom:14px">
+        <div class="ph2">
+          <div>
+            <div class="ptl2" id="task-detail-title">Roof repair Block D — summer works</div>
+            <div style="font-size:11px;color:var(--t3);margin-top:2px" id="task-detail-meta">Raamopdracht Timmerwerk · Miyagami B.V.</div>
+          </div>
+          <span id="task-detail-badge" class="badge" style="background:#fef3c7;color:#b45309;font-weight:600">Extension required</span>
+        </div>
+        <div style="padding:14px 16px;border-top:1px solid var(--border);display:flex;gap:28px;flex-wrap:wrap">
+          <div><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:2px">Period</div><div style="font-size:13px;font-weight:500">1 Jul – 29 Aug 2026</div></div>
+          <div><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:2px">Framework</div><div style="font-size:13px;font-weight:500">Raamopdracht Timmerwerk</div></div>
+          <div><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:2px">Client</div><div style="font-size:13px;font-weight:500">Miyagami B.V.</div></div>
+          <div><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:2px">Your contract ends</div><div style="font-size:13px;font-weight:500;color:#b45309">31 May 2026</div></div>
+        </div>
+        <div style="padding:12px 16px;border-top:1px solid var(--border)">
+          <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:6px">Description</div>
+          <div style="font-size:13px;color:var(--t2);line-height:1.6">Full roof inspection and repair of Block D ahead of summer occupancy. Includes replacement of damaged sections, waterproofing and gutter clearing. Estimated 6–8 weeks on-site.</div>
+        </div>
+      </div>
+
+      <!-- Extension required warning -->
+      <div id="task-ext-warning" style="background:#fffbeb;border:1px solid #fcd34d;border-radius:var(--r);padding:14px 16px;margin-bottom:14px">
+        <div style="display:flex;align-items:flex-start;gap:10px">
+          <svg viewBox="0 0 16 16" fill="none" stroke="#b45309" stroke-width="1.2" stroke-linecap="round" style="width:16px;height:16px;flex-shrink:0;margin-top:1px"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5M8 10.5v.5"/></svg>
+          <div style="flex:1">
+            <div style="font-size:13px;font-weight:600;color:#92400e;margin-bottom:4px">Your contract expires before this task ends</div>
+            <div style="font-size:12px;color:#92400e;line-height:1.6;margin-bottom:12px">Your contract under <strong>Raamopdracht Timmerwerk</strong> ends on <strong>31 May 2026</strong>, but this task runs until <strong>29 Aug 2026</strong>. You must either extend your contract or submit a new offer before accepting this task.</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn bs" style="background:#fff;border:1.5px solid #b45309;color:#92400e;font-size:12px" onclick="openExtendContract()">Extend contract →</button>
+              <button class="btn bs" style="background:#212121;border:1.5px solid #212121;color:#fff;font-size:12px" onclick="openNewOfferFromTask()">Create new offer →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- No extension needed — accept/decline (hidden initially for this task) -->
+      <div id="task-normal-actions" style="display:none;background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px">
+        <div style="font-size:13px;font-weight:600;margin-bottom:4px">Respond to this task</div>
+        <div style="font-size:12px;color:var(--t3);margin-bottom:12px">Your contract covers this task period. By accepting you confirm you are available for the full period. Your contract ends at the task end date.</div>
+        <div style="display:flex;gap:8px">
+          <button class="btn bk bs" onclick="acceptTask()">Accept task →</button>
+          <button class="btn bg bs" onclick="declineTask()">Decline</button>
+        </div>
+      </div>
+
+      <!-- Contract extended — awaiting client acceptance (shown after extension submitted) -->
+      <div id="task-ext-pending" style="display:none;background:#f4f4f4;border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;margin-bottom:14px">
+        <div style="font-size:13px;font-weight:600;margin-bottom:4px">Extension request sent</div>
+        <div style="font-size:12px;color:var(--t2);line-height:1.6">Your contract extension request has been sent to <strong>Miyagami B.V.</strong> for review. Once they accept, you can proceed with this task.</div>
+      </div>
+
+      <!-- New offer submitted — awaiting client acceptance -->
+      <div id="task-offer-pending" style="display:none;background:#f4f4f4;border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;margin-bottom:14px">
+        <div style="font-size:13px;font-weight:600;margin-bottom:4px">New offer submitted</div>
+        <div style="font-size:12px;color:var(--t2);line-height:1.6">Your new offer has been sent to <strong>Miyagami B.V.</strong>. Once they accept, you can accept this task. <a onclick="showClientReview()" style="color:var(--t2);cursor:pointer;text-decoration:underline">Simulate client response →</a></div>
+      </div>
+
+      <!-- Client accepted — ready to accept task -->
+      <div id="task-ready-actions" style="display:none;background:#f0fdf4;border:1px solid #86efac;border-radius:var(--r);padding:14px 16px">
+        <div style="font-size:13px;font-weight:600;color:#15803d;margin-bottom:4px">Offer accepted by client</div>
+        <div style="font-size:12px;color:#166534;line-height:1.6;margin-bottom:12px">Miyagami B.V. has accepted your new offer. You can now accept this task.</div>
+        <button class="btn bk bs" onclick="acceptTask()">Accept task →</button>
+      </div>
+
+      <!-- Task accepted state -->
+      <div id="task-accepted-state" style="display:none;background:#f0fdf4;border:1px solid #86efac;border-radius:var(--r);padding:14px 16px">
+        <div style="font-size:13px;font-weight:600;color:#15803d;margin-bottom:2px">Task accepted</div>
+        <div style="font-size:12px;color:#166534;line-height:1.6">You have accepted this task. Your contract is valid through <strong>29 Aug 2026</strong>.</div>
+      </div>
+
+    </div>
+
+    <!-- NOTIFICATIONS -->    </div>
     <div class="sc" id="pg-notifications">
       <div class="tw">
         <div class="th2">
@@ -2788,6 +2945,7 @@ tbody tr:hover td{background:var(--bg)}
 
     <!-- SETTINGS -->
     </div>
+
     <div class="sc" id="pg-settings">
       <div class="tw">
         <div style="padding:0 16px;border-bottom:1px solid var(--border)">
@@ -3359,8 +3517,8 @@ tbody tr:hover td{background:var(--bg)}
         </div>
       </div>
     </div>
-
   </div><!-- /pw -->
+
 </div><!-- /main -->
 </div><!-- /app -->
 
@@ -4262,13 +4420,19 @@ tbody tr:hover td{background:var(--bg)}
 
     <!-- Sub-options (visible when 'Notify existing' is selected) -->
     <div id="fw-scope-contractor-options" style="display:flex;flex-direction:row;gap:8px">
-      <label style="flex:1;flex-direction:column;display:flex;align-items:flex-start;gap:10px;padding:14px;border:1.5px solid var(--border);border-radius:var(--r);cursor:default">
-        <div style="font-size:13px;font-weight:600">Continue without changes to offer</div>
-        <div style="font-size:12px;color:var(--t3);line-height:1.6">The PO will be updated but the contractor's offer stays the same. The client will be asked to sign the updated contract.</div>
+      <label style="flex:1;flex-direction:column;display:flex;align-items:flex-start;gap:10px;padding:14px;border:2px solid var(--navy);border-radius:var(--r);cursor:pointer;background:rgba(10,26,58,.03)" id="fw-sub-opt-continue" onclick="selectFWSub('continue')">
+        <input type="radio" name="fw-sub" value="continue" checked style="accent-color:var(--navy);flex-shrink:0">
+        <div>
+          <div style="font-size:13px;font-weight:600;margin-bottom:3px">Continue without changes to offer</div>
+          <div style="font-size:12px;color:var(--t3);line-height:1.6">The PO will be updated but the contractor's offer stays the same. The client will be asked to sign the updated contract.</div>
+        </div>
       </label>
-      <label style="flex:1;flex-direction:column;display:flex;align-items:flex-start;gap:10px;padding:14px;border:1.5px solid var(--border);border-radius:var(--r);cursor:default">
-        <div style="font-size:13px;font-weight:600">Review and change offer</div>
-        <div style="font-size:12px;color:var(--t3);line-height:1.6">Update both the PO and the offer. The client will review the new offer before signing.</div>
+      <label style="flex:1;flex-direction:column;display:flex;align-items:flex-start;gap:10px;padding:14px;border:1.5px solid var(--border);border-radius:var(--r);cursor:pointer" id="fw-sub-opt-review" onclick="selectFWSub('review')">
+        <input type="radio" name="fw-sub" value="review" style="accent-color:var(--navy);flex-shrink:0">
+        <div>
+          <div style="font-size:13px;font-weight:600;margin-bottom:3px">Review and change offer</div>
+          <div style="font-size:12px;color:var(--t3);line-height:1.6">Update both the PO and the offer. The client will review the new offer before signing.</div>
+        </div>
       </label>
     </div>
     <div id="fw-scope-contractor-note" style="font-size:11px;color:var(--t3);margin-top:8px">Each contractor will choose their preferred option.</div>
@@ -4311,6 +4475,159 @@ tbody tr:hover td{background:var(--bg)}
   <div class="mf">
     <button class="btn bg bs" onclick="cl('m-fw-contractor-proceed')">Decide later</button>
     <button class="btn bk bs" onclick="submitFWProceed()">Confirm →</button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL: EXTEND CONTRACT -->
+<div class="overlay" id="m-extend-contract">
+<div class="modal" style="width:480px">
+  <div class="mh"><div class="mt">Request contract extension</div><button class="mx" onclick="cl('m-extend-contract')">✕</button></div>
+  <div class="mb">
+    <div style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;color:var(--t2);margin-bottom:16px;line-height:1.6">
+      You are requesting to extend your contract under <strong>Raamopdracht Timmerwerk</strong> with Miyagami B.V. Both parties must accept for the extension to take effect. <strong>Maximum extension: 1 year.</strong>
+    </div>
+    <div class="g2">
+      <div class="fld">
+        <label class="lbl dk">Current end date</label>
+        <input class="ii" value="31 May 2026" disabled style="opacity:.6">
+      </div>
+      <div class="fld">
+        <label class="lbl dk">New end date *</label>
+        <input class="ii" id="ext-new-end" type="date" value="2026-08-29">
+      </div>
+    </div>
+    <div style="background:#fff3cd;border:1px solid #fcd34d;border-radius:var(--rs);padding:10px 12px;font-size:12px;color:#92400e;margin-bottom:14px;line-height:1.6" id="ext-max-warning" style="display:none">
+      The extension period exceeds 1 year. Please reduce the end date or create a new offer instead.
+    </div>
+    <div class="fld" style="margin-bottom:0">
+      <label class="lbl dk">Reason for extension *</label>
+      <textarea class="ii" id="ext-reason" style="min-height:80px" placeholder="e.g. The task assigned under this framework extends beyond the current contract period. The extension covers the roof repair of Block D running until 29 August 2026."></textarea>
+    </div>
+  </div>
+  <div class="mf">
+    <button class="btn bg bs" onclick="cl('m-extend-contract')">Cancel</button>
+    <button class="btn bw bs" onclick="cannotExtend()">Cannot extend — new offer →</button>
+    <button class="btn bk bs" onclick="submitExtension()">Send request →</button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL: NEW OFFER FROM TASK -->
+<div class="overlay" id="m-new-offer-task">
+<div class="modal" style="width:480px">
+  <div class="mh"><div class="mt">Create new offer</div><button class="mx" onclick="cl('m-new-offer-task')">✕</button></div>
+  <div class="mb">
+    <div style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;color:var(--t2);margin-bottom:16px;line-height:1.6">
+      A new offer is required because the task period goes beyond what can be covered by a contract extension (max 1 year) or you chose not to extend. The client must accept this offer before you can proceed.
+    </div>
+    <div class="fld">
+      <label class="lbl dk">Task / scope description *</label>
+      <textarea class="ii" style="min-height:70px" placeholder="Describe the work you will perform…">Roof repair Block D — summer works. Full inspection, waterproofing and gutter clearing. On-site 1 July to 29 August 2026.</textarea>
+    </div>
+    <div class="g2">
+      <div class="fld"><label class="lbl dk">Amount (excl. BTW) *</label><input class="ii" placeholder="e.g. €8,500"></div>
+      <div class="fld"><label class="lbl dk">Pricing type</label><select class="ii"><option>Fixed price</option><option>Hourly rate</option></select></div>
+      <div class="fld"><label class="lbl dk">Start date</label><input class="ii" type="date" value="2026-07-01"></div>
+      <div class="fld"><label class="lbl dk">End date</label><input class="ii" type="date" value="2026-08-29"></div>
+    </div>
+    <div class="fld" style="margin-bottom:0">
+      <label class="lbl dk">Motivation <span style="font-weight:400;color:var(--t3)">(optional)</span></label>
+      <textarea class="ii" style="min-height:56px" placeholder="Why you are the right person for this work…"></textarea>
+    </div>
+  </div>
+  <div class="mf">
+    <button class="btn bg bs" onclick="cl('m-new-offer-task')">Cancel</button>
+    <button class="btn bk bs" onclick="submitNewOfferTask()">Submit offer →</button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL: CLIENT REVIEW NEW OFFER (simulation) -->
+<div class="overlay" id="m-client-review-offer">
+<div class="modal" style="width:480px">
+  <div class="mh"><div class="mt">Client — Review new offer</div><button class="mx" onclick="cl('m-client-review-offer')">✕</button></div>
+  <div class="mb">
+    <div style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;color:var(--t2);margin-bottom:16px;line-height:1.6">
+      <em>Simulating the client's view.</em> Miyagami B.V. received a new offer from Laurens de Boer for the task <strong>Roof repair Block D — summer works</strong>.
+    </div>
+    <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:14px">
+      <div class="ir"><span class="ik">Contractor</span><span class="iv">Laurens de Boer · De Boer Timmerwerk</span></div>
+      <div class="ir"><span class="ik">Scope</span><span class="iv">Roof repair Block D</span></div>
+      <div class="ir"><span class="ik">Period</span><span class="iv">1 Jul – 29 Aug 2026</span></div>
+      <div class="ir" style="border:none"><span class="ik">Amount</span><span class="iv">€8,500 (fixed price)</span></div>
+    </div>
+  </div>
+  <div class="mf">
+    <button class="btn bg bs" onclick="cl('m-client-review-offer')">Decline offer</button>
+    <button class="btn bk bs" onclick="clientAcceptsOffer()">Accept offer →</button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL: REQUEST CONTRACT CANCELLATION -->
+<div class="overlay" id="m-cancel-contract">
+<div class="modal" style="width:500px">
+  <div class="mh"><div class="mt">Request contract cancellation</div><button class="mx" onclick="cl('m-cancel-contract')">✕</button></div>
+  <div class="mb">
+    <div style="background:#fff3cd;border:1px solid #fcd34d;border-radius:var(--rs);padding:10px 14px;font-size:12px;color:#92400e;margin-bottom:16px;line-height:1.6">
+      You are requesting to cancel <strong id="cancel-contract-name">Raamopdracht Timmerwerk</strong>. Both parties must agree before the contract is terminated. Cancellation requests can be withdrawn as long as the other party hasn't responded.
+    </div>
+
+    <div class="fld">
+      <label class="lbl dk">Reason for cancellation *</label>
+      <textarea class="ii" id="cancel-reason" style="min-height:90px" placeholder="Explain why you are requesting to cancel this contract. This will be shared with the other party and logged in the contract dossier."></textarea>
+    </div>
+
+    <div class="g2">
+      <div class="fld">
+        <label class="lbl dk">Requested effective date *</label>
+        <input class="ii" id="cancel-effective-date" type="date" value="2026-06-01">
+      </div>
+      <div class="fld">
+        <label class="lbl dk">Notice period</label>
+        <select class="ii" id="cancel-notice">
+          <option value="immediate">Immediate</option>
+          <option value="7" selected>7 days</option>
+          <option value="14">14 days</option>
+          <option value="30">30 days</option>
+          <option value="60">60 days</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="fld" style="margin-bottom:0">
+      <label class="lbl dk">Supporting documents <span style="font-weight:400;color:var(--t3)">(optional)</span></label>
+      <button class="btn bw bs" style="width:100%;margin-top:6px" onclick="toast('File picker opened')">+ Add document</button>
+    </div>
+  </div>
+  <div class="mf">
+    <button class="btn bg bs" onclick="cl('m-cancel-contract')">Cancel</button>
+    <button class="btn bs" style="background:#212121;color:#fff;border-color:#212121" onclick="submitCancellationRequest()">Send request →</button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL: RESPOND TO CANCELLATION (other party simulation) -->
+<div class="overlay" id="m-cancel-respond">
+<div class="modal" style="width:500px">
+  <div class="mh"><div class="mt">Contract cancellation request</div><button class="mx" onclick="cl('m-cancel-respond')">✕</button></div>
+  <div class="mb">
+    <div style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;color:var(--t2);margin-bottom:16px;line-height:1.6">
+      <em>Simulating the other party's view.</em> <strong id="cancel-requester">Miyagami B.V.</strong> has requested to cancel the contract <strong id="cancel-respond-name">Raamopdracht Timmerwerk</strong>.
+    </div>
+    <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:16px">
+      <div class="ir"><span class="ik">Requested by</span><span class="iv" id="cancel-resp-by">Miyagami B.V.</span></div>
+      <div class="ir"><span class="ik">Effective date</span><span class="iv" id="cancel-resp-date">1 Jun 2026</span></div>
+      <div class="ir"><span class="ik">Notice period</span><span class="iv" id="cancel-resp-notice">7 days</span></div>
+      <div class="ir" style="border:none;align-items:flex-start"><span class="ik">Reason</span><span class="iv" id="cancel-resp-reason" style="font-weight:400;color:var(--t2);line-height:1.6">—</span></div>
+    </div>
+    <div style="font-size:12px;color:var(--t3);line-height:1.6">If you accept, the contract will be terminated on the requested effective date. If you deny, the contract continues and the requesting party will be notified.</div>
+  </div>
+  <div class="mf">
+    <button class="btn bg bs" onclick="cl('m-cancel-respond')">Close</button>
+    <button class="btn bw bs" onclick="clientRespondsCancellation('deny')" style="color:#b45309;border-color:#fcd34d">Deny</button>
+    <button class="btn bs" style="background:#212121;color:#fff;border-color:#212121" onclick="clientRespondsCancellation('accept')">Accept cancellation →</button>
   </div>
 </div>
 </div>
@@ -5249,6 +5566,7 @@ function setEnt(co,type,av,role){
   }
 
   updateInvoiceButtons();
+  applyChainScoreView();
   closeEdd();
   nav('dashboard');
 }
@@ -5323,10 +5641,15 @@ function nav(p){
   document.querySelectorAll('.sc').forEach(s=>s.classList.remove('on'));
   document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
   const pg=document.getElementById('pg-'+p);if(pg)pg.classList.add('on');
-  const activeNav = currentEntityType === "ZZP'er" ? document.getElementById('nav-zzp') : document.getElementById('nav-org');
+  // Pick active nav based on entity type
+  const isIntermediary = document.getElementById('nav-intermediary')?.style.display !== 'none';
+  const activeNav = isIntermediary
+    ? document.getElementById('nav-intermediary')
+    : currentEntityType === "ZZP'er" ? document.getElementById('nav-zzp') : document.getElementById('nav-org');
   if(activeNav){
     activeNav.querySelectorAll('.ni').forEach(n=>{
-      if(n.getAttribute('onclick') && n.getAttribute('onclick').includes("'"+p+"'")) n.classList.add('on');
+      const oc = n.getAttribute('onclick') || '';
+      if(oc.includes("'"+p+"'") || (p.startsWith('invites') && oc.includes("'invites'"))) n.classList.add('on');
     });
   }
   // Breadcrumb map: page → [segments], cta
@@ -5342,7 +5665,7 @@ function nav(p){
     'fw-contractor':  {segs:[{label:'Purchase Orders',page:'pos'},{label:'Framework Agreements',page:'framework'},{label:'—'}], cta:null},
     'fw-contractor':  {segs:[{label:'Purchase Orders',page:'pos'},{label:'Framework Agreements',page:'framework'},{label:'—'}], cta:null},
     contracts:        {segs:[{label:'Contracts'}],                                                             cta:null},
-    invoices:         {segs:[{label:'Invoices'}],                                                             cta:['+ Invoice',()=>openInvoiceByRole()]},
+    invoices:         {segs:[{label:'Invoices'}],                                                             cta: currentEntityType === "ZZP'er" ? ['+ Invoice',()=>openInv()] : null},
     projects:         {segs:[{label:'Projects'}],                                                             cta:['+ New Project',()=>openNewProject()]},
     'project-detail': {segs:[{label:'Projects',page:'projects'},{label:'—'}],                                 cta:null},
     settings:         {segs:[{label:'Settings'}],                                                             cta:null},
@@ -5351,6 +5674,9 @@ function nav(p){
     'zzp-make-offer':   {segs:[{label:'Purchase Orders',page:'zzp-pos'},{label:'Dakbedekking Renovatie Blok C',page:'zzp-received-po'},{label:'Make an offer'}], cta:null},
     'zzp-po-detail':  {segs:[{label:'Purchase Orders',page:'zzp-pos'},{label:'—'}],                           cta:null},
     'zzp-tasks':      {segs:[{label:'Tasks'}],                                                                 cta:null},
+    'task-detail':    {segs:[{label:'Tasks',page:'zzp-tasks'},{label:'Task detail'}],                          cta:null},
+    'invites':        {segs:[{label:'Invites'}],                                                               cta:null},
+    'invites-new':    {segs:[{label:'Invites',page:'invites'},{label:'New entity'}],                           cta:null},
   };
   const entry = bmap[p];
   if(entry) setBreadcrumb(entry.segs, entry.cta);
@@ -5511,10 +5837,34 @@ function doLogin(){
       document.getElementById('nav-org').style.display='none';
       document.getElementById('nav-zzp').style.display='none';
       document.getElementById('nav-intermediary').style.display='block';
-      // Swap mc button to + New entity
+      // mc button → + New entity → goes to Invites / New entity
       const mc = document.getElementById('mc');
-      if(mc){ mc.textContent='+ New entity'; mc.onclick=()=>toggleIntermediaryInviteForm(true); }
-      // Hide all dashboard content, show intermediary state (use separate flag)
+      if(mc){ mc.textContent='+ New entity'; mc.setAttribute('onclick',"nav('invites-new')"); }
+      // Hide Subscription tab in Settings
+      const subTab = document.querySelector('.tab[onclick*="st3"]');
+      if(subTab) subTab.style.display='none';
+      // Hide Legal representative + its divider
+      const lrSection = document.getElementById('profile-client-section');
+      if(lrSection){
+        const prev = lrSection.previousElementSibling;
+        if(prev) prev.style.display='none';
+        lrSection.style.display='none';
+      }
+      // Hide Business registration block (the div + heading that follow the next .div)
+      const st0 = document.getElementById('st0');
+      if(st0){
+        st0.querySelectorAll('.div').forEach(divider=>{
+          const next = divider.nextElementSibling;
+          if(next && next.textContent?.includes('Business registration')){
+            divider.style.display='none';
+            next.style.display='none';
+            // Also hide the .g2 that follows
+            const g2 = next.nextElementSibling?.nextElementSibling;
+            if(g2) g2.style.display='none';
+          }
+        });
+      }
+      // Hide all dashboard content, show intermediary state
       document.querySelectorAll('#pg-dashboard > *:not(#dashboard-click-blocker):not(#dashboard-empty-state):not(#dashboard-intermediary-state)').forEach(el=>{
         el.dataset.hiddenForDennis='1'; el.style.display='none';
       });
@@ -5685,6 +6035,13 @@ function deactivateEmptyDashboard(){
   // Restore nav-org visibility (in case Dennis hid it)
   const navOrg = document.getElementById('nav-org');
   if(navOrg) navOrg.style.display='block';
+  // Restore Subscription tab + profile sections hidden for Dennis
+  const subTab = document.querySelector('.tab[onclick*="st3"]');
+  if(subTab) subTab.style.display='';
+  const lrSection = document.getElementById('profile-client-section');
+  if(lrSection){ lrSection.style.display=''; const prev=lrSection.previousElementSibling; if(prev) prev.style.display=''; }
+  const st0 = document.getElementById('st0');
+  if(st0){ st0.querySelectorAll('.div').forEach(d=>{ d.style.display=''; const n=d.nextElementSibling; if(n) n.style.display=''; const g=n?.nextElementSibling?.nextElementSibling; if(g) g.style.display=''; }); }
   // Restore mc button based on entity type
   const mc = document.getElementById('mc');
   if(mc){
@@ -5976,6 +6333,42 @@ function openOfferContractDetail(){
   ], null);
 }
 
+function applyChainScoreView(){
+  // Clients see Compliant/Not compliant labels; contractors and admins see full % scores
+  const isClientView = currentEntityRole !== "ZZP'er" && currentEntityType !== "ZZP'er";
+  document.querySelectorAll('.chain-score-full').forEach(el=>{
+    el.style.display = isClientView ? 'none' : 'block';
+  });
+  document.querySelectorAll('.chain-score-client').forEach(el=>{
+    el.style.display = isClientView ? 'block' : 'none';
+  });
+  // Compliance score tab: show % bar for contractors, simplified for clients
+  const scoreLbl = document.getElementById('pod-score-lbl');
+  const scoreFill = document.getElementById('pod-score-fill');
+  const scoreBar = scoreFill?.closest('.sb');
+  const scoreRange = scoreBar?.previousElementSibling;
+  if(isClientView){
+    if(scoreRange) scoreRange.style.display='none';
+    if(scoreBar) scoreBar.style.display='none';
+  } else {
+    if(scoreRange) scoreRange.style.display='';
+    if(scoreBar) scoreBar.style.display='';
+  }
+  // Dashboard compliance widget
+  const dashComplianceW = document.querySelector('.w [class*="Compliance"]')?.closest('.w');
+  if(dashComplianceW){
+    const wv = dashComplianceW.querySelector('.wv');
+    const wd = dashComplianceW.querySelector('.wd');
+    if(isClientView){
+      if(wv){ wv.textContent='Compliant'; wv.style.fontSize='14px'; }
+      if(wd) wd.textContent='All active contracts';
+    } else {
+      if(wv){ wv.textContent='94%'; wv.style.fontSize=''; }
+      if(wd) wd.textContent='1 contractor action required';
+    }
+  }
+}
+
 function openContractDetail(title, contractor, type, value, status, expires){
   document.getElementById('cd-title').textContent = title;
   document.getElementById('cd-sub').textContent = contractor + ' · ' + type;
@@ -5990,6 +6383,12 @@ function openContractDetail(title, contractor, type, value, status, expires){
   document.getElementById('ct1').style.display='block';
   document.querySelectorAll('#pg-contract-detail .tab').forEach((t)=>t.classList.remove('on'));
   document.querySelector('#pg-contract-detail .tab').classList.add('on');
+  applyChainScoreView();
+  // Reset cancellation state
+  const cancelBanner = document.getElementById('cd-cancel-banner');
+  if(cancelBanner) cancelBanner.style.display='none';
+  const cancelBtn = document.getElementById('cd-cancel-btn');
+  if(cancelBtn){ cancelBtn.textContent='Request cancellation'; cancelBtn.style.display=''; cancelBtn.onclick=openCancellationRequest; }
   nav('contract-detail');
   setBreadcrumb([{label:'Contracts',page:'contracts'},{label:title}], null);
 }
@@ -6068,19 +6467,21 @@ function openCreditInvoice(){
 }
 function openInvoiceByRole(){
   const isZZP = currentEntityType === "ZZP'er";
-  if(isZZP) openInv(); else openCreditInvoice();
+  if(isZZP) openInv(); else return; // clients cannot create invoices
 }
 function updateInvoiceButtons(){
   const isZZP = currentEntityType === "ZZP'er";
   const newBtn = document.getElementById('inv-new-btn');
   const creditBtn = document.getElementById('inv-credit-btn');
-  if(newBtn) newBtn.style.display = isZZP ? '' : 'none';
-  if(creditBtn) creditBtn.style.display = isZZP ? 'none' : '';
-  // Update topbar CTA label
+  // Contractor: both buttons visible. Client: neither.
+  if(newBtn)    newBtn.style.display    = isZZP ? '' : 'none';
+  if(creditBtn) creditBtn.style.display = isZZP ? '' : 'none';
+  // Update topbar CTA — only show for contractors
   const mc = document.getElementById('mc');
   if(mc && mc.style.display !== 'none'){
     if(window._currentPage === 'invoices'){
-      mc.textContent = isZZP ? '+ New invoice' : '+ Credit invoice';
+      if(isZZP) mc.textContent = '+ New invoice';
+      else mc.textContent = '+ New PO'; // revert to default for org
     }
   }
 }
@@ -6657,6 +7058,14 @@ function saveFWPOChanges(){
   }
 }
 
+function selectFWSub(val){
+  const optCont = document.getElementById('fw-sub-opt-continue');
+  const optRev  = document.getElementById('fw-sub-opt-review');
+  if(optCont){ optCont.style.border = val==='continue' ? '2px solid var(--navy)' : '1.5px solid var(--border)'; optCont.style.background = val==='continue' ? 'rgba(10,26,58,.03)' : ''; }
+  if(optRev) { optRev.style.border  = val==='review'   ? '2px solid var(--navy)' : '1.5px solid var(--border)'; optRev.style.background  = val==='review'   ? 'rgba(10,26,58,.03)' : ''; }
+  document.querySelectorAll('input[name="fw-sub"]').forEach(r=>{ r.checked = r.value===val; });
+}
+
 function selectFWScope(val){
   _fwScopeChoice = val;
   const optNew = document.getElementById('fw-scope-opt-new');
@@ -6827,6 +7236,200 @@ function populateZZPReview(){
   const orgNote=document.getElementById('zzp-po-org-note');
   if(piNote)  piNote.style.display  = _zzpClientType==='pi'  ? 'block' : 'none';
   if(orgNote) orgNote.style.display = _zzpClientType==='org' ? 'block' : 'none';
+}
+
+// ── CONTRACT CANCELLATION ──
+function openCancellationRequest(){
+  const title = document.getElementById('cd-title')?.textContent || 'this contract';
+  const nameEl = document.getElementById('cancel-contract-name');
+  if(nameEl) nameEl.textContent = title;
+  document.getElementById('cancel-reason').value = '';
+  document.getElementById('cancel-effective-date').value = '2026-06-01';
+  document.getElementById('cancel-notice').value = '7';
+  op('m-cancel-contract');
+}
+
+function submitCancellationRequest(){
+  const reason = document.getElementById('cancel-reason')?.value.trim();
+  if(!reason){ toast('Please enter a reason for the cancellation request'); return; }
+  const effectiveDate = document.getElementById('cancel-effective-date')?.value || '2026-06-01';
+  const noticeVal = document.getElementById('cancel-notice')?.value || '7';
+  const noticeLabels = {immediate:'Immediate','7':'7 days','14':'14 days','30':'30 days','60':'60 days'};
+  const noticeLbl = noticeLabels[noticeVal] || '7 days';
+  cl('m-cancel-contract');
+
+  // Show pending banner
+  const banner = document.getElementById('cd-cancel-banner');
+  const bannerText = document.getElementById('cd-cancel-banner-text');
+  const cancelBtn = document.getElementById('cd-cancel-btn');
+  if(banner){ banner.style.display='block'; }
+  if(bannerText) bannerText.textContent = 'You have requested cancellation effective ' + effectiveDate + '. Awaiting acceptance from the other party.';
+  if(cancelBtn){ cancelBtn.textContent='Withdraw request'; cancelBtn.onclick=withdrawCancellationRequest; }
+
+  // Add timeline entry
+  addContractTimelineEntry('Cancellation requested','Just now · Effective ' + effectiveDate + ' · ' + noticeLbl + ' notice');
+
+  toast('Cancellation request sent — the other party will be notified');
+
+  // Simulate: after 2.5s the other party receives the request
+  setTimeout(()=>{
+    const contractName = document.getElementById('cd-title')?.textContent || 'the contract';
+    const respName = document.getElementById('cancel-requester');
+    const respContract = document.getElementById('cancel-respond-name');
+    const respDate = document.getElementById('cancel-resp-date');
+    const respNotice = document.getElementById('cancel-resp-notice');
+    const respReason = document.getElementById('cancel-resp-reason');
+    const respBy = document.getElementById('cancel-resp-by');
+    if(respName) respName.textContent = 'Miyagami B.V.';
+    if(respBy) respBy.textContent = 'Miyagami B.V.';
+    if(respContract) respContract.textContent = contractName;
+    if(respDate) respDate.textContent = effectiveDate;
+    if(respNotice) respNotice.textContent = noticeLbl;
+    if(respReason) respReason.textContent = reason;
+    op('m-cancel-respond');
+  }, 2500);
+}
+
+function withdrawCancellationRequest(){
+  const banner = document.getElementById('cd-cancel-banner');
+  if(banner) banner.style.display='none';
+  const cancelBtn = document.getElementById('cd-cancel-btn');
+  if(cancelBtn){ cancelBtn.textContent='Request cancellation'; cancelBtn.onclick=openCancellationRequest; }
+  addContractTimelineEntry('Cancellation request withdrawn','Just now · Withdrawn by Miyagami B.V.');
+  toast('Cancellation request withdrawn');
+}
+
+function clientRespondsCancellation(response){
+  cl('m-cancel-respond');
+  const banner = document.getElementById('cd-cancel-banner');
+  const bannerText = document.getElementById('cd-cancel-banner-text');
+  const cancelBtn = document.getElementById('cd-cancel-btn');
+  const badge = document.getElementById('cd-badge');
+
+  if(response === 'accept'){
+    if(bannerText) bannerText.textContent = 'Both parties agreed. This contract has been cancelled.';
+    if(banner){ banner.style.background='#f0fdf4'; banner.style.borderColor='#86efac'; }
+    const icon = banner?.querySelector('svg');
+    if(icon){ icon.setAttribute('stroke','#15803d'); }
+    const title = banner?.querySelector('[style*="font-size:13px"]');
+    if(title){ title.style.color='#15803d'; title.textContent='Contract cancelled'; }
+    const desc = document.getElementById('cd-cancel-banner-text');
+    if(desc) desc.style.color = '#166534';
+    if(cancelBtn) cancelBtn.style.display='none';
+    if(badge){ badge.textContent='Cancelled'; badge.className='badge bgr'; }
+    addContractTimelineEntry('Contract cancelled — accepted by both parties','Just now · Effective as requested');
+    toast('Contract cancelled — both parties have accepted');
+  } else {
+    if(banner) banner.style.display='none';
+    if(cancelBtn){ cancelBtn.textContent='Request cancellation'; cancelBtn.onclick=openCancellationRequest; }
+    addContractTimelineEntry('Cancellation request denied by other party','Just now · Contract continues');
+    toast('Cancellation denied — contract continues');
+  }
+}
+
+function respondCancellation(action){ clientRespondsCancellation(action); }
+
+function addContractTimelineEntry(title, meta){
+  const timeline = document.querySelector('#ct4 > div');
+  if(!timeline) return;
+  const entry = document.createElement('div');
+  entry.className = 'tli';
+  entry.innerHTML = `<div class="tldot"></div><div><div class="tlt">${title}</div><div class="tlm">${meta}</div></div>`;
+  timeline.insertBefore(entry, timeline.firstChild);
+}
+
+
+function openTaskDetail(type){
+  const isExt = type === 'ext';
+  const title  = isExt ? 'Roof repair Block D — summer works' : 'Renovation block E, floor 1–2';
+  document.getElementById('task-detail-title').textContent = title;
+  const badge = document.getElementById('task-detail-badge');
+  if(isExt){
+    badge.textContent='Extension required'; badge.style.background='#fef3c7'; badge.style.color='#b45309';
+  } else {
+    badge.textContent='Pending'; badge.className='badge bga';
+  }
+  // Show/hide panels
+  ['task-ext-warning','task-ext-pending','task-offer-pending','task-ready-actions','task-accepted-state','task-normal-actions'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.style.display='none';
+  });
+  document.getElementById(isExt ? 'task-ext-warning' : 'task-normal-actions').style.display = 'block';
+  nav('task-detail');
+  setBreadcrumb([{label:'Tasks',page:'zzp-tasks'},{label:title}], null);
+}
+
+function openExtendContract(){
+  op('m-extend-contract');
+}
+
+function submitExtension(){
+  const reason = document.getElementById('ext-reason')?.value.trim();
+  if(!reason){ toast('Please enter a reason for the extension'); return; }
+  cl('m-extend-contract');
+  document.getElementById('task-ext-warning').style.display='none';
+  document.getElementById('task-ext-pending').style.display='block';
+  toast('Extension request sent to Miyagami B.V. — awaiting their acceptance');
+}
+
+function cannotExtend(){
+  cl('m-extend-contract');
+  op('m-new-offer-task');
+}
+
+function openNewOfferFromTask(){
+  op('m-new-offer-task');
+}
+
+function submitNewOfferTask(){
+  cl('m-new-offer-task');
+  document.getElementById('task-ext-warning').style.display='none';
+  document.getElementById('task-offer-pending').style.display='block';
+  toast('New offer sent to Miyagami B.V. — awaiting their acceptance');
+}
+
+function showClientReview(){
+  op('m-client-review-offer');
+}
+
+function clientAcceptsOffer(){
+  cl('m-client-review-offer');
+  document.getElementById('task-offer-pending').style.display='none';
+  document.getElementById('task-ready-actions').style.display='block';
+  toast('Miyagami B.V. accepted your offer — you can now accept the task');
+}
+
+function acceptTask(){
+  ['task-ext-warning','task-ext-pending','task-offer-pending','task-ready-actions','task-normal-actions'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.style.display='none';
+  });
+  document.getElementById('task-accepted-state').style.display='block';
+  const badge=document.getElementById('task-detail-badge');
+  badge.textContent='Accepted'; badge.style.background=''; badge.style.color=''; badge.className='badge bgn';
+  toast('Task accepted — your contract is valid through 29 Aug 2026');
+}
+
+function declineTask(){
+  nav('zzp-tasks');
+  toast('Task declined');
+}
+
+function zzpFilterTasks(el, status){
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');
+  document.querySelectorAll('#tasks-tbody tr').forEach(tr=>{
+    const s = tr.dataset.status;
+    tr.style.display = (status==='all' || s===status || (status==='pending' && s==='extension')) ? '' : 'none';
+  });
+}
+
+
+function submitNewEntityPage(){
+  const name  = document.getElementById('int-new-org-name')?.value.trim();
+  const email = document.getElementById('int-new-org-email')?.value.trim();
+  if(!name){ toast('Please enter an organisation name'); return; }
+  if(!email){ toast('Please enter an email address'); return; }
+  toast('Invitation sent to ' + email + ' — they will receive a link to complete the profile');
+  nav('invites');
 }
 
 function toggleZZPCDesc(){
