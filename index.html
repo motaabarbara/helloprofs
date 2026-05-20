@@ -263,13 +263,29 @@ tbody tr:hover td{background:var(--bg)}
   <div class="logo-r"><div class="lmark">H</div><div class="ltxt">HelloProfs</div></div>
   <div class="ah">Welcome back</div>
   <div class="as">Sign in to your account</div>
-  <div class="fld"><label class="lbl">Email</label><input class="id" type="email" id="login-email" value="barbara@miyagami.com"></div>
+  <div class="fld"><label class="lbl">Email</label><input class="id" type="email" id="login-email" value="sanne@miyagami.com"></div>
   <div class="fld"><label class="lbl">Password</label><input class="id" type="password" value="password"></div>
   <button class="btn bl bf" style="margin-top:6px" onclick="doLogin()">Sign in</button>
   <div style="margin-top:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--rs);padding:10px 14px;font-size:12px;color:rgba(255,255,255,.4)">
-    <div style="font-weight:600;color:rgba(255,255,255,.55);margin-bottom:6px">Demo accounts</div>
-    <div style="cursor:pointer;margin-bottom:3px" onclick="document.getElementById('login-email').value='barbara@miyagami.com'">barbara@miyagami.com — existing user</div>
-    <div style="cursor:pointer" onclick="document.getElementById('login-email').value='jan@company.nl'">jan@company.nl — new user (incomplete profile)</div>
+    <div style="font-weight:600;color:rgba(255,255,255,.55);margin-bottom:8px">Demo accounts</div>
+    <div style="display:flex;flex-direction:column;gap:5px">
+      <div style="cursor:pointer;padding:6px 8px;border-radius:var(--rs);transition:background .15s" onmouseover="this.style.background='rgba(255,255,255,.06)'" onmouseout="this.style.background=''" onclick="document.getElementById('login-email').value='sanne@miyagami.com'">
+        <div style="color:rgba(255,255,255,.7);font-weight:500">sanne@miyagami.com</div>
+        <div style="font-size:11px;margin-top:1px">Organisation admin — 3 entities (Global, Netherlands, Spain)</div>
+      </div>
+      <div style="cursor:pointer;padding:6px 8px;border-radius:var(--rs);transition:background .15s" onmouseover="this.style.background='rgba(255,255,255,.06)'" onmouseout="this.style.background=''" onclick="document.getElementById('login-email').value='jan@company.nl'">
+        <div style="color:rgba(255,255,255,.7);font-weight:500">jan@company.nl</div>
+        <div style="font-size:11px;margin-top:1px">New user — incomplete profile</div>
+      </div>
+      <div style="cursor:pointer;padding:6px 8px;border-radius:var(--rs);transition:background .15s" onmouseover="this.style.background='rgba(255,255,255,.06)'" onmouseout="this.style.background=''" onclick="document.getElementById('login-email').value='dennis@summitaccounting.nl'">
+        <div style="color:rgba(255,255,255,.7);font-weight:500">dennis@summitaccounting.nl</div>
+        <div style="font-size:11px;margin-top:1px">Intermediary — Summit Accounting</div>
+      </div>
+      <div style="cursor:pointer;padding:6px 8px;border-radius:var(--rs);transition:background .15s" onmouseover="this.style.background='rgba(255,255,255,.06)'" onmouseout="this.style.background=''" onclick="document.getElementById('login-email').value='laurens@gmail.com'">
+        <div style="color:rgba(255,255,255,.7);font-weight:500">laurens@gmail.com</div>
+        <div style="font-size:11px;margin-top:1px">ZZP'er — Laurens de Boer Timmerwerk</div>
+      </div>
+    </div>
   </div>
   <div class="alink" style="margin-top:12px"><a onclick="go('sc-s1')">Create account</a> · <a>Forgot password?</a></div>
 </div>
@@ -278,43 +294,125 @@ tbody tr:hover td{background:var(--bg)}
 <!-- SIGNUP -->
 <div class="auth" id="sc-s1">
 <div class="glow"></div>
-<div class="abox" style="width:460px">
+<div class="abox" style="width:480px">
   <div class="logo-r"><div class="lmark">H</div><div class="ltxt">HelloProfs</div></div>
   <div class="ah">Create account</div>
-  <div class="as" style="margin-bottom:20px">Get started in under a minute</div>
+  <div class="as" style="margin-bottom:20px">Choose how you want to use HelloProfs</div>
 
-  <div class="tg" style="margin-bottom:16px">
-    <div class="tc sel" onclick="selT(this)">
-      <div class="ti" style="display:flex;justify-content:center;color:rgba(255,255,255,.6)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg></div>
+  <!-- 3 account type tiles -->
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:20px" id="signup-type-grid">
+    <div class="tc sel" id="stype-org" onclick="selectSignupType('org')">
+      <div class="ti" style="display:flex;justify-content:center;color:rgba(255,255,255,.6)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg></div>
       <div class="tn">Organisation</div>
       <div class="td">Company / legal entity</div>
     </div>
-    <div class="tc" onclick="selT(this)">
-      <div class="ti" style="display:flex;justify-content:center;color:rgba(255,255,255,.6)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+    <div class="tc" id="stype-zzp" onclick="selectSignupType('zzp')">
+      <div class="ti" style="display:flex;justify-content:center;color:rgba(255,255,255,.6)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
       <div class="tn">ZZP'er</div>
       <div class="td">Self-employed</div>
     </div>
+    <div class="tc" id="stype-int" onclick="selectSignupType('intermediary')">
+      <div class="ti" style="display:flex;justify-content:center;color:rgba(255,255,255,.6)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg></div>
+      <div class="tn">Intermediary</div>
+      <div class="td">Broker / accountant</div>
+    </div>
   </div>
 
-  <div class="g2">
-    <div class="fld"><label class="lbl">First name</label><input class="id" placeholder="Jan"></div>
-    <div class="fld"><label class="lbl">Last name</label><input class="id" placeholder="de Vries"></div>
-  </div>
-  <div class="fld"><label class="lbl">Email</label><input class="id" type="email" placeholder="jan@company.nl"></div>
-  <div class="g2">
-    <div class="fld"><label class="lbl">Password</label><input class="id" type="password" placeholder="Min. 8 characters"></div>
-    <div class="fld"><label class="lbl">Repeat password</label><input class="id" type="password" placeholder="Repeat password"></div>
+  <!-- Standard fields (Organisation + ZZP'er) -->
+  <div id="signup-standard-fields">
+    <div class="g2">
+      <div class="fld"><label class="lbl">First name</label><input class="id" placeholder="Jan"></div>
+      <div class="fld"><label class="lbl">Last name</label><input class="id" placeholder="de Vries"></div>
+    </div>
+    <div class="fld"><label class="lbl">Email</label><input class="id" type="email" placeholder="jan@company.nl"></div>
+    <div class="g2">
+      <div class="fld"><label class="lbl">Password</label><input class="id" type="password" placeholder="Min. 8 characters"></div>
+      <div class="fld"><label class="lbl">Repeat password</label><input class="id" type="password" placeholder="Repeat password"></div>
+    </div>
+    <label style="display:flex;align-items:flex-start;gap:10px;margin-bottom:18px;cursor:pointer">
+      <input type="checkbox" style="margin-top:2px;width:14px;height:14px;accent-color:var(--lime);flex-shrink:0">
+      <span style="font-size:12px;color:rgba(255,255,255,.5);line-height:1.6">I agree to the <a style="color:var(--lime);cursor:pointer">Terms &amp; Conditions</a> and <a style="color:var(--lime);cursor:pointer">Privacy Policy</a></span>
+    </label>
+    <button class="btn bl bf" onclick="go('sc-verify-email')">Create account →</button>
   </div>
 
-  <label style="display:flex;align-items:flex-start;gap:10px;margin-bottom:18px;cursor:pointer">
-    <input type="checkbox" style="margin-top:2px;width:14px;height:14px;accent-color:var(--lime);flex-shrink:0">
-    <span style="font-size:12px;color:rgba(255,255,255,.5);line-height:1.6">I agree to the <a style="color:var(--lime);cursor:pointer">Terms &amp; Conditions</a> and <a style="color:var(--lime);cursor:pointer">Privacy Policy</a></span>
-  </label>
+  <!-- Intermediary fields -->
+  <div id="signup-intermediary-fields" style="display:none">
+    <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:var(--r);padding:12px 14px;font-size:12px;color:rgba(255,255,255,.45);line-height:1.7;margin-bottom:18px">
+      As an intermediary you can create and manage organisations on behalf of your clients. After creating your account, you can invite organisations to complete their own profile.
+    </div>
+    <div class="g2">
+      <div class="fld"><label class="lbl">First name</label><input class="id" placeholder="Jan"></div>
+      <div class="fld"><label class="lbl">Last name</label><input class="id" placeholder="de Vries"></div>
+    </div>
+    <div class="fld"><label class="lbl">Your email</label><input class="id" type="email" placeholder="jan@brokerfirm.nl"></div>
+    <div class="fld"><label class="lbl">Your company name</label><input class="id" placeholder="e.g. de Vries Advies B.V."></div>
+    <div class="g2">
+      <div class="fld"><label class="lbl">Password</label><input class="id" type="password" placeholder="Min. 8 characters"></div>
+      <div class="fld"><label class="lbl">Repeat password</label><input class="id" type="password" placeholder="Repeat password"></div>
+    </div>
+    <label style="display:flex;align-items:flex-start;gap:10px;margin-bottom:18px;cursor:pointer">
+      <input type="checkbox" style="margin-top:2px;width:14px;height:14px;accent-color:var(--lime);flex-shrink:0">
+      <span style="font-size:12px;color:rgba(255,255,255,.5);line-height:1.6">I agree to the <a style="color:var(--lime);cursor:pointer">Terms &amp; Conditions</a> and <a style="color:var(--lime);cursor:pointer">Privacy Policy</a></span>
+    </label>
+    <button class="btn bl bf" onclick="go('sc-verify-email')">Create account →</button>
+  </div>
 
-  <button class="btn bl bf" onclick="go('sc-verify-email')">Create account →</button>
   <div class="alink"><a onclick="go('sc-login')">Already have an account? Sign in</a></div>
 </div>
 </div>
+
+<!-- INTERMEDIARY: INVITE ORGANISATION -->
+<div class="auth" id="sc-intermediary-invite">
+<div class="glow"></div>
+<div class="abox" style="width:460px">
+  <div class="logo-r"><div class="lmark">H</div><div class="ltxt">HelloProfs</div></div>
+  <div class="ah">Invite an organisation</div>
+  <div class="as" style="margin-bottom:20px">Add a new client organisation to HelloProfs</div>
+
+  <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:var(--r);padding:12px 14px;font-size:12px;color:rgba(255,255,255,.45);line-height:1.7;margin-bottom:20px">
+    Enter the email of the organisation's <strong style="color:rgba(255,255,255,.7)">Legal Representative</strong> or an <strong style="color:rgba(255,255,255,.7)">Admin</strong>. They will receive an email with a link to complete their organisation's profile on HelloProfs.
+  </div>
+
+  <div class="fld">
+    <label class="lbl">Organisation name</label>
+    <input class="id" placeholder="e.g. Bouw Installaties B.V." id="int-org-name">
+  </div>
+  <div class="fld">
+    <label class="lbl">Legal Representative or Admin email</label>
+    <input class="id" type="email" placeholder="director@company.nl" id="int-org-email">
+  </div>
+  <div class="fld" style="margin-bottom:20px">
+    <label class="lbl">Message <span style="color:rgba(255,255,255,.3);font-weight:400">(optional)</span></label>
+    <textarea class="id" style="min-height:70px;resize:none" placeholder="Add a note to the recipient explaining why they're being invited..."></textarea>
+  </div>
+
+  <button class="btn bl bf" onclick="sendIntermediaryInvite()">Send invitation →</button>
+  <div class="alink"><a onclick="nav('dashboard')">Skip — go to dashboard</a></div>
+</div>
+</div>
+
+<!-- INTERMEDIARY: INVITE SENT -->
+<div class="auth" id="sc-intermediary-sent">
+<div class="glow"></div>
+<div class="abox" style="text-align:center">
+  <div class="logo-r" style="justify-content:center"><div class="lmark">H</div><div class="ltxt">HelloProfs</div></div>
+  <div style="width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 18px">
+    <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+  </div>
+  <div class="ah">Invitation sent</div>
+  <div class="as" style="margin-bottom:20px">An email has been sent to <strong id="int-sent-email" style="color:rgba(255,255,255,.8)">director@company.nl</strong>. They will receive a link to complete <strong id="int-sent-org" style="color:rgba(255,255,255,.8)">the organisation</strong>'s profile.</div>
+  <div style="background:rgba(255,255,255,.04);border-radius:var(--r);padding:14px;font-size:12px;color:rgba(255,255,255,.4);line-height:1.7;margin-bottom:20px;text-align:left">
+    <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px"><svg viewBox="0 0 16 16" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1.2" stroke-linecap="round" style="width:13px;height:13px;flex-shrink:0;margin-top:1px"><path d="M3 8l3.5 3.5L13 5"/></svg>Once they complete their profile, you'll be notified</div>
+    <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px"><svg viewBox="0 0 16 16" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1.2" stroke-linecap="round" style="width:13px;height:13px;flex-shrink:0;margin-top:1px"><path d="M3 8l3.5 3.5L13 5"/></svg>You can invite more organisations from your dashboard</div>
+    <div style="display:flex;align-items:flex-start;gap:8px"><svg viewBox="0 0 16 16" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1.2" stroke-linecap="round" style="width:13px;height:13px;flex-shrink:0;margin-top:1px"><path d="M3 8l3.5 3.5L13 5"/></svg>The link expires in 7 days</div>
+  </div>
+  <button class="btn bl bf" onclick="nav('dashboard')">Go to dashboard →</button>
+  <div class="alink"><a onclick="go('sc-intermediary-invite')">Invite another organisation</a></div>
+</div>
+</div>
+
+
 
 <!-- VERIFY EMAIL -->
 <div class="auth" id="sc-verify-email">
@@ -575,6 +673,13 @@ tbody tr:hover td{background:var(--bg)}
     </div>
   </div>
 
+  <div class="snav" id="nav-intermediary" style="display:none">
+    <div class="ni on" onclick="nav('dashboard')">
+      <span class="nic"><svg class="ic" viewBox="0 0 16 16"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg></span>
+      Dashboard
+    </div>
+  </div>
+
   <!-- ZZP'er nav -->
   <div class="snav" id="nav-zzp" style="display:none">
     <div class="ni on" onclick="nav('dashboard')">
@@ -638,6 +743,7 @@ tbody tr:hover td{background:var(--bg)}
       <div id="dashboard-click-blocker" onclick="openOnboarding()" style="display:none;position:absolute;inset:0;z-index:10;cursor:pointer"></div>
 
       <!-- NEW USER: empty state (hidden by default) -->
+      <!-- Empty state: new user (incomplete profile) -->
       <div id="dashboard-empty-state" style="display:none;position:absolute;inset:0;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;z-index:5">
         <div style="width:64px;height:64px;border-radius:50%;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:20px">
           <svg viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="width:28px;height:28px"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>
@@ -645,6 +751,61 @@ tbody tr:hover td{background:var(--bg)}
         <div style="font-size:18px;font-weight:700;margin-bottom:8px;color:var(--t1)">Welcome to HelloProfs</div>
         <div style="font-size:13px;color:var(--t3);line-height:1.7;max-width:340px;margin-bottom:20px">Your account is set up. Complete your profile to start creating POs, inviting relations and managing contracts.</div>
         <button class="btn bk bs" onclick="nav('settings');setTimeout(()=>stab(document.querySelector('#pg-settings .tab'),'st0'),60)">Complete profile →</button>
+      </div>
+
+      <!-- Intermediary dashboard view -->
+      <div id="dashboard-intermediary-state" style="display:none;position:absolute;inset:0;overflow-y:auto;z-index:5;padding:20px 24px">
+
+        <!-- Standard screen header -->
+        <div class="tw" style="margin-bottom:16px">
+          <div class="ph2">
+            <div style="font-size:13px;font-weight:600">Dashboard</div>
+            <button class="btn bk bs" onclick="toggleIntermediaryInviteForm(true)">+ New entity</button>
+          </div>
+
+          <!-- Empty state: no organisations yet -->
+          <div id="int-orgs-empty" style="padding:60px 24px;text-align:center">
+            <div style="width:52px;height:52px;border-radius:50%;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 16px">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>
+            </div>
+            <div style="font-size:16px;font-weight:700;margin-bottom:8px;color:var(--t1)">Invite your first organisation</div>
+            <div style="font-size:13px;color:var(--t3);line-height:1.7;max-width:360px;margin:0 auto 22px">As an intermediary you can create and manage organisations on behalf of your clients. Their Legal Representative or Admin will receive an email to complete the profile.</div>
+            <button class="btn bk bs" onclick="toggleIntermediaryInviteForm(true)">+ New entity</button>
+          </div>
+
+          <!-- Organisations list (shown after first invite) -->
+          <div id="int-orgs-list" style="display:none;flex-direction:column;gap:1px"></div>
+        </div>
+
+        <!-- Inline invite form (hidden by default) -->
+        <div id="int-invite-form" style="display:none">
+          <div class="tw">
+            <div class="ph2" style="justify-content:space-between">
+              <div style="font-size:13px;font-weight:600">Invite an organisation</div>
+              <button class="btn bg bx" onclick="toggleIntermediaryInviteForm(false)">✕</button>
+            </div>
+            <div style="padding:18px;display:flex;flex-direction:column;gap:14px">
+              <div style="font-size:12px;color:var(--t3);line-height:1.6">Enter the email of the organisation's <strong style="color:var(--t2)">Legal Representative</strong> or an <strong style="color:var(--t2)">Admin</strong>. They will receive a link to complete their profile on HelloProfs.</div>
+              <div class="fld" style="margin:0">
+                <label class="lbl dk">Organisation name *</label>
+                <input class="ii" id="int-form-org-name" placeholder="e.g. Bouw Installaties B.V." style="margin-top:6px">
+              </div>
+              <div class="fld" style="margin:0">
+                <label class="lbl dk">Legal Representative or Admin email *</label>
+                <input class="ii" id="int-form-org-email" type="email" placeholder="director@company.nl" style="margin-top:6px">
+              </div>
+              <div class="fld" style="margin:0">
+                <label class="lbl dk">Message <span style="font-weight:400;color:var(--t3)">(optional)</span></label>
+                <textarea class="ii" id="int-form-org-msg" style="min-height:70px;margin-top:6px" placeholder="Add a note explaining why they're being invited..."></textarea>
+              </div>
+              <div style="display:flex;gap:8px;justify-content:flex-end">
+                <button class="btn bg bs" onclick="toggleIntermediaryInviteForm(false)">Cancel</button>
+                <button class="btn bk bs" onclick="submitIntermediaryInviteInline()">Send invitation →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <div class="ph"><div><div class="ptl">Good morning, Bárbara</div><div class="pst">Monday, 19 May 2026 · Miyagami B.V.</div></div></div>
@@ -765,7 +926,7 @@ tbody tr:hover td{background:var(--bg)}
           <!-- Sub-assignments -->
           <!-- Details tab -->
           <div id="rddet" style="display:none">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
               <div>
                 <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:10px">Contact information</div>
                 <div class="ir"><span class="ik">Full name</span><span class="iv">Jan Bakker</span></div>
@@ -781,6 +942,40 @@ tbody tr:hover td{background:var(--bg)}
                 <div class="ir"><span class="ik">BTW</span><span class="iv mono">NL001122334B01</span></div>
                 <div class="ir"><span class="ik">IBAN</span><span class="iv mono">NL91 ABNA 0417 1643 00</span></div>
                 <div class="ir"><span class="ik">Relation since</span><span class="iv">Jan 2025</span></div>
+              </div>
+            </div>
+
+            <!-- Labels — editable -->
+            <div style="border-top:1px solid var(--border);padding-top:16px">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+                <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3)">Labels</div>
+                <button class="btn bw bx viewer-hide" style="font-size:11px" onclick="toggleRelLabelEdit()" id="rel-label-edit-btn">Edit</button>
+              </div>
+
+              <!-- View state -->
+              <div id="rel-labels-view" style="display:flex;flex-wrap:wrap;gap:6px;min-height:24px">
+                <span class="tag">Carpentry<span class="tag-x" onclick="removeRelLabel('Carpentry')">×</span></span>
+              </div>
+
+              <!-- Edit state -->
+              <div id="rel-labels-edit" style="display:none">
+                <div style="position:relative">
+                  <input class="ii" id="rel-label-search" placeholder="Search or add labels…" onfocus="openRelLabelDropdown()" oninput="filterRelLabels(this.value)" style="width:100%">
+                  <div id="rel-label-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--white);border:1px solid var(--border);border-top:none;border-radius:0 0 var(--rs) var(--rs);z-index:30;max-height:140px;overflow-y:auto">
+                    <div class="rel-opt rel-lbl-opt" data-label="Carpentry" onclick="toggleRelLabel('Carpentry')"><span class="rel-lbl-check" style="margin-right:8px">✓</span>Carpentry</div>
+                    <div class="rel-opt rel-lbl-opt" data-label="Electrical" onclick="toggleRelLabel('Electrical')"><span class="rel-lbl-check" style="margin-right:8px;opacity:0">✓</span>Electrical</div>
+                    <div class="rel-opt rel-lbl-opt" data-label="IT" onclick="toggleRelLabel('IT')"><span class="rel-lbl-check" style="margin-right:8px;opacity:0">✓</span>IT</div>
+                    <div class="rel-opt rel-lbl-opt" data-label="Installation" onclick="toggleRelLabel('Installation')"><span class="rel-lbl-check" style="margin-right:8px;opacity:0">✓</span>Installation</div>
+                    <div class="rel-opt rel-lbl-opt" data-label="Painting" onclick="toggleRelLabel('Painting')"><span class="rel-lbl-check" style="margin-right:8px;opacity:0">✓</span>Painting</div>
+                  </div>
+                </div>
+                <div id="rel-label-tags" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;min-height:24px">
+                  <span class="tag">Carpentry<span class="tag-x" onclick="removeRelLabel('Carpentry')">×</span></span>
+                </div>
+                <div style="display:flex;gap:8px;margin-top:10px;justify-content:flex-end">
+                  <button class="btn bg bs" style="font-size:12px" onclick="cancelRelLabelEdit()">Cancel</button>
+                  <button class="btn bk bs" style="font-size:12px" onclick="saveRelLabels()">Save labels</button>
+                </div>
               </div>
             </div>
           </div>
@@ -1149,6 +1344,7 @@ tbody tr:hover td{background:var(--bg)}
         <table><thead><tr><th>Title</th><th>Type</th><th>Status</th><th>Contractor</th><th>Deadline</th><th></th></tr></thead>
         <tbody id="po-table-body">
           <tr data-type="assignment" onclick="openPODetail('blok-d')"><td><div class="tm">Renovatie Blok D — Timmerwerk</div><div class="ts2">Woningbouw Almere</div></td><td><span class="badge bgn2">Assignment</span></td><td><span class="badge bga">Offer received</span></td><td>Jan Bakker</td><td>25 May</td><td><button class="btn bk bx" onclick="event.stopPropagation();openPODetail('blok-d')">Review</button></td></tr>
+          <tr data-type="framework" onclick="openPODetail('fw-timmerwerk')"><td><div class="tm">Raamopdracht Timmerwerk 2026</div><div class="ts2">Woningbouw Almere</div></td><td><span class="badge bgl">Framework</span></td><td><span class="badge bgn">Active</span></td><td>4 contractors</td><td>Ongoing</td><td><button class="btn bw bx" onclick="event.stopPropagation();openPODetail('fw-timmerwerk')">View</button></td></tr>
           <tr data-type="assignment" onclick="openPODetail('elektra')"><td><div class="tm">Elektra Installatie Unit 12–18</div><div class="ts2">Woningbouw Almere</div></td><td><span class="badge bgn2">Assignment</span></td><td><span class="badge bga">Offer received</span></td><td>Pieter Smit</td><td>30 May</td><td><button class="btn bk bx" onclick="event.stopPropagation();openPODetail('elektra')">Review</button></td></tr>
           <tr data-type="assignment" onclick="openPODetail('dakdekker')"><td><div class="tm">Dakdekker Blok B — Onderhoud</div><div class="ts2">Woningbouw Almere</div></td><td><span class="badge bgn2">Assignment</span></td><td><span class="badge bgn">Active</span></td><td>Kees de Groot</td><td>Ongoing</td><td><button class="btn bw bx" onclick="event.stopPropagation();openPODetail('dakdekker')">View</button></td></tr>
           <tr data-type="framework" onclick="openFrameworkDetail('it')"><td><div class="tm">IT Support Helpdesk Q3</div><div class="ts2">Internal IT</div></td><td><span class="badge bgl">Framework</span></td><td><span class="badge bgn">Active</span></td><td>Marco Jansen</td><td>Ongoing</td><td><button class="btn bw bx" onclick="event.stopPropagation();openFrameworkDetail('it')">Open</button></td></tr>
@@ -1177,6 +1373,7 @@ tbody tr:hover td{background:var(--bg)}
           </div>
           <div style="display:flex;gap:8px;align-items:center">
             <span class="badge" id="pod-badge">—</span>
+            <button class="btn bw bx viewer-hide" style="font-size:12px;display:none" id="pod-edit-btn" onclick="openEditFWPO()">Edit PO</button>
           </div>
         </div>
         <div style="padding:12px 16px;display:flex;gap:32px;flex-wrap:wrap;border-top:1px solid var(--border)">
@@ -1931,7 +2128,10 @@ tbody tr:hover td{background:var(--bg)}
       <div class="panel" style="margin-bottom:16px">
         <div class="ph2">
           <div class="ptl2" id="pd-title">Woningbouw Almere</div>
-          <span class="badge bgn" id="pd-status">Active</span>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="badge bgn" id="pd-status">Active</span>
+            <button class="btn bw bx viewer-hide" style="font-size:12px" onclick="openEditProject(document.getElementById('pd-title').textContent)">Edit</button>
+          </div>
         </div>
         <div style="padding:16px">
           <div class="g2" style="margin-bottom:14px">
@@ -1972,6 +2172,7 @@ tbody tr:hover td{background:var(--bg)}
               <div class="chip" id="zzp-filter-client" onclick="zzpFilterPO('client')">↑ Client</div>
             </div>
             <input class="src" placeholder="Search...">
+            <button class="btn bk bs" onclick="openZZPCreatePO()">+ New PO</button>
           </div>
         </div>
         <table>
@@ -2114,40 +2315,103 @@ tbody tr:hover td{background:var(--bg)}
 
             <!-- Step 2: Attachments -->
             <div id="zzp-s2" style="display:none;padding:16px">
-              <div style="font-size:12px;color:var(--t3);margin-bottom:14px;line-height:1.6">Attach your general terms &amp; conditions and any documents requested by the client.</div>
 
-              <div style="font-size:13px;font-weight:600;margin-bottom:8px">Terms &amp; conditions</div>
-              <div id="zzp-tc-stored" style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);margin-bottom:8px">
-                <span style="display:flex"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;flex-shrink:0"><path d="M4 2h5l3 3v9H4V2z"/><path d="M9 2v3h3"/></svg></span>
-                <div style="flex:1;font-size:12px"><div style="font-weight:500">AlgemeneVoorwaarden_JanBakker.pdf</div><div style="color:var(--t3);margin-top:1px">Stored on your profile · 245 KB</div></div>
-                <span class="badge bgn" style="font-size:10px">Auto-attached</span>
-              </div>
-              <button class="btn bw bx" style="margin-bottom:18px" onclick="toast('📎 Upload different T&C')">Replace with different file</button>
-
-              <div class="div"></div>
-              <div style="font-size:13px;font-weight:600;margin-bottom:6px">Requested by client</div>
-              <div style="background:var(--amber-bg);border:1px solid #fcd34d;border-radius:var(--rs);padding:10px 12px;font-size:12px;color:var(--amber-t);margin-bottom:12px;line-height:1.6">
-                Bouw Installaties B.V. has requested: <strong>VCA certificate</strong> and <strong>proof of liability insurance</strong>
-              </div>
-              <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px" id="zzp-req-attachments">
+              <!-- T&C -->
+              <div style="margin-bottom:18px">
+                <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:8px">Terms &amp; conditions</div>
                 <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:var(--rs)">
-                  <span style="display:flex"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;flex-shrink:0"><path d="M4 2h5l3 3v9H4V2z"/><path d="M9 2v3h3"/></svg></span>
-                  <div style="flex:1;font-size:12px"><div style="font-weight:500">VCA_Certificaat_JanBakker.pdf</div><div style="color:var(--t3);margin-top:1px">From your profile · Valid until Dec 2027</div></div>
-                  <span class="badge bgn" style="font-size:10px">✓ Attached</span>
-                </div>
-                <div onclick="toast('📎 Upload liability insurance')" style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg);border:2px dashed var(--border);border-radius:var(--rs);cursor:pointer">
-                  <span style="display:flex"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;flex-shrink:0"><path d="M4 2h5l3 3v9H4V2z"/><path d="M9 2v3h3"/></svg></span>
-                  <div style="flex:1;font-size:12px;color:var(--t3)">Upload proof of liability insurance</div>
-                  <button class="btn bw bx" onclick="event.stopPropagation();toast('📎 File upload')">Upload</button>
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" style="width:14px;height:14px;flex-shrink:0"><path d="M4 2h5l3 3v9H4V2z"/><path d="M9 2v3h3"/></svg>
+                  <div style="flex:1;font-size:12px"><div style="font-weight:500">AlgemeneVoorwaarden_JanBakker.pdf</div><div style="color:var(--t3);margin-top:1px">From your profile · 245 KB</div></div>
+                  <span class="badge bgn2" style="font-size:10px">Auto-attached</span>
+                  <button class="btn bw bx" onclick="toast('Replace T&C file')">Replace</button>
                 </div>
               </div>
 
-              <div class="div"></div>
-              <div style="font-size:13px;font-weight:600;margin-bottom:8px">Additional attachments <span style="font-weight:400;color:var(--t3)">(optional)</span></div>
-              <div class="sign" style="padding:12px" onclick="toast('📎 Add portfolio, project photos...')">
-                <div style="font-size:16px;margin-bottom:3px">📎</div>
-                <div style="font-size:12px;color:var(--t3)">Upload portfolio, project photos or other relevant documents</div>
+              <div class="div" style="margin-bottom:18px"></div>
+
+              <!-- Requested by client -->
+              <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:4px">Requested by client</div>
+              <div style="font-size:12px;color:var(--t3);margin-bottom:12px">Profile matches are pre-filled. You can swap, upload new, or skip any document.</div>
+
+              <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px" id="zzp-req-attachments">
+
+                <!-- VCA — profile match -->
+                <div style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden" id="req-vca">
+                  <div style="padding:10px 12px;display:flex;align-items:center;gap:10px">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" style="width:14px;height:14px;flex-shrink:0"><path d="M4 2h5l3 3v9H4V2z"/><path d="M9 2v3h3"/></svg>
+                    <div style="flex:1;min-width:0">
+                      <div style="font-size:11px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.4px">VCA certificate</div>
+                      <div style="font-size:13px;font-weight:500;margin-top:1px">VCA_Certificaat_JanBakker.pdf</div>
+                      <div style="font-size:11px;color:var(--t3);margin-top:1px">From your profile · Valid until Dec 2027</div>
+                    </div>
+                    <span class="badge bgn2" style="font-size:10px;flex-shrink:0">Profile match</span>
+                  </div>
+                  <div style="padding:6px 12px 10px;border-top:1px solid var(--border);display:flex;gap:6px;background:var(--bg)">
+                    <button class="btn bw bx" style="font-size:11px" onclick="showChangeDoc('vca')">Select from profile</button>
+                    <button class="btn bw bx" style="font-size:11px" onclick="showUploadNewDoc('vca')">Upload new</button>
+                    <button class="btn br bx" style="font-size:11px;margin-left:auto" onclick="removeReqDoc('vca')">Skip</button>
+                  </div>
+                  <div id="req-vca-change" style="display:none;padding:10px 12px;border-top:1px solid var(--border)">
+                    <select class="ii" style="margin-bottom:0">
+                      <option>VCA_Certificaat_JanBakker.pdf</option>
+                      <option>VCA_Basis_2024.pdf</option>
+                    </select>
+                  </div>
+                  <div id="req-vca-upload" style="display:none;padding:10px 12px;border-top:1px solid var(--border)">
+                    <div class="sign" style="padding:10px;margin-bottom:8px" onclick="toast('File picker opened')">
+                      <div style="font-size:12px;color:var(--t3)">Click to upload</div>
+                    </div>
+                    <label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer;font-size:12px;color:var(--t2)">
+                      <input type="checkbox" style="width:13px;height:13px;accent-color:var(--navy);flex-shrink:0;margin-top:1px">
+                      Add this document to my profile for future use
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Liability insurance — no match -->
+                <div style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden" id="req-liability">
+                  <div style="padding:10px 12px;display:flex;align-items:center;gap:10px">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" style="width:14px;height:14px;flex-shrink:0;opacity:.35"><path d="M4 2h5l3 3v9H4V2z"/><path d="M9 2v3h3"/></svg>
+                    <div style="flex:1;min-width:0">
+                      <div style="font-size:11px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.4px">Business liability insurance</div>
+                      <div style="font-size:12px;color:var(--t3);margin-top:2px">No document found in your profile</div>
+                    </div>
+                    <span style="font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;background:#f4f4f4;border:1px solid var(--border);color:#777;flex-shrink:0">Missing</span>
+                  </div>
+                  <div style="padding:6px 12px 10px;border-top:1px solid var(--border);display:flex;gap:6px;background:var(--bg)">
+                    <button class="btn bw bx" style="font-size:11px" onclick="showChangeDoc('liability')">Select from profile</button>
+                    <button class="btn bw bx" style="font-size:11px" onclick="showUploadNewDoc('liability')">Upload new</button>
+                    <button class="btn br bx" style="font-size:11px;margin-left:auto" onclick="removeReqDoc('liability')">Skip</button>
+                  </div>
+                  <div id="req-liability-change" style="display:none;padding:10px 12px;border-top:1px solid var(--border)">
+                    <div style="font-size:11px;color:var(--t3);margin-bottom:6px">Choose an existing document from your profile that covers liability insurance</div>
+                    <select class="ii" style="margin-bottom:0">
+                      <option value="">Select a document…</option>
+                      <option>Aansprakelijkheidsverzekering_2026.pdf</option>
+                      <option>Insurance_Certificate_2025.pdf</option>
+                    </select>
+                  </div>
+                  <div id="req-liability-upload" style="display:none;padding:10px 12px;border-top:1px solid var(--border)">
+                    <div class="sign" style="padding:10px;margin-bottom:8px" onclick="toast('File picker opened')">
+                      <div style="font-size:12px;color:var(--t3)">Click to upload proof of liability insurance</div>
+                    </div>
+                    <label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer;font-size:12px;color:var(--t2)">
+                      <input type="checkbox" style="width:13px;height:13px;accent-color:var(--navy);flex-shrink:0;margin-top:1px">
+                      Add this document to my profile for future use
+                    </label>
+                  </div>
+                </div>
+
               </div>
+
+              <div class="div" style="margin-bottom:18px"></div>
+
+              <!-- Additional -->
+              <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:8px">Additional attachments <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--t3)">(optional)</span></div>
+              <div class="sign" style="padding:14px" onclick="toast('Add portfolio or other documents')">
+                <div style="font-size:12px;color:var(--t3)">Upload portfolio, references or other relevant documents</div>
+              </div>
+
             </div>
 
             <!-- Step 3: Fiscal-legal questionnaire -->
@@ -2532,7 +2796,7 @@ tbody tr:hover td{background:var(--bg)}
             <div class="tab" onclick="stab(this,'st1')">Entities</div>
             <div class="tab" onclick="stab(this,'st4')">Members</div>
             <div class="tab" onclick="stab(this,'st2')">Security</div>
-            <div class="tab" onclick="stab(this,'st6')">T&amp;C Templates</div>
+            <div class="tab" onclick="stab(this,'st6')">Documents</div>
             <div class="tab" id="st5-tab" onclick="stab(this,'st5')">Fiscal-legal</div>
             <div class="tab manager-hide" onclick="stab(this,'st3')">Subscription</div>
           </div>
@@ -2588,7 +2852,7 @@ tbody tr:hover td{background:var(--bg)}
             <div id="profile-client-section">
               <div style="font-size:13px;font-weight:600;margin-bottom:14px">Legal representative</div>
               <div class="g2">
-                <div class="fld"><label class="lbl dk">Legal representative</label><input class="ii" placeholder="Full name of legal representative"></div>
+                <div class="fld"><label class="lbl dk">Legal representative *</label><input class="ii" placeholder="Full name of legal representative"></div>
                 <div class="fld"><label class="lbl dk">Job title</label><input class="ii" placeholder="e.g. Director, CEO"></div>
                 <div class="fld"><label class="lbl dk">Initials</label><input class="ii" placeholder="e.g. B.M."></div>
                 <div class="fld"><label class="lbl dk">Gender</label>
@@ -2600,7 +2864,7 @@ tbody tr:hover td{background:var(--bg)}
                     <option>Prefer not to say</option>
                   </select>
                 </div>
-                <div class="fld" style="grid-column:1/-1"><label class="lbl dk">Invoice email</label><input class="ii" placeholder="invoices@company.nl" type="email"></div>
+                <div class="fld" style="grid-column:1/-1"><label class="lbl dk">Invoice email *</label><input class="ii" placeholder="invoices@company.nl" type="email"></div>
               </div>
             </div>
 
@@ -2826,62 +3090,105 @@ tbody tr:hover td{background:var(--bg)}
               <button class="btn bk bs manager-hide" onclick="op('m-invite-member')">+ Invite member</button>
             </div>
 
+            <!-- Sign permission info banner -->
+            <div style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;color:var(--t2);margin-bottom:16px;line-height:1.6">
+              <strong>Signing authority</strong> is a separate permission, independent of role. Only the <strong>Legal Representative</strong> can grant or revoke it. Admins can request it on behalf of a member.
+            </div>
+
             <div style="display:flex;flex-direction:column;gap:8px">
 
-              <!-- Bárbara — Admin (you) -->
-              <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--white);border:1px solid var(--border);border-radius:var(--r)">
-                <div class="av" style="width:36px;height:36px;font-size:14px">B</div>
-                <div style="flex:1;min-width:0">
-                  <div style="font-size:13px;font-weight:500">Bárbara Mota</div>
-                  <div style="font-size:11px;color:var(--t3);margin-top:1px">barbara@miyagami.com</div>
-                </div>
-                <span class="badge bgn2">Admin</span>
-                <span style="font-size:11px;color:var(--t3);flex-shrink:0">You</span>
-              </div>
-
-              <!-- Thomas — Viewer -->
-              <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--white);border:1px solid var(--border);border-radius:var(--r)">
-                <div class="av" style="width:36px;height:36px;font-size:14px;background:#333333">T</div>
-                <div style="flex:1;min-width:0">
-                  <div style="font-size:13px;font-weight:500">Thomas Weiss</div>
-                  <div style="font-size:11px;color:var(--t3);margin-top:1px">thomas@miyagami.com</div>
-                </div>
-                <select class="ii manager-hide" style="width:110px;font-size:12px;padding:4px 8px;flex-shrink:0" onchange="toast('✓ Thomas Weiss role updated')">
-                  <option>Viewer</option><option>Manager</option><option>Admin</option>
-                </select>
-                <button class="btn br bx manager-hide" onclick="removeMember('Thomas Weiss')" title="Remove">✕</button>
-              </div>
-
-              <!-- Sophie — Manager + PO Owner -->
-              <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--white);border:1px solid var(--border);border-radius:var(--r)">
-                <div class="av" style="width:36px;height:36px;font-size:14px;background:#555555">S</div>
-                <div style="flex:1;min-width:0">
-                  <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-                    <span style="font-size:13px;font-weight:500">Sophie van Dam</span>
-                    <span class="badge bga" style="font-size:10px">PO Owner · Blok D</span>
+              <!-- Bárbara — Admin + Legal Representative (you) -->
+              <div style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden">
+                <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--white)">
+                  <div class="av" style="width:36px;height:36px;font-size:14px">B</div>
+                  <div style="flex:1;min-width:0">
+                    <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                      <span style="font-size:13px;font-weight:500">Bárbara Mota</span>
+                      <span class="badge bgn2" style="font-size:10px">Admin</span>
+                      <span style="font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;background:#212121;color:#fff">Legal Representative</span>
+                    </div>
+                    <div style="font-size:11px;color:var(--t3);margin-top:1px">barbara@miyagami.com</div>
                   </div>
-                  <div style="font-size:11px;color:var(--t3);margin-top:1px">sophie@miyagami.com</div>
+                  <div style="display:flex;align-items:center;gap:5px;flex-shrink:0">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M13 4l-6 7-4-4"/></svg>
+                    <span style="font-size:12px;font-weight:500">Can sign</span>
+                    <span style="font-size:10px;color:var(--t3)">(inherent)</span>
+                  </div>
+                  <span style="font-size:11px;color:var(--t3);flex-shrink:0">You</span>
                 </div>
-                <select class="ii manager-hide" style="width:110px;font-size:12px;padding:4px 8px;flex-shrink:0" onchange="toast('✓ Sophie van Dam role updated')">
-                  <option>Manager</option><option>Viewer</option><option>Admin</option>
-                </select>
-                <button class="btn br bx manager-hide" onclick="removeMember('Sophie van Dam')" title="Remove">✕</button>
+              </div>
+
+              <!-- Thomas — Viewer, no sign permission -->
+              <div style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden" id="member-thomas">
+                <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--white)">
+                  <div class="av" style="width:36px;height:36px;font-size:14px;background:#333333">T</div>
+                  <div style="flex:1;min-width:0">
+                    <div style="font-size:13px;font-weight:500">Thomas Weiss</div>
+                    <div style="font-size:11px;color:var(--t3);margin-top:1px">thomas@miyagami.com</div>
+                  </div>
+                  <select class="ii manager-hide" style="width:110px;font-size:12px;padding:4px 8px;flex-shrink:0" onchange="toast('Thomas Weiss role updated')">
+                    <option>Viewer</option><option>Manager</option><option>Admin</option>
+                  </select>
+                  <div id="thomas-sign-state" style="display:flex;align-items:center;gap:6px;flex-shrink:0">
+                    <span style="font-size:12px;color:var(--t3)">No signing authority</span>
+                    <button class="btn bw bx manager-hide" style="font-size:11px" onclick="requestSignPermission('Thomas Weiss','thomas')">Request</button>
+                  </div>
+                  <button class="btn br bx manager-hide" onclick="removeMember('Thomas Weiss')" title="Remove">✕</button>
+                </div>
+                <!-- Pending request notice (shown after request is sent) -->
+                <div id="thomas-sign-pending" style="display:none;padding:8px 14px;border-top:1px solid var(--border);background:#f9f9f9;font-size:12px;color:var(--t2)">
+                  <strong>Sign permission requested</strong> — awaiting approval from Bárbara Mota (Legal Representative). A request email has been sent.
+                </div>
+              </div>
+
+              <!-- Sophie — Manager, has sign permission -->
+              <div style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden" id="member-sophie">
+                <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--white)">
+                  <div class="av" style="width:36px;height:36px;font-size:14px;background:#555555">S</div>
+                  <div style="flex:1;min-width:0">
+                    <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                      <span style="font-size:13px;font-weight:500">Sophie van Dam</span>
+                      <span class="badge bga" style="font-size:10px">PO Owner · Blok D</span>
+                    </div>
+                    <div style="font-size:11px;color:var(--t3);margin-top:1px">sophie@miyagami.com</div>
+                  </div>
+                  <select class="ii manager-hide" style="width:110px;font-size:12px;padding:4px 8px;flex-shrink:0" onchange="toast('Sophie van Dam role updated')">
+                    <option>Manager</option><option>Viewer</option><option>Admin</option>
+                  </select>
+                  <div id="sophie-sign-state" style="display:flex;align-items:center;gap:5px;flex-shrink:0">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M13 4l-6 7-4-4"/></svg>
+                    <span style="font-size:12px;font-weight:500">Can sign</span>
+                    <button class="btn br bx manager-hide" style="font-size:11px" onclick="revokeSignPermission('Sophie van Dam','sophie')">Revoke</button>
+                  </div>
+                  <button class="btn br bx manager-hide" onclick="removeMember('Sophie van Dam')" title="Remove">✕</button>
+                </div>
               </div>
 
               <!-- Pending invite -->
               <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--white);border:1px dashed var(--border);border-radius:var(--r)">
-                <div style="width:36px;height:36px;border-radius:50%;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">✉️</div>
+                <div style="width:36px;height:36px;border-radius:50%;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;color:var(--t3)">✉</div>
                 <div style="flex:1;min-width:0">
                   <div style="font-size:13px;font-weight:500;color:var(--t2)">mark@miyagami.com</div>
                   <div style="font-size:11px;color:var(--t3);margin-top:1px">Invite sent 17 May 2026 · not yet accepted</div>
                 </div>
                 <span class="badge bgg">Pending</span>
-                <button class="btn bg bx" onclick="toast('📧 Invite resent to mark@miyagami.com')" title="Resend invite">↻</button>
-                <button class="btn br bx" onclick="toast('🗑 Invite cancelled')" title="Cancel invite">✕</button>
+                <button class="btn bg bx" onclick="toast('Invite resent to mark@miyagami.com')">↻</button>
+                <button class="btn br bx" onclick="toast('Invite cancelled')">✕</button>
               </div>
 
             </div>
+
+            <!-- Signing authority audit log -->
+            <div style="margin-top:22px">
+              <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:10px">Signing authority log</div>
+              <div style="display:flex;flex-direction:column;gap:2px" id="sign-audit-log">
+                <div class="tli"><div class="tldot"></div><div><div class="tlt">Sophie van Dam granted signing authority</div><div class="tlm">12 May 2026 · Granted by Bárbara Mota (Legal Representative)</div></div></div>
+                <div class="tli"><div class="tldot"></div><div><div class="tlt">Bárbara Mota registered as Legal Representative</div><div class="tlm">3 Jan 2026 · Verified via email</div></div></div>
+              </div>
+            </div>
+
           </div>
+
 
           <!-- Security -->
           <div id="st2" style="display:none">
@@ -2900,14 +3207,14 @@ tbody tr:hover td{background:var(--bg)}
             <button class="btn bw bs" onclick="toast('📱 2FA setup started')">Enable 2FA</button>
           </div>
 
-          <!-- T&C Templates -->
+          <!-- Documents -->
           <div id="st6" style="display:none">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
               <div>
-                <div style="font-size:13px;font-weight:600">Terms &amp; Conditions templates</div>
-                <div style="font-size:12px;color:var(--t3);margin-top:2px">Saved templates you can attach when creating a Purchase Order or offer.</div>
+                <div style="font-size:13px;font-weight:600">Documents</div>
+                <div style="font-size:12px;color:var(--t3);margin-top:2px">Saved documents you can attach when creating a Purchase Order or offer.</div>
               </div>
-              <button class="btn bk bs" onclick="addTCTemplate()">+ Upload template</button>
+              <button class="btn bk bs" onclick="addTCTemplate()">+ Upload document</button>
             </div>
 
             <div style="display:flex;flex-direction:column;gap:8px;margin-top:14px" id="tc-templates-list">
@@ -3217,6 +3524,25 @@ tbody tr:hover td{background:var(--bg)}
 </div>
 </div>
 
+<!-- MODAL: EDIT PROJECT -->
+<div class="overlay" id="m-edit-project">
+<div class="modal">
+  <div class="mh"><div class="mt" id="edit-proj-modal-title">Edit project</div><button class="mx" onclick="cl('m-edit-project')">✕</button></div>
+  <div class="mb">
+    <div class="fld"><label class="lbl dk">Project name *</label><input class="ii" id="edit-proj-name"></div>
+    <div class="g2">
+      <div class="fld"><label class="lbl dk">Start date <span style="font-weight:400;color:var(--t3)">(optional)</span></label><input class="ii" type="date" id="edit-proj-start"></div>
+      <div class="fld"><label class="lbl dk">Expected end date <span style="font-weight:400;color:var(--t3)">(optional)</span></label><input class="ii" type="date" id="edit-proj-end"></div>
+    </div>
+    <div class="fld" style="margin-bottom:0"><label class="lbl dk">Description <span style="font-weight:400;color:var(--t3)">(optional)</span></label><textarea class="ii" id="edit-proj-desc" style="min-height:80px"></textarea></div>
+  </div>
+  <div class="mf">
+    <button class="btn bg bs" onclick="cl('m-edit-project')">Cancel</button>
+    <button class="btn bk bs" onclick="saveEditProject()">Save changes</button>
+  </div>
+</div>
+</div>
+
 <!-- MODAL: NEW PROJECT -->
 <div class="overlay" id="m-project">
 <div class="modal" style="width:500px">
@@ -3514,6 +3840,503 @@ tbody tr:hover td{background:var(--bg)}
 </div>
 </div>
 
+<!-- MODAL: REQUEST SIGN PERMISSION -->
+<div class="overlay" id="m-request-sign">
+<div class="modal" style="width:460px">
+  <div class="mh"><div class="mt">Request signing authority</div><button class="mx" onclick="cl('m-request-sign')">✕</button></div>
+  <div class="mb">
+    <div style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;color:var(--t2);margin-bottom:16px;line-height:1.6">
+      You are requesting that <strong id="sign-req-name">—</strong> is granted signing authority on behalf of Miyagami B.V. This request will be sent to <strong>Bárbara Mota</strong> (Legal Representative) for approval.
+    </div>
+    <div class="fld" style="margin-bottom:0">
+      <label class="lbl dk">Reason for this request <span style="font-weight:400;color:var(--t3)">(optional)</span></label>
+      <textarea class="ii" id="sign-req-reason" style="min-height:70px" placeholder="e.g. Thomas will be handling contract signing while Bárbara is on leave..."></textarea>
+    </div>
+  </div>
+  <div class="mf">
+    <button class="btn bg bs" onclick="cl('m-request-sign')">Cancel</button>
+    <button class="btn bk bs" onclick="submitSignRequest()">Send request →</button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL: ZZP CREATE PO -->
+<div class="overlay" id="m-zzp-create-po">
+<div class="modal mlg" style="max-height:85vh;overflow-y:auto">
+  <div class="mh">
+    <div style="display:flex;flex-direction:column;gap:2px">
+      <div class="mt">New Purchase Order</div>
+      <div style="font-size:11px;color:var(--t3)" id="zzp-po-step-label">Step 1 of 3</div>
+    </div>
+    <button class="mx" onclick="cl('m-zzp-create-po')">✕</button>
+  </div>
+
+  <!-- Stepper (rebuilt dynamically) -->
+  <div style="padding:12px 20px;border-bottom:1px solid var(--border)">
+    <div class="steps" id="zzp-po-steps"></div>
+  </div>
+
+  <div class="mb">
+
+    <!-- STEP 1: Role selection (shared) -->
+    <div id="zzp-po-s1">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px">Your role in this purchase order</div>
+      <div style="font-size:12px;color:var(--t3);margin-bottom:14px">Are you the client, or are you creating this on behalf of a client who is not on HelloProfs?</div>
+      <div style="display:flex;flex-direction:row;gap:8px">
+        <div id="zzp-role-contractor" class="tc sel" style="flex:1;padding:14px 16px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:8px;cursor:pointer;text-align:center" onclick="selectZZPRole('contractor')">
+          <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px">
+            <input type="radio" name="zzp-po-role" value="contractor" checked style="accent-color:var(--navy);flex-shrink:0">
+            <div style="font-size:13px;font-weight:600">Contractor</div>
+          </div>
+          <div style="font-size:11px;color:rgba(255,255,255,.5)">Creating on behalf of a client</div>
+        </div>
+        <div id="zzp-role-client" class="tc" style="flex:1;padding:14px 16px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:8px;cursor:pointer;text-align:center" onclick="selectZZPRole('client')">
+          <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px">
+            <input type="radio" name="zzp-po-role" value="client" style="accent-color:var(--navy);flex-shrink:0">
+            <div style="font-size:13px;font-weight:600">Client</div>
+          </div>
+          <div style="font-size:11px;color:rgba(255,255,255,.5)">I am the client</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CONTRACTOR PATH ── -->
+
+    <!-- C-Step 2: Contractor details -->
+    <div id="zzp-po-c2" style="display:none">
+
+      <!-- Client type -->
+      <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:10px">Client type</div>
+      <div style="display:flex;gap:8px;margin-bottom:16px">
+        <div id="zzp-client-type-pi" style="flex:1;padding:10px 12px;border:2px solid var(--navy);border-radius:var(--rs);cursor:pointer;background:rgba(10,26,58,.04)" onclick="selectZZPClientType('pi')">
+          <div style="font-size:13px;font-weight:600;margin-bottom:1px">Private Individual</div>
+          <div style="font-size:11px;color:var(--t3)">Can accept without an account</div>
+        </div>
+        <div id="zzp-client-type-org" style="flex:1;padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--rs);cursor:pointer" onclick="selectZZPClientType('org')">
+          <div style="font-size:13px;font-weight:600;margin-bottom:1px">Organisation</div>
+          <div style="font-size:11px;color:var(--t3)">Must create an account to accept</div>
+        </div>
+      </div>
+
+      <!-- Client contact -->
+      <div id="zzp-client-pi-fields">
+        <div class="g2">
+          <div class="fld"><label class="lbl dk">Client name *</label><input class="ii" id="zzp-client-name" placeholder="e.g. Klaas van den Berg"></div>
+          <div class="fld"><label class="lbl dk">Client email *</label><input class="ii" id="zzp-client-email" type="email" placeholder="klaas@email.nl"></div>
+        </div>
+      </div>
+      <div id="zzp-client-org-fields" style="display:none">
+        <div class="g2">
+          <div class="fld"><label class="lbl dk">Organisation name *</label><input class="ii" placeholder="e.g. Bouw Installaties B.V."></div>
+          <div class="fld"><label class="lbl dk">Contact email *</label><input class="ii" type="email" placeholder="contact@company.nl"></div>
+        </div>
+        <div style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px;font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:4px">The organisation must create a HelloProfs account to accept and sign the contract.</div>
+      </div>
+
+      <div style="border-top:1px solid var(--border);margin:16px 0"></div>
+
+      <!-- Description -->
+      <div class="fld"><label class="lbl dk">Title *</label><input class="ii" placeholder="e.g. Bathroom renovation Almere"></div>
+      <div class="fld"><label class="lbl dk">Description *</label><textarea class="ii" style="min-height:80px" placeholder="Describe the work, scope, materials, and any specific requirements&#x2026;"></textarea></div>
+
+      <div style="border-top:1px solid var(--border);margin:16px 0"></div>
+
+      <!-- Agreement type -->
+      <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:10px">Agreement type</div>
+      <div style="display:flex;gap:8px;margin-bottom:16px">
+        <div id="zzp-c-type-assign" class="tc sel" style="flex:1;color:var(--t1);cursor:pointer" onclick="selectZZPCType('assignment')">
+          <div class="tn" style="color:var(--t1)">Assignment Agreement</div>
+          <div class="td" style="color:var(--t3)">Fixed scope and dates</div>
+        </div>
+        <div id="zzp-c-type-fw" class="tc" style="flex:1;color:var(--t1);cursor:pointer" onclick="selectZZPCType('framework')">
+          <div class="tn" style="color:var(--t1)">Framework Agreement</div>
+          <div class="td" style="color:var(--t3)">Ongoing arrangement</div>
+        </div>
+      </div>
+
+      <!-- Offer fields — Assignment -->
+      <div id="zzp-c-assign-fields">
+        <div class="g2">
+          <div class="fld"><label class="lbl dk">Start date *</label><input class="ii" type="date"></div>
+          <div class="fld"><label class="lbl dk">End date *</label><input class="ii" type="date"></div>
+          <div class="fld"><label class="lbl dk">Amount (excl. BTW) *</label><input class="ii" placeholder="e.g. &#x20AC;2,500"></div>
+          <div class="fld"><label class="lbl dk">Pricing type</label><select class="ii"><option>Fixed price</option><option>Hourly rate</option></select></div>
+        </div>
+      </div>
+      <!-- Offer fields — Framework -->
+      <div id="zzp-c-fw-fields" style="display:none">
+        <div class="g2">
+          <div class="fld"><label class="lbl dk">Hourly rate (excl. BTW) *</label><input class="ii" placeholder="e.g. &#x20AC;85"></div>
+          <div class="fld"><label class="lbl dk">Preferred duration</label><select class="ii"><option value="">Select&#x2026;</option><option>3 months</option><option>6 months</option><option>12 months</option><option>Indefinite</option></select></div>
+        </div>
+      </div>
+      <div class="fld"><label class="lbl dk">Motivation <span style="font-weight:400;color:var(--t3)">(optional)</span></label><textarea class="ii" style="min-height:56px" placeholder="Why you are the right person for this job&#x2026;"></textarea></div>
+
+      <div style="border-top:1px solid var(--border);margin:16px 0"></div>
+
+      <!-- Questionnaire -->
+      <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:10px">Wet DBA questionnaire</div>
+      <div style="font-size:12px;color:var(--t3);margin-bottom:12px;line-height:1.6">Confirm your working relationship with this client. Answers verify your independence under Wet DBA.</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px">
+          <div style="font-size:12px;color:var(--t2);margin-bottom:6px">Do you work for other clients besides this one?</div>
+          <div style="display:flex;gap:8px"><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-q1" checked style="accent-color:var(--navy)"> Yes</label><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-q1" style="accent-color:var(--navy)"> No</label></div>
+        </div>
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px">
+          <div style="font-size:12px;color:var(--t2);margin-bottom:6px">Do you determine your own working hours and methods?</div>
+          <div style="display:flex;gap:8px"><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-q2" checked style="accent-color:var(--navy)"> Yes</label><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-q2" style="accent-color:var(--navy)"> No</label></div>
+        </div>
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px">
+          <div style="font-size:12px;color:var(--t2);margin-bottom:6px">Do you bear your own financial risk for this work?</div>
+          <div style="display:flex;gap:8px"><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-q3" checked style="accent-color:var(--navy)"> Yes</label><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-q3" style="accent-color:var(--navy)"> No</label></div>
+        </div>
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px">
+          <div style="font-size:12px;color:var(--t2);margin-bottom:6px">Are you responsible for the result, not just the effort?</div>
+          <div style="display:flex;gap:8px"><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-q4" checked style="accent-color:var(--navy)"> Yes</label><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-q4" style="accent-color:var(--navy)"> No</label></div>
+        </div>
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px">
+          <div style="font-size:12px;color:var(--t2);margin-bottom:6px">Do you have a KVK registration?</div>
+          <div style="display:flex;gap:8px"><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-q5" checked style="accent-color:var(--navy)"> Yes</label><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-q5" style="accent-color:var(--navy)"> No</label></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- C-Step 3: Contractor review -->
+    <div id="zzp-po-c3" style="display:none">
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:12px">
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:12px">Review your Purchase Order</div>
+        <div class="ir"><span class="ik">Your role</span><span class="iv">Contractor (on behalf of client)</span></div>
+        <div class="ir"><span class="ik">Client type</span><span class="iv" id="zzp-rv-client-type">Private Individual</span></div>
+        <div class="ir"><span class="ik">Client</span><span class="iv" id="zzp-rv-client">—</span></div>
+        <!-- Description — truncated -->
+        <div class="ir" style="align-items:flex-start">
+          <span class="ik">Description</span>
+          <span class="iv" style="flex-direction:column;align-items:flex-start;gap:4px">
+            <span id="zzp-c-desc-short" style="color:var(--t2);font-weight:400;line-height:1.5">Renovation of the bathroom including tiling, plumbing connections and finishing. All materials to be supplied by the contractor. Work must comply with local building regulations and...</span>
+            <span id="zzp-c-desc-full" style="display:none;color:var(--t2);font-weight:400;line-height:1.5">Renovation of the bathroom including tiling, plumbing connections and finishing. All materials to be supplied by the contractor. Work must comply with local building regulations and meet the agreed quality standard as specified in the scope document.</span>
+            <a id="zzp-c-desc-toggle" onclick="toggleZZPCDesc()" style="font-size:11px;color:var(--t3);cursor:pointer;text-decoration:underline">Read more</a>
+          </span>
+        </div>
+        <!-- Period (always shown for contractor path — they set start/end dates) -->
+        <div class="ir" id="zzp-c-period-row"><span class="ik">Period</span><span class="iv" id="zzp-rv-c-period">—</span></div>
+        <div class="ir"><span class="ik">Amount</span><span class="iv" id="zzp-rv-amount">—</span></div>
+        <div class="ir" style="border:none"><span class="ik">Questionnaire</span><span class="iv" style="font-weight:500">Pre-filled from profile</span></div>
+      </div>
+      <div id="zzp-po-pi-note" style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px;font-size:12px;color:var(--t2);line-height:1.6">The client will receive an email with a link to review and sign. <strong>They can accept without creating a HelloProfs account.</strong></div>
+      <div id="zzp-po-org-note" style="display:none;background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px;font-size:12px;color:var(--t2);line-height:1.6">The organisation will receive an email inviting them to create a HelloProfs account to review and sign.</div>
+    </div>
+
+    <!-- ── CLIENT PATH ── -->
+
+    <!-- L-Step 2: Agreement type -->
+    <div id="zzp-po-l2" style="display:none">
+      <div style="font-size:13px;color:var(--t2);margin-bottom:14px">Select the type of purchase order you want to create.</div>
+      <div class="g2">
+        <div class="tc sel" id="zzp-pt-assign" style="color:var(--t1)" onclick="selZZPPT(this,'assignment')">
+          <div class="ti">📋</div>
+          <div class="tn" style="color:var(--t1)">Assignment Agreement</div>
+          <div class="td" style="color:var(--t3)">Fixed scope, clear dates, fixed price or quotation</div>
+        </div>
+        <div class="tc" id="zzp-pt-fw" style="color:var(--t1)" onclick="selZZPPT(this,'framework')">
+          <div class="ti">🔗</div>
+          <div class="tn" style="color:var(--t1)">Framework Agreement</div>
+          <div class="td" style="color:var(--t3)">Ongoing, sector-based, continuous contractors</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- L-Step 3: Details (no project field) -->
+    <div id="zzp-po-l3" style="display:none">
+      <div class="fld gf"><label class="lbl dk">Title *</label><input class="ii" placeholder="e.g. Interior painting apartment"></div>
+      <div class="fld gf"><label class="lbl dk">Description *</label><textarea class="ii" placeholder="Describe the work, responsibilities and expected result. You can also include qualification requirements here, e.g. certifications or experience needed."></textarea></div>
+      <!-- Assignment fields -->
+      <div id="zzp-l3-assign">
+        <div class="fld"><label class="lbl dk">Industry *</label><select class="ii"><option>Construction</option><option>Electrical</option><option>IT</option></select></div>
+        <div class="fld"><label class="lbl dk">Location <span style="font-weight:400;color:var(--t3)">(optional)</span></label><input class="ii" placeholder="e.g. Amsterdam"></div>
+        <div class="fld"><label class="lbl dk">Start date *</label><input class="ii" type="date"></div>
+        <div class="fld"><label class="lbl dk">End date *</label><input class="ii" type="date"></div>
+      </div>
+      <!-- Framework fields -->
+      <div id="zzp-l3-fw" style="display:none">
+        <div class="fld"><label class="lbl dk">Sector / workgroup *</label><select class="ii"><option>Construction / Carpentry</option><option>Electrical</option><option>IT &amp; Technology</option><option>Installation</option><option>Painting</option></select></div>
+        <div class="fld"><label class="lbl dk">Conditions &amp; possible activities *</label><textarea class="ii" style="min-height:80px" placeholder="Describe the types of work and activities under this framework. You can also include qualification requirements here."></textarea></div>
+        <div class="fld"><label class="lbl dk">Preferred duration of contract</label><select class="ii"><option value="">Select a duration…</option><option>3 months</option><option>6 months</option><option>12 months</option><option>24 months</option><option>Indefinite</option></select></div>
+      </div>
+    </div>
+
+    <!-- L-Step 4: Documentation -->
+    <div id="zzp-po-l4" style="display:none">
+      <!-- T&C -->
+      <div style="margin-bottom:18px">
+        <div style="font-size:13px;font-weight:600;margin-bottom:4px">Purchase conditions (T&amp;C)</div>
+        <div style="font-size:12px;color:var(--t3);margin-bottom:10px">Attach your terms &amp; conditions — use an existing template or upload a new file.</div>
+        <div style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden">
+          <div style="display:flex;border-bottom:1px solid var(--border)">
+            <div style="flex:1;padding:8px 14px;font-size:12px;font-weight:600;color:var(--t1);background:var(--white);cursor:pointer;text-align:center;border-right:1px solid var(--border)">Use existing template</div>
+            <div style="flex:1;padding:8px 14px;font-size:12px;font-weight:500;color:var(--t3);background:var(--bg);cursor:pointer;text-align:center">Upload new file</div>
+          </div>
+          <div style="padding:14px;display:flex;flex-direction:column;gap:8px">
+            <label class="tpl-row"><input type="radio" name="zzp-tc-tpl" checked style="width:14px;height:14px;accent-color:var(--navy);flex-shrink:0"><div><div style="font-size:13px;font-weight:500">Inkoopvoorwaarden Standaard 2024</div><div style="font-size:11px;color:var(--t3)">Last updated 12 Jan 2024</div></div></label>
+            <label class="tpl-row"><input type="radio" name="zzp-tc-tpl" style="width:14px;height:14px;accent-color:var(--navy);flex-shrink:0"><div><div style="font-size:13px;font-weight:500">Raamopdracht Voorwaarden v2</div><div style="font-size:11px;color:var(--t3)">Last updated 3 Mar 2026</div></div></label>
+          </div>
+        </div>
+      </div>
+      <div class="div" style="margin-bottom:18px"></div>
+      <!-- Required attachments -->
+      <div style="margin-bottom:18px">
+        <div style="font-size:13px;font-weight:600;margin-bottom:4px">Required attachments from contractor</div>
+        <div style="font-size:12px;color:var(--t3);margin-bottom:10px">Select which documents the contractor must include with their offer.</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <label style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);cursor:not-allowed;opacity:.7">
+            <input type="checkbox" checked disabled style="width:14px;height:14px;accent-color:var(--navy);flex-shrink:0">
+            <div style="flex:1"><div style="font-size:13px;font-weight:500">General terms &amp; conditions</div><div style="font-size:11px;color:var(--t3);margin-top:1px">Mandatory — always required</div></div>
+            <span class="badge bgn2" style="font-size:10px">Required</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--white);border:1px solid var(--border);border-radius:var(--rs);cursor:pointer" onclick="this.querySelector('input').click();event.preventDefault()">
+            <input type="checkbox" style="width:14px;height:14px;accent-color:var(--navy);flex-shrink:0">
+            <div style="flex:1"><div style="font-size:13px;font-weight:500">Proof of business liability insurance</div></div>
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--white);border:1px solid var(--border);border-radius:var(--rs);cursor:pointer" onclick="this.querySelector('input').click();event.preventDefault()">
+            <input type="checkbox" checked style="width:14px;height:14px;accent-color:var(--navy);flex-shrink:0">
+            <div style="flex:1"><div style="font-size:13px;font-weight:500">VCA certificate</div></div>
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--white);border:1px solid var(--border);border-radius:var(--rs);cursor:pointer" onclick="this.querySelector('input').click();event.preventDefault()">
+            <input type="checkbox" style="width:14px;height:14px;accent-color:var(--navy);flex-shrink:0">
+            <div style="flex:1"><div style="font-size:13px;font-weight:500">Driver's licence</div></div>
+          </label>
+        </div>
+      </div>
+      <div class="div" style="margin-bottom:18px"></div>
+      <!-- Additional documentation -->
+      <div>
+        <div style="font-size:13px;font-weight:600;margin-bottom:4px">Additional documentation <span style="font-weight:400;color:var(--t3);font-size:12px">(optional)</span></div>
+        <div style="font-size:12px;color:var(--t3);margin-bottom:10px">Upload documents the contractor needs to read before submitting their offer.</div>
+        <button class="btn bw bs" style="width:100%" onclick="toast('File picker opened')">+ Add document</button>
+      </div>
+    </div>
+
+    <!-- L-Step 5: Distribute -->
+    <div id="zzp-po-l5" style="display:none">
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
+        <label class="cr" onclick="setZZPDistrib('relations')"><input type="radio" name="zzp-d" id="zzp-d-rel" checked> <div><div style="font-weight:500">Send to specific relations</div><div style="font-size:11px;color:var(--t3);margin-top:1px">Choose contractors from your network</div></div></label>
+        <label class="cr" onclick="setZZPDistrib('labels')"><input type="radio" name="zzp-d" id="zzp-d-lbl"> <div><div style="font-weight:500">Send to a label group</div><div style="font-size:11px;color:var(--t3);margin-top:1px">Notify all contractors with a specific label</div></div></label>
+        <label class="cr" onclick="setZZPDistrib('marketplace')"><input type="radio" name="zzp-d" id="zzp-d-mp"> <div><div style="font-weight:500">Post on marketplace</div><div style="font-size:11px;color:var(--t3);margin-top:1px">Any verified contractor can respond</div></div></label>
+        <label class="cr" onclick="setZZPDistrib('external')"><input type="radio" name="zzp-d" id="zzp-d-ext"> <div><div style="font-weight:500">Send to external user</div><div style="font-size:11px;color:var(--t3);margin-top:1px">Person not yet on HelloProfs</div></div></label>
+      </div>
+      <div id="zzp-dist-relations">
+        <label class="lbl dk">Select relations</label>
+        <div style="position:relative;margin-top:6px"><input class="ii" placeholder="Search relations..." style="width:100%"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;min-height:24px"></div>
+      </div>
+      <div id="zzp-dist-labels" style="display:none">
+        <label class="lbl dk">Select labels</label>
+        <div style="position:relative;margin-top:6px"><input class="ii" placeholder="Search labels..." style="width:100%"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;min-height:24px"></div>
+      </div>
+      <div id="zzp-dist-marketplace" style="display:none;background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:12px;font-size:12px;color:var(--t2);line-height:1.6">This PO will be published on the HelloProfs marketplace. Any verified contractor can discover and respond to it.</div>
+      <div id="zzp-dist-external" style="display:none">
+        <div class="fld"><label class="lbl dk">Email address *</label><input class="ii" type="email" placeholder="contractor@email.nl" style="margin-top:6px"></div>
+      </div>
+    </div>
+
+    <!-- L-Step 6: Review -->
+    <div id="zzp-po-l6" style="display:none">
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:12px">
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:12px">Review your Purchase Order</div>
+
+        <div class="ir"><span class="ik">Your role</span><span class="iv">Client</span></div>
+        <div class="ir"><span class="ik">Type</span><span class="iv" id="zzp-rv-type">Assignment Agreement</span></div>
+
+        <!-- Description — truncated -->
+        <div class="ir" style="align-items:flex-start">
+          <span class="ik">Description</span>
+          <span class="iv" style="flex-direction:column;align-items:flex-start;gap:4px">
+            <span id="zzp-l-desc-short" style="color:var(--t2);font-weight:400;line-height:1.5">Interior painting of a 3-bedroom apartment including ceilings, walls and doors. Contractor to supply all materials. Work must be completed in a single continuous period with no disruption to...</span>
+            <span id="zzp-l-desc-full" style="display:none;color:var(--t2);font-weight:400;line-height:1.5">Interior painting of a 3-bedroom apartment including ceilings, walls and doors. Contractor to supply all materials. Work must be completed in a single continuous period with no disruption to neighbours. Surface preparation, priming and two topcoats required per wall.</span>
+            <a id="zzp-l-desc-toggle" onclick="toggleZZPLDesc()" style="font-size:11px;color:var(--t3);cursor:pointer;text-decoration:underline">Read more</a>
+          </span>
+        </div>
+
+        <!-- Period — only for Assignment Agreement -->
+        <div class="ir" id="zzp-l-period-row"><span class="ik">Period</span><span class="iv" id="zzp-rv-period">—</span></div>
+        <!-- Preferred duration — only for Framework Agreement -->
+        <div class="ir" id="zzp-l-duration-row" style="display:none"><span class="ik">Preferred duration</span><span class="iv" id="zzp-rv-duration">—</span></div>
+
+        <div style="border-top:1px solid var(--border);margin:10px 0"></div>
+
+        <div class="ir"><span class="ik">T&amp;C</span><span class="iv">Inkoopvoorwaarden Standaard 2024</span></div>
+        <div class="ir"><span class="ik">Distribution</span><span class="iv" id="zzp-rv-dist">Specific relations</span></div>
+        <div class="ir" style="border:none"><span class="ik">Status</span><span class="iv" style="font-weight:500">Ready to send</span></div>
+      </div>
+      <div style="font-size:12px;color:var(--t3);line-height:1.6">Submitting will notify your selected contractors and create a case file for each response.</div>
+    </div>
+
+  </div>
+  <div class="mf">
+    <button class="btn bg bs" id="zzp-po-back-btn" style="display:none" onclick="zzpPOBack()">← Back</button>
+    <button class="btn bg bs" onclick="cl('m-zzp-create-po')">Cancel</button>
+    <button class="btn bk bs" id="zzp-po-next-btn" onclick="zzpPONext()">Continue →</button>
+  </div>
+</div>
+</div>
+
+
+<!-- MODAL: EDIT FRAMEWORK PO -->
+<div class="overlay" id="m-edit-fw-po">
+<div class="modal" style="width:520px">
+  <div class="mh"><div class="mt">Edit Purchase Order</div><button class="mx" onclick="cl('m-edit-fw-po')">✕</button></div>
+  <div class="mb">
+    <div style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;color:var(--t2);margin-bottom:16px;line-height:1.6">
+      You can update the fields below while this framework agreement is active. Changes to <strong>Purchase conditions</strong> or <strong>Description</strong> will require contractors to acknowledge the update.
+    </div>
+    <div class="fld">
+      <label class="lbl dk">Purchase conditions (T&amp;C)</label>
+      <select class="ii" id="fw-edit-tc">
+        <option selected>Inkoopvoorwaarden Standaard 2024</option>
+        <option>Raamopdracht Voorwaarden v2</option>
+        <option>Aangepaste Voorwaarden Woningbouw 2026</option>
+      </select>
+    </div>
+    <div class="fld">
+      <label class="lbl dk">Description</label>
+      <textarea class="ii" id="fw-edit-desc" style="min-height:100px">Ongoing framework agreement for all carpentry and timber work across the Woningbouw Almere project. Contractors under this agreement may be assigned individual work orders throughout the year. VCA certification and liability insurance required. All work to comply with residential building standards.</textarea>
+    </div>
+    <div class="g2">
+      <div class="fld">
+        <label class="lbl dk">End date</label>
+        <input class="ii" id="fw-edit-end" type="date" value="2026-12-31">
+      </div>
+      <div class="fld">
+        <label class="lbl dk">Industry</label>
+        <select class="ii" id="fw-edit-industry">
+          <option selected>Construction</option>
+          <option>Electrical</option>
+          <option>IT</option>
+          <option>Installation</option>
+          <option>Painting</option>
+        </select>
+      </div>
+    </div>
+    <div class="fld" style="margin-bottom:0">
+      <label class="lbl dk">Location</label>
+      <input class="ii" id="fw-edit-location" value="Almere">
+    </div>
+  </div>
+  <div class="mf">
+    <button class="btn bg bs" onclick="cl('m-edit-fw-po')">Cancel</button>
+    <button class="btn bk bs" onclick="saveFWPOChanges()">Save changes →</button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL: FRAMEWORK PO CHANGES — CONTRACTOR SCOPE -->
+<div class="overlay" id="m-fw-scope">
+<div class="modal" style="width:540px">
+  <div class="mh"><div class="mt">Apply changes to contractors</div><button class="mx" onclick="cl('m-fw-scope')">✕</button></div>
+  <div class="mb">
+    <div style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;color:var(--t2);margin-bottom:16px;line-height:1.6">
+      You've changed the <strong id="fw-scope-changed-fields">Purchase conditions and Description</strong>. Decide how these changes apply to your current contractors.
+    </div>
+
+    <!-- Two main options side by side -->
+    <div style="display:flex;flex-direction:row;gap:8px;margin-bottom:16px">
+      <!-- Option 1: New contractors only -->
+      <label style="flex:1;flex-direction:column;display:flex;align-items:flex-start;gap:12px;padding:14px;border:1.5px solid var(--border);border-radius:var(--r);cursor:pointer;transition:border-color .15s" id="fw-scope-opt-new" onclick="selectFWScope('new')">
+        <input type="radio" name="fw-scope" value="new" style="accent-color:var(--navy);flex-shrink:0">
+        <div>
+          <div style="font-size:13px;font-weight:600;margin-bottom:3px">Apply only to new contractors</div>
+          <div style="font-size:12px;color:var(--t3);line-height:1.6">Existing contractors are not affected. The updated conditions apply only to contractors who join from now on.</div>
+        </div>
+      </label>
+
+      <!-- Option 2: Notify existing -->
+      <label style="flex:1;flex-direction:column;display:flex;align-items:flex-start;gap:12px;padding:14px;border:2px solid var(--navy);border-radius:var(--r);cursor:pointer;background:rgba(10,26,58,.03)" id="fw-scope-opt-all" onclick="selectFWScope('all')">
+        <input type="radio" name="fw-scope" value="all" checked style="accent-color:var(--navy);flex-shrink:0">
+        <div>
+          <div style="font-size:13px;font-weight:600;margin-bottom:3px">Notify existing contractors <span class="badge bga" style="font-size:10px;margin-left:4px">2 active</span></div>
+          <div style="font-size:12px;color:var(--t3);line-height:1.6">All current contractors will be asked how they want to proceed with the updated conditions.</div>
+        </div>
+      </label>
+    </div>
+
+    <!-- Sub-options (visible when 'Notify existing' is selected) -->
+    <div id="fw-scope-contractor-options" style="display:flex;flex-direction:row;gap:8px">
+      <label style="flex:1;flex-direction:column;display:flex;align-items:flex-start;gap:10px;padding:14px;border:1.5px solid var(--border);border-radius:var(--r);cursor:default">
+        <div style="font-size:13px;font-weight:600">Continue without changes to offer</div>
+        <div style="font-size:12px;color:var(--t3);line-height:1.6">The PO will be updated but the contractor's offer stays the same. The client will be asked to sign the updated contract.</div>
+      </label>
+      <label style="flex:1;flex-direction:column;display:flex;align-items:flex-start;gap:10px;padding:14px;border:1.5px solid var(--border);border-radius:var(--r);cursor:default">
+        <div style="font-size:13px;font-weight:600">Review and change offer</div>
+        <div style="font-size:12px;color:var(--t3);line-height:1.6">Update both the PO and the offer. The client will review the new offer before signing.</div>
+      </label>
+    </div>
+    <div id="fw-scope-contractor-note" style="font-size:11px;color:var(--t3);margin-top:8px">Each contractor will choose their preferred option.</div>
+
+  </div>
+  <div class="mf">
+    <button class="btn bg bs" onclick="cl('m-fw-scope')">Cancel</button>
+    <button class="btn bk bs" onclick="confirmFWScope()">Confirm &amp; save →</button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL: CONTRACTOR — HOW TO PROCEED (notification simulation) -->
+<div class="overlay" id="m-fw-contractor-proceed">
+<div class="modal" style="width:500px">
+  <div class="mh"><div class="mt">Purchase Order updated</div><button class="mx" onclick="cl('m-fw-contractor-proceed')">✕</button></div>
+  <div class="mb">
+    <div style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;color:var(--t2);margin-bottom:16px;line-height:1.6">
+      <strong>Miyagami B.V.</strong> has updated the <strong id="fw-proc-changed">Purchase conditions and Description</strong> of the framework agreement <strong>Raamopdracht Timmerwerk 2026</strong>. How do you want to proceed?
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <label style="display:flex;align-items:flex-start;gap:12px;padding:14px;border:2px solid var(--navy);border-radius:var(--r);cursor:pointer;background:rgba(10,26,58,.03)" id="fw-proc-opt-continue" onclick="selectFWProceed('continue')">
+        <input type="radio" name="fw-proceed" value="continue" checked style="accent-color:var(--navy);flex-shrink:0;margin-top:3px">
+        <div>
+          <div style="font-size:13px;font-weight:600;margin-bottom:3px">Continue without changes to offer</div>
+          <div style="font-size:12px;color:var(--t3);line-height:1.6">The PO will be updated but your offer stays the same. The client will be asked to sign the updated contract.</div>
+        </div>
+      </label>
+
+      <label style="display:flex;align-items:flex-start;gap:12px;padding:14px;border:1.5px solid var(--border);border-radius:var(--r);cursor:pointer" id="fw-proc-opt-review" onclick="selectFWProceed('review')">
+        <input type="radio" name="fw-proceed" value="review" style="accent-color:var(--navy);flex-shrink:0;margin-top:3px">
+        <div>
+          <div style="font-size:13px;font-weight:600;margin-bottom:3px">Review and change offer</div>
+          <div style="font-size:12px;color:var(--t3);line-height:1.6">Update both the PO and your offer. The client will review the new offer before signing.</div>
+        </div>
+      </label>
+    </div>
+  </div>
+  <div class="mf">
+    <button class="btn bg bs" onclick="cl('m-fw-contractor-proceed')">Decide later</button>
+    <button class="btn bk bs" onclick="submitFWProceed()">Confirm →</button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL: APPROVE SIGN PERMISSION (Legal Rep view) -->
+<div class="overlay" id="m-approve-sign">
+<div class="modal" style="width:460px">
+  <div class="mh"><div class="mt">Signing authority request</div><button class="mx" onclick="cl('m-approve-sign')">✕</button></div>
+  <div class="mb">
+    <div style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;color:var(--t2);margin-bottom:16px;line-height:1.6">
+      <strong>Bárbara Mota</strong> (Admin) has requested that <strong id="approve-req-name">Thomas Weiss</strong> is granted the authority to sign contracts on behalf of Miyagami B.V.
+    </div>
+    <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;margin-bottom:16px">
+      <div style="font-weight:600;margin-bottom:4px">Reason provided</div>
+      <div style="color:var(--t2)" id="approve-req-reason">Thomas will be handling contract signing while Bárbara is on leave.</div>
+    </div>
+    <div style="font-size:12px;color:var(--t3);line-height:1.6">By granting this permission you confirm that <strong id="approve-req-name2">Thomas Weiss</strong> is legally authorised to sign contracts on behalf of your company. This action will be logged and can be revoked at any time.</div>
+  </div>
+  <div class="mf">
+    <button class="btn bg bs" onclick="cl('m-approve-sign')">Cancel</button>
+    <button class="btn bw bs" onclick="denySignRequest()">Deny</button>
+    <button class="btn bk bs" onclick="grantSignPermission()">Grant signing authority →</button>
+  </div>
+</div>
+</div>
+
 <!-- MODAL: SUBSCRIPTION PROMPT -->
 <div class="overlay" id="m-subscription">
 <div class="modal" style="width:480px">
@@ -3689,6 +4512,23 @@ tbody tr:hover td{background:var(--bg)}
         </div>
       </div>
     </div>
+
+    <!-- Labels (shared across both tabs) -->
+    <div style="border-top:1px solid var(--border);margin-top:18px;padding-top:16px">
+      <label class="lbl dk" style="margin-bottom:6px;display:block">Labels <span style="font-weight:400;color:var(--t3)">(optional)</span></label>
+      <div style="font-size:12px;color:var(--t3);margin-bottom:8px">Assign one or more labels to organise this relation in your network.</div>
+      <div style="position:relative">
+        <input class="ii" id="inv-label-search" placeholder="Search or select labels…" onfocus="openInvLabelDropdown()" oninput="filterInvLabels(this.value)" style="width:100%">
+        <div id="inv-label-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--white);border:1px solid var(--border);border-top:none;border-radius:0 0 var(--rs) var(--rs);z-index:30;max-height:140px;overflow-y:auto">
+          <div class="rel-opt inv-label-opt" data-label="Carpentry" onclick="toggleInvLabel('Carpentry')"><span class="inv-lbl-check" style="margin-right:8px;opacity:0">✓</span>Carpentry</div>
+          <div class="rel-opt inv-label-opt" data-label="Electrical" onclick="toggleInvLabel('Electrical')"><span class="inv-lbl-check" style="margin-right:8px;opacity:0">✓</span>Electrical</div>
+          <div class="rel-opt inv-label-opt" data-label="IT" onclick="toggleInvLabel('IT')"><span class="inv-lbl-check" style="margin-right:8px;opacity:0">✓</span>IT</div>
+          <div class="rel-opt inv-label-opt" data-label="Installation" onclick="toggleInvLabel('Installation')"><span class="inv-lbl-check" style="margin-right:8px;opacity:0">✓</span>Installation</div>
+          <div class="rel-opt inv-label-opt" data-label="Painting" onclick="toggleInvLabel('Painting')"><span class="inv-lbl-check" style="margin-right:8px;opacity:0">✓</span>Painting</div>
+        </div>
+      </div>
+      <div id="inv-label-tags" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;min-height:24px"></div>
+    </div>
   </div>
   <div class="mf">
     <button class="btn bg bs" onclick="cl('m-invite')">Cancel</button>
@@ -3716,38 +4556,70 @@ tbody tr:hover td{background:var(--bg)}
         <div class="fld gf"><label class="lbl dk">Title *</label><input class="ii" placeholder="e.g. Raamopdracht Timmerwerk"></div>
 
         <!-- ASSIGNMENT-only fields -->
-        <div class="fld gf po-assign-only"><label class="lbl dk">Description *</label><textarea class="ii" placeholder="Describe the work, responsibilities and expected result..."></textarea></div>
+        <div class="fld gf po-assign-only"><label class="lbl dk">Description *</label><textarea class="ii" placeholder="Describe the work, responsibilities and expected result. You can also include qualification requirements here, e.g. certifications or experience needed."></textarea></div>
 
         <!-- Project — mandatory -->
         <div class="fld gf po-assign-only">
           <label class="lbl dk">Project *</label>
-          <div style="display:flex;gap:8px;align-items:flex-start">
-            <select class="ii" id="po-project-select" onchange="onPOProjectChange()" style="flex:1">
+          <div style="font-size:12px;color:var(--t3);margin-top:2px;margin-bottom:8px">Every PO must be linked to a project. Select an existing one or create a new project directly here.</div>
+
+          <!-- Project options: radio-style -->
+          <div style="display:flex;gap:8px" id="po-project-options">
+            <label style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:8px;padding:9px 12px;border:1.5px solid var(--border);border-radius:var(--rs);cursor:pointer;flex:1;text-align:center" onclick="togglePOProjectMode('existing')">
+              <input type="radio" name="po-proj-mode" value="existing" checked style="accent-color:var(--navy)">
+              <div style="font-size:13px;font-weight:500">Select existing</div>
+            </label>
+            <label style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:8px;padding:9px 12px;border:1.5px solid var(--border);border-radius:var(--rs);cursor:pointer;flex:1;text-align:center" onclick="togglePOProjectMode('new')">
+              <input type="radio" name="po-proj-mode" value="new" style="accent-color:var(--navy)">
+              <div style="font-size:13px;font-weight:500">Create new project</div>
+            </label>
+          </div>
+
+          <!-- Existing project dropdown -->
+          <div id="po-project-existing" style="margin-top:8px">
+            <select class="ii" id="po-project-select" onchange="onPOProjectChange()">
               <option value="">— Select a project —</option>
               <option data-loc="Almere">Woningbouw Almere</option>
               <option data-loc="Amsterdam">Onderhoud 2026</option>
               <option data-loc="Rotterdam">Internal IT</option>
             </select>
-            <button class="btn bw bs" style="flex-shrink:0;white-space:nowrap" onclick="createNewProjectFromPO()">+ New project</button>
           </div>
-          <div style="font-size:11px;color:var(--t3);margin-top:4px">Every PO must be linked to a project. If you don't have one yet, create it first.</div>
+
+          <!-- Inline new project form -->
+          <div id="po-project-new" style="display:none;margin-top:8px;padding:12px;background:var(--bg);border:1px solid var(--border);border-radius:var(--rs)">
+            <div class="fld" style="margin-bottom:6px">
+              <label class="lbl dk">Project name *</label>
+              <input class="ii" id="po-new-project-name" placeholder="e.g. Woningbouw Rotterdam" style="margin-top:4px">
+            </div>
+            <div style="font-size:11px;color:var(--t3);line-height:1.5">The project will be created when you submit this PO. You can add more details (dates, description) later by clicking <strong>Edit</strong> on the project card.</div>
+          </div>
         </div>
         
 
         <!-- FRAMEWORK-only fields -->
         <div class="fld po-fw-only" style="display:none"><label class="lbl dk">Sector / workgroup *</label><select class="ii"><option>Construction / Carpentry</option><option>Electrical</option><option>IT &amp; Technology</option><option>Installation</option><option>Painting</option><option>Plumbing</option></select></div>
         <div class="fld po-fw-only" style="display:none"><label class="lbl dk">Location</label><input class="ii" id="po-location" placeholder="e.g. Almere"></div>
-        <div class="fld gf po-fw-only" style="display:none"><label class="lbl dk">Conditions &amp; possible activities *</label><textarea class="ii" style="min-height:100px" placeholder="Describe the types of work, conditions, and activities that may be assigned under this framework..."></textarea></div>
+        <div class="fld gf po-fw-only" style="display:none"><label class="lbl dk">Conditions &amp; possible activities *</label><textarea class="ii" style="min-height:100px" placeholder="Describe the types of work, conditions, and activities that may be assigned under this framework. You can also include qualification requirements here, e.g. certifications or specific skills the contractor must have."></textarea></div>
 
         <!-- ASSIGNMENT-only location/dates -->
         <div class="fld po-assign-only"><label class="lbl dk">Industry *</label><select class="ii"><option>Construction</option><option>Electrical</option><option>IT</option></select></div>
-        <div class="fld po-assign-only"><label class="lbl dk" id="po-loc-label">Location *</label><input class="ii" id="po-location-assign" placeholder="e.g. Almere"></div>
+        <div class="fld po-assign-only"><label class="lbl dk">Location <span style="font-weight:400;color:var(--t3)">(optional)</span></label><input class="ii" id="po-location-assign" placeholder="e.g. Almere"></div>
         <div class="fld po-assign-only"><label class="lbl dk">Start date *</label><input class="ii" type="date" value="2026-06-01"></div>
         <div class="fld po-assign-only"><label class="lbl dk">End date *</label><input class="ii" type="date" value="2026-08-31"></div>
 
-        <!-- FRAMEWORK: no end date notice -->
+        <!-- FRAMEWORK: preferred duration (replaces start/end dates) -->
         <div class="fld gf po-fw-only" style="display:none">
-          <div style="background:#f4f4f4;border:1px solid #d4d4d4;border-radius:var(--rs);padding:10px 12px;font-size:12px;color:#111111">Note: Framework agreements have no fixed end date. They remain active until you close them or replace them with updated prerequisites.</div>
+          <label class="lbl dk">Preferred duration of contract</label>
+          <select class="ii" style="margin-top:6px">
+            <option value="">Select a duration…</option>
+            <option>3 months</option>
+            <option>6 months</option>
+            <option>12 months</option>
+            <option>24 months</option>
+            <option>Indefinite (no fixed end date)</option>
+            <option>Custom</option>
+          </select>
+          <div style="font-size:11px;color:var(--t3);margin-top:4px">Framework agreements remain active until closed or replaced. This is a preference, not a fixed commitment.</div>
         </div>
       </div>
     </div>
@@ -3759,33 +4631,26 @@ tbody tr:hover td{background:var(--bg)}
         <div style="font-size:12px;color:var(--t3);margin-bottom:10px">Attach your terms &amp; conditions — upload a file or select a saved template.</div>
         <div style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden">
           <div style="display:flex;border-bottom:1px solid var(--border)">
-            <div id="tc-tab-upload" style="flex:1;padding:8px 14px;font-size:12px;font-weight:600;color:var(--t1);background:var(--white);cursor:pointer;text-align:center;border-right:1px solid var(--border)" onclick="switchTCTab('upload')">Upload file</div>
-            <div id="tc-tab-template" style="flex:1;padding:8px 14px;font-size:12px;font-weight:500;color:var(--t3);background:var(--bg);cursor:pointer;text-align:center" onclick="switchTCTab('template')">Use existing template</div>
+            <div id="tc-tab-template" style="flex:1;padding:8px 14px;font-size:12px;font-weight:600;color:var(--t1);background:var(--white);cursor:pointer;text-align:center;border-right:1px solid var(--border)" onclick="switchTCTab('template')">Use existing template</div>
+            <div id="tc-tab-upload" style="flex:1;padding:8px 14px;font-size:12px;font-weight:500;color:var(--t3);background:var(--bg);cursor:pointer;text-align:center" onclick="switchTCTab('upload')">Upload new file</div>
           </div>
-          <div id="tc-panel-upload" style="padding:14px">
+          <div id="tc-panel-template" style="padding:14px">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <label class="tpl-row"><input type="radio" name="tc-tpl" checked style="width:14px;height:14px;accent-color:var(--navy);flex-shrink:0"><div><div style="font-size:13px;font-weight:500">Inkoopvoorwaarden Standaard 2024</div><div style="font-size:11px;color:var(--t3)">Last updated 12 Jan 2024</div></div></label>
+              <label class="tpl-row"><input type="radio" name="tc-tpl" style="width:14px;height:14px;accent-color:var(--navy);flex-shrink:0"><div><div style="font-size:13px;font-weight:500">Raamopdracht Voorwaarden v2</div><div style="font-size:11px;color:var(--t3)">Last updated 3 Mar 2026</div></div></label>
+              <label class="tpl-row"><input type="radio" name="tc-tpl" style="width:14px;height:14px;accent-color:var(--navy);flex-shrink:0"><div><div style="font-size:13px;font-weight:500">IT &amp; Dienstverlening Voorwaarden</div><div style="font-size:11px;color:var(--t3)">Last updated 19 Feb 2025</div></div></label>
+            </div>
+          </div>
+          <div id="tc-panel-upload" style="display:none;padding:14px">
             <div class="sign" style="padding:16px" onclick="toast('File picker opened')">
               <svg viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px;margin:0 auto 8px;display:block"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
               <div style="font-size:12px;color:var(--t3)">Click to upload · PDF, DOCX accepted</div>
-            </div>
-          </div>
-          <div id="tc-panel-template" style="display:none;padding:14px">
-            <div style="display:flex;flex-direction:column;gap:8px">
-              <label class="tpl-row"><input type="radio" name="tc-tpl" style="width:14px;height:14px;accent-color:var(--navy);flex-shrink:0"><div><div style="font-size:13px;font-weight:500">Inkoopvoorwaarden Standaard 2024</div><div style="font-size:11px;color:var(--t3)">Last updated 12 Jan 2024</div></div></label>
-              <label class="tpl-row"><input type="radio" name="tc-tpl" style="width:14px;height:14px;accent-color:var(--navy);flex-shrink:0"><div><div style="font-size:13px;font-weight:500">Raamopdracht Voorwaarden v2</div><div style="font-size:11px;color:var(--t3)">Last updated 3 Mar 2026</div></div></label>
-              <label class="tpl-row"><input type="radio" name="tc-tpl" style="width:14px;height:14px;accent-color:var(--navy);flex-shrink:0"><div><div style="font-size:13px;font-weight:500">IT &amp; Dienstverlening Voorwaarden</div><div style="font-size:11px;color:var(--t3)">Last updated 19 Feb 2025</div></div></label>
             </div>
           </div>
         </div>
       </div>
 
       <div class="div" style="margin-bottom:20px"></div>
-
-      <!-- Qualification requirements -->
-      <div style="margin-bottom:20px">
-        <div style="font-size:13px;font-weight:600;margin-bottom:4px">Qualification requirements</div>
-        <div style="font-size:12px;color:var(--t3);margin-bottom:8px">Describe any certifications, experience or skills the contractor must have.</div>
-        <textarea class="ii" placeholder="e.g. VCA certification, 3+ years experience..."></textarea>
-      </div>
 
       <div class="div" style="margin-bottom:20px"></div>
 
@@ -3858,16 +4723,18 @@ tbody tr:hover td{background:var(--bg)}
       <div id="dist-labels" style="display:block">
         <label class="lbl dk">Select labels</label>
         <div style="position:relative;margin-top:6px">
-          <input class="ii" id="lbl-search" placeholder="Search labels..." oninput="filterLblPicker()" onfocus="document.getElementById('lbl-dropdown').style.display='block'" style="width:100%">
+          <input class="ii" id="lbl-search" placeholder="Search labels..." oninput="filterLblPicker()" onfocus="document.getElementById('lbl-dropdown').style.display='block';syncLblDropdownChecks()" style="width:100%">
           <div id="lbl-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--white);border:1px solid var(--border);border-top:none;border-radius:0 0 var(--rs) var(--rs);z-index:20;max-height:160px;overflow-y:auto">
-            <div class="rel-opt" onclick="addLblTag('Carpentry')">Carpentry</div>
-            <div class="rel-opt" onclick="addLblTag('Electrical')">Electrical</div>
-            <div class="rel-opt" onclick="addLblTag('IT')">IT</div>
-            <div class="rel-opt" onclick="addLblTag('Installation')">Installation</div>
-            <div class="rel-opt" onclick="addLblTag('Painting')">Painting</div>
+            <div class="rel-opt" data-value="Carpentry" onclick="addLblTag('Carpentry')"><span class="lbl-check" style="margin-right:8px;opacity:0">✓</span>Carpentry</div>
+            <div class="rel-opt" data-value="Electrical" onclick="addLblTag('Electrical')"><span class="lbl-check" style="margin-right:8px;opacity:0">✓</span>Electrical</div>
+            <div class="rel-opt" data-value="IT" onclick="addLblTag('IT')"><span class="lbl-check" style="margin-right:8px;opacity:0">✓</span>IT</div>
+            <div class="rel-opt" data-value="Installation" onclick="addLblTag('Installation')"><span class="lbl-check" style="margin-right:8px;opacity:0">✓</span>Installation</div>
+            <div class="rel-opt" data-value="Painting" onclick="addLblTag('Painting')"><span class="lbl-check" style="margin-right:8px;opacity:0">✓</span>Painting</div>
           </div>
         </div>
         <div id="lbl-tags" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;min-height:28px"></div>
+        <!-- Per-label relation lists — rendered dynamically -->
+        <div id="lbl-relation-lists" style="display:flex;flex-direction:column;gap:12px;margin-top:12px"></div>
       </div>
 
       <!-- Marketplace notice -->
@@ -3910,7 +4777,45 @@ tbody tr:hover td{background:var(--bg)}
         </div>
       </div>
     </div>
-    <div id="ps5" style="display:none"><div style="background:var(--bg);border-radius:var(--r);padding:14px;border:1px solid var(--border)"><div style="font-size:11px;color:var(--t3);margin-bottom:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px">Summary</div><div class="ir"><span class="ik">Title</span><span class="iv">Renovatie Blok E — Timmerwerk Q3</span></div><div class="ir"><span class="ik">Type</span><span class="iv">Assignment Agreement</span></div><div class="ir"><span class="ik">Period</span><span class="iv">1 Jun – 31 Aug 2026</span></div><div class="ir"><span class="ik">Pricing</span><span class="iv">Quotation</span></div><div class="ir"><span class="ik">Distribution</span><span class="iv">Label: Carpentry (3 contractors)</span></div></div><div style="font-size:12px;color:var(--t3);margin-top:12px">Note: Sending creates a case file per contractor and notifies them by email.</div></div>
+    <div id="ps5" style="display:none">
+      <div style="background:var(--bg);border-radius:var(--r);padding:16px;border:1px solid var(--border)">
+        <div style="font-size:11px;color:var(--t3);margin-bottom:12px;font-weight:600;text-transform:uppercase;letter-spacing:.4px">Review your Purchase Order</div>
+
+        <!-- Type & Title -->
+        <div class="ir"><span class="ik">Title</span><span class="iv" id="rv-title">Renovatie Blok E — Timmerwerk Q3</span></div>
+        <div class="ir"><span class="ik">Type</span><span class="iv" id="rv-type">Assignment Agreement</span></div>
+        <div class="ir"><span class="ik">Project</span><span class="iv" id="rv-project">Woningbouw Almere</span></div>
+
+        <!-- Description — truncated with Read more -->
+        <div class="ir" style="align-items:flex-start">
+          <span class="ik">Description</span>
+          <span class="iv" style="flex-direction:column;align-items:flex-start;gap:4px">
+            <span id="rv-desc-short" style="color:var(--t2);font-weight:400;line-height:1.5">Renovation of Block E covering carpentry, internal finishing and floor installation. Contractor must supply all tools and materials per spec sheet. Work to be completed in accordance with the building regulation applicable to residential...</span>
+            <span id="rv-desc-full" style="display:none;color:var(--t2);font-weight:400;line-height:1.5">Renovation of Block E covering carpentry, internal finishing and floor installation. Contractor must supply all tools and materials per spec sheet. Work to be completed in accordance with the building regulation applicable to residential construction projects. VCA certification required. All waste to be removed from site daily.</span>
+            <a id="rv-desc-toggle" onclick="toggleRvDesc()" style="font-size:11px;color:var(--t3);cursor:pointer;text-decoration:underline">Read more</a>
+          </span>
+        </div>
+
+        <!-- Period — only for Assignment Agreement -->
+        <div class="ir" id="rv-period-row"><span class="ik">Period</span><span class="iv" id="rv-period">1 Jun – 31 Aug 2026</span></div>
+
+        <!-- Preferred duration — only for Framework Agreement -->
+        <div class="ir" id="rv-duration-row" style="display:none"><span class="ik">Preferred duration</span><span class="iv" id="rv-duration">6 months</span></div>
+
+        <div style="border-top:1px solid var(--border);margin:10px 0"></div>
+
+        <!-- Pricing & Conditions -->
+        <div class="ir"><span class="ik">T&amp;C</span><span class="iv" id="rv-tc">Inkoopvoorwaarden Standaard 2024</span></div>
+        <div class="ir" id="rv-attachments-row"><span class="ik">Required docs</span><span class="iv" id="rv-attachments">VCA certificate, T&amp;C</span></div>
+
+        <div style="border-top:1px solid var(--border);margin:10px 0"></div>
+
+        <!-- Distribution -->
+        <div class="ir"><span class="ik">Send to</span><span class="iv" id="rv-dist">Label: Carpentry (3 contractors)</span></div>
+
+      </div>
+      <div style="font-size:12px;color:var(--t3);margin-top:10px;line-height:1.6">Submitting will create a case file per contractor and notify them by email. You can still make changes after sending by requesting a revision.</div>
+    </div>
   </div>
   <div class="mf"><button class="btn bg bs" id="pb" style="display:none" onclick="poBack()">← Back</button><button class="btn bg bs" onclick="cl('m-po')">Cancel</button><button class="btn bk bs" id="pn" onclick="poNext()">Continue →</button></div>
 </div>
@@ -4336,6 +5241,13 @@ function setEnt(co,type,av,role){
   // Apply manager restrictions (no invite, no subscription)
   const isManager = (role || '').toLowerCase() === 'manager';
   applyManagerRole(isManager);
+  // Switch topbar mc button based on entity type
+  const mc = document.getElementById('mc');
+  if(mc){
+    if(isZZP){ mc.textContent="+ New PO"; mc.setAttribute('onclick','openZZPCreatePO()'); }
+    else      { mc.textContent="+ New PO"; mc.setAttribute('onclick','openPO()'); }
+  }
+
   updateInvoiceButtons();
   closeEdd();
   nav('dashboard');
@@ -4504,17 +5416,18 @@ function applyViewerRole(isViewer){
 // ── LOGIN ──
 function doLogin(){
   const email = document.getElementById('login-email')?.value.trim().toLowerCase();
-  const isNewUser = email === 'jan@company.nl';
+  const isNewUser      = email === 'jan@company.nl';
+  const isSanne        = email === 'sanne@miyagami.com' || (!isNewUser && email !== 'dennis@summitaccounting.nl' && email !== 'laurens@gmail.com');
+  const isDennis       = email === 'dennis@summitaccounting.nl';
+  const isLaurens      = email === 'laurens@gmail.com';
+
   if(isNewUser){
     profileIncomplete = true;
     cpKVKVerified = false;
     cpBTWVerified = false;
-    // Reset profile fields
     ['cp-kvk','cp-btw'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
     ['cp-kvk-status','cp-btw-status'].forEach(id=>{ const el=document.getElementById(id); if(el){el.textContent='';el.style.display='none';} });
     ['cp-kvk-btn','cp-btw-btn'].forEach(id=>{ const el=document.getElementById(id); if(el){ el.textContent='Verify'; el.disabled=false; el.style.background='rgba(212,255,53,.15)'; el.style.borderColor='rgba(212,255,53,.3)'; el.style.color='var(--lime)'; }});
-
-    // ── Swap sidebar identity to Jan ──
     const sUsername = document.getElementById('sidebar-username');
     const sEmail    = document.getElementById('sidebar-email');
     const sAv2      = document.getElementById('sidebar-av2');
@@ -4525,8 +5438,6 @@ function doLogin(){
     if(sAv2)      sAv2.textContent      = 'J';
     if(sEav)      sEav.textContent      = 'C';
     if(sEco)      sEco.textContent      = 'Company B.V.';
-
-    // ── Swap entity dropdown to single entity ──
     const edd = document.getElementById('edd');
     if(edd){
       const switcher = edd.querySelector('.eds');
@@ -4534,170 +5445,215 @@ function doLogin(){
         <div class="edl">Switch entity</div>
         <div class="edi act"><div class="edav" style="background:#111111">C</div>Company B.V.<span class="edd-role" style="margin-left:auto;font-size:10px;font-weight:600;color:var(--lime)">Admin</span></div>`;
     }
-
-    // ── Swap settings entities list to single entity ──
     const entList = document.getElementById('entities-list');
     if(entList) entList.innerHTML = `
-      <div style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden" data-entity="Company B.V.">
+      <div style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden">
         <div style="padding:14px 18px;display:flex;align-items:center;gap:14px">
           <div class="av" style="width:40px;height:40px;font-size:16px;flex-shrink:0;background:#111111">C</div>
           <div style="flex:1;min-width:0">
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
               <div style="font-size:14px;font-weight:600">Company B.V.</div>
-              <span class="badge bgl">Current</span>
-              <span class="badge bgn2">Admin</span>
+              <span class="badge bgl">Current</span><span class="badge bgn2">Admin</span>
             </div>
-            <div style="font-size:12px;color:var(--t3);display:flex;gap:14px;flex-wrap:wrap">
+            <div style="font-size:12px;color:var(--t3);display:flex;gap:14px">
               <span>Organisation</span><span>KVK —</span><span>No active plan</span>
             </div>
           </div>
-          <button class="btn br bs" onclick="toast('Cannot archive your only entity')">Archive</button>
         </div>
       </div>`;
-
-    // Show incomplete banner
     const banner = document.getElementById('profile-incomplete-banner');
     if(banner) banner.style.display='flex';
-    // Set ID verification to empty state for new user
     idSetNewUser();
-    // Hide Members tab
     const membersTab = document.querySelector('[onclick*="st4"]');
     if(membersTab) membersTab.style.display='none';
-    // Enter app, show empty dashboard + onboarding
     go('sc-app');
-    setTimeout(()=>{
-      activateEmptyDashboard();
-      openOnboarding();
-    }, 80);
-  } else {
+    setTimeout(()=>{ activateEmptyDashboard(); openOnboarding(); }, 80);
+
+  } else if(isDennis){
     profileIncomplete = false;
     idSetVerified();
-
-    // ── Restore sidebar identity to Bárbara ──
     const sUsername = document.getElementById('sidebar-username');
     const sEmail    = document.getElementById('sidebar-email');
     const sAv2      = document.getElementById('sidebar-av2');
     const sEav      = document.getElementById('eav');
     const sEco      = document.getElementById('eco');
-    if(sUsername) sUsername.textContent = 'Bárbara Mota';
-    if(sEmail)    sEmail.textContent    = 'barbara@miyagami.com';
-    if(sAv2)      sAv2.textContent      = 'B';
-    if(sEav)      sEav.textContent      = 'M';
-    if(sEco)      sEco.textContent      = 'Miyagami B.V.';
-
-    // ── Restore entity dropdown ──
+    if(sUsername) sUsername.textContent = 'Dennis Vermeer';
+    if(sEmail)    sEmail.textContent    = 'dennis@summitaccounting.nl';
+    if(sAv2)      sAv2.textContent      = 'D';
+    if(sEav)      sEav.textContent      = 'S';
+    if(sEco)      sEco.textContent      = 'Summit Accounting';
     const edd = document.getElementById('edd');
     if(edd){
       const switcher = edd.querySelector('.eds');
       if(switcher) switcher.innerHTML = `
         <div class="edl">Switch entity</div>
-        <div class="edi act" onclick="setEnt('Miyagami B.V.','Organisation','M','Admin')"><div class="edav">M</div>Miyagami B.V.<span class="edd-role" style="margin-left:auto;font-size:10px;font-weight:600;color:var(--lime)">Admin</span></div>
-        <div class="edi" onclick="setEnt('HelloProfs B.V.','Organisation','H','Viewer')"><div class="edav" style="background:#333333">H</div>HelloProfs B.V.<span class="edd-role" style="margin-left:auto;font-size:10px;font-weight:600;color:rgba(255,255,255,.35)">Viewer</span></div>
-        <div class="edi" onclick="setEnt('Claude B.V.','Organisation','C','Manager')"><div class="edav" style="background:#444444">C</div>Claude B.V.<span class="edd-role" style="margin-left:auto;font-size:10px;font-weight:600;color:rgba(255,255,255,.35)">Manager</span></div>
-        <div class="edi" onclick="setEnt('Barbara Freelance','ZZP\\'er','B','ZZP\\'er')"><div class="edav" style="background:#666666">B</div>Barbara Freelance<span class="edd-role" style="margin-left:auto;font-size:10px;font-weight:600;color:rgba(255,255,255,.35)">ZZP'er</span></div>`;
+        <div class="edi act"><div class="edav" style="background:#212121">S</div>Summit Accounting<span class="edd-role" style="margin-left:auto;font-size:10px;font-weight:600;color:var(--lime)">Intermediary</span></div>`;
     }
-
-    // ── Restore settings entities list ──
     const entList = document.getElementById('entities-list');
     if(entList) entList.innerHTML = `
-      <div style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden" data-entity="Miyagami B.V.">
+      <div style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden">
         <div style="padding:14px 18px;display:flex;align-items:center;gap:14px">
-          <div class="av" style="width:40px;height:40px;font-size:16px;flex-shrink:0;background:var(--navy)">M</div>
+          <div class="av" style="width:40px;height:40px;font-size:16px;flex-shrink:0;background:#212121">S</div>
           <div style="flex:1;min-width:0">
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
-              <div style="font-size:14px;font-weight:600">Miyagami B.V.</div>
-              <span class="badge bgl entity-current-badge">Current</span>
-              <span class="badge bgn2">Admin</span>
+              <div style="font-size:14px;font-weight:600">Summit Accounting</div>
+              <span class="badge bgl">Current</span>
+              <span class="badge bgn2">Intermediary</span>
             </div>
-            <div style="font-size:12px;color:var(--t3);display:flex;gap:14px;flex-wrap:wrap"><span>Organisation</span><span>KVK 12345678</span><span>Annual plan</span></div>
+            <div style="font-size:12px;color:var(--t3);display:flex;gap:14px"><span>Intermediary</span><span>0 organisations</span></div>
           </div>
-          <button class="btn br bs entity-archive-btn" onclick="archiveEntity('Miyagami B.V.')">Archive</button>
         </div>
-      </div>
-      <div style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer" data-entity="HelloProfs B.V." onclick="setEnt('HelloProfs B.V.','Organisation','H','Viewer')">
-        <div style="padding:14px 18px;display:flex;align-items:center;gap:14px">
-          <div class="av" style="width:40px;height:40px;font-size:16px;flex-shrink:0;background:#e5484d">H</div>
-          <div style="flex:1;min-width:0">
-            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:3px">
-              <div style="font-size:14px;font-weight:600">HelloProfs B.V.</div>
-              <span class="badge bgb">Viewer</span>
-              <span class="badge bga" style="font-size:10px">PO Owner · IT Support Q3</span>
-            </div>
-            <div style="font-size:12px;color:var(--t3);display:flex;gap:14px;flex-wrap:wrap"><span>Organisation</span><span>KVK 55544433</span><span>Annual plan</span></div>
-          </div>
-          <svg style="width:16px;height:16px;stroke:var(--t3);fill:none;stroke-width:1.2;stroke-linecap:round;flex-shrink:0" viewBox="0 0 16 16"><path d="M6 4l4 4-4 4"/></svg>
-        </div>
-      </div>
-      <div style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer" data-entity="Claude B.V." onclick="setEnt('Claude B.V.','Organisation','C','Manager')">
-        <div style="padding:14px 18px;display:flex;align-items:center;gap:14px">
-          <div class="av" style="width:40px;height:40px;font-size:16px;flex-shrink:0;background:#444444">C</div>
-          <div style="flex:1;min-width:0">
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
-              <div style="font-size:14px;font-weight:600">Claude B.V.</div>
-              <span class="badge" style="background:rgba(124,58,237,.1);color:#6d28d9;font-weight:600">Manager</span>
-            </div>
-            <div style="font-size:12px;color:var(--t3);display:flex;gap:14px;flex-wrap:wrap"><span>Organisation</span><span>KVK 99887766</span><span>Flex plan</span></div>
-          </div>
-          <svg style="width:16px;height:16px;stroke:var(--t3);fill:none;stroke-width:1.2;stroke-linecap:round;flex-shrink:0" viewBox="0 0 16 16"><path d="M6 4l4 4-4 4"/></svg>
-        </div>
-      </div>
-      <div style="border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;display:flex;align-items:center;gap:14px;cursor:pointer" data-entity="Barbara Freelance" onclick="setEnt('Barbara Freelance','ZZP\\'er','B','ZZP\\'er')">
-        <div class="av" style="width:40px;height:40px;font-size:16px;flex-shrink:0;background:#555">B</div>
-        <div style="flex:1;min-width:0">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
-            <div style="font-size:14px;font-weight:600">Barbara Freelance</div>
-            <span class="badge bgn2">ZZP'er</span>
-          </div>
-          <div style="font-size:12px;color:var(--t3);display:flex;gap:14px;flex-wrap:wrap"><span>ZZP'er</span><span>KVK 98765432</span><span>Flex plan</span></div>
-        </div>
-        <svg style="width:16px;height:16px;stroke:var(--t3);fill:none;stroke-width:1.2;stroke-linecap:round;flex-shrink:0" viewBox="0 0 16 16"><path d="M6 4l4 4-4 4"/></svg>
       </div>`;
+    // Show full app with intermediary empty state
+    go('sc-app');
+    setTimeout(()=>{
+      // Switch nav to intermediary-only
+      document.getElementById('nav-org').style.display='none';
+      document.getElementById('nav-zzp').style.display='none';
+      document.getElementById('nav-intermediary').style.display='block';
+      // Swap mc button to + New entity
+      const mc = document.getElementById('mc');
+      if(mc){ mc.textContent='+ New entity'; mc.onclick=()=>toggleIntermediaryInviteForm(true); }
+      // Hide all dashboard content, show intermediary state (use separate flag)
+      document.querySelectorAll('#pg-dashboard > *:not(#dashboard-click-blocker):not(#dashboard-empty-state):not(#dashboard-intermediary-state)').forEach(el=>{
+        el.dataset.hiddenForDennis='1'; el.style.display='none';
+      });
+      const intState = document.getElementById('dashboard-intermediary-state');
+      if(intState) intState.style.display='block';
+      const emptyState = document.getElementById('dashboard-empty-state');
+      if(emptyState) emptyState.style.display='none';
+      nav('dashboard');
+    }, 80);
 
-    // ── Restore profile fields ──
-    const cpKvk = document.getElementById('cp-kvk'); if(cpKvk) cpKvk.value='12345678';
-    const cpBtw = document.getElementById('cp-btw'); if(cpBtw) cpBtw.value='NL123456789B01';
-    const kvkStatus = document.getElementById('cp-kvk-status');
-    if(kvkStatus){ kvkStatus.textContent='✓ KVK verified — Miyagami B.V.'; kvkStatus.style.display='block'; kvkStatus.style.color='var(--green-t)'; }
-    const btwStatus = document.getElementById('cp-btw-status');
-    if(btwStatus){ btwStatus.textContent='✓ BTW number verified'; btwStatus.style.display='block'; btwStatus.style.color='var(--green-t)'; }
-    const kvkBtn = document.getElementById('cp-kvk-btn');
-    if(kvkBtn){ kvkBtn.textContent='✓ Verified'; kvkBtn.style.background='var(--green-bg)'; kvkBtn.style.borderColor='#86efac'; kvkBtn.style.color='var(--green-t)'; }
-    const btwBtn = document.getElementById('cp-btw-btn');
-    if(btwBtn){ btwBtn.textContent='✓ Verified'; btwBtn.style.background='var(--green-bg)'; btwBtn.style.borderColor='#86efac'; btwBtn.style.color='var(--green-t)'; }
-    cpKVKVerified = true; cpBTWVerified = true;
-
-    // ── Hide incomplete banner ──
+  } else if(isLaurens){
+    profileIncomplete = false;
+    idSetVerified();
+    const sUsername = document.getElementById('sidebar-username');
+    const sEmail    = document.getElementById('sidebar-email');
+    const sAv2      = document.getElementById('sidebar-av2');
+    const sEav      = document.getElementById('eav');
+    const sEco      = document.getElementById('eco');
+    if(sUsername) sUsername.textContent = 'Laurens de Boer';
+    if(sEmail)    sEmail.textContent    = 'laurens@gmail.com';
+    if(sAv2)      sAv2.textContent      = 'L';
+    if(sEav)      sEav.textContent      = 'L';
+    if(sEco)      sEco.textContent      = 'De Boer Timmerwerk';
+    const edd = document.getElementById('edd');
+    if(edd){
+      const switcher = edd.querySelector('.eds');
+      if(switcher) switcher.innerHTML = `
+        <div class="edl">Switch entity</div>
+        <div class="edi act"><div class="edav" style="background:#333333">L</div>De Boer Timmerwerk<span class="edd-role" style="margin-left:auto;font-size:10px;font-weight:600;color:var(--lime)">ZZP'er</span></div>`;
+    }
+    const entList = document.getElementById('entities-list');
+    if(entList) entList.innerHTML = `
+      <div style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden">
+        <div style="padding:14px 18px;display:flex;align-items:center;gap:14px">
+          <div class="av" style="width:40px;height:40px;font-size:16px;flex-shrink:0;background:#333333">L</div>
+          <div style="flex:1;min-width:0">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+              <div style="font-size:14px;font-weight:600">De Boer Timmerwerk</div>
+              <span class="badge bgl">Current</span>
+              <span class="badge bgn2">ZZP'er</span>
+            </div>
+            <div style="font-size:12px;color:var(--t3);display:flex;gap:14px"><span>ZZP'er</span><span>KVK 87654321</span><span>Flex plan</span></div>
+          </div>
+        </div>
+      </div>`;
+    // Restore dashboard + nav, then switch to ZZP'er entity
+    deactivateEmptyDashboard();
     const banner = document.getElementById('profile-incomplete-banner');
     if(banner) banner.style.display='none';
-
-    // ── Restore Members tab ──
     const membersTab = document.querySelector('[onclick*="st4"]');
     if(membersTab) membersTab.style.display='';
-
-    // ── Restore dashboard and nav ──
-    deactivateEmptyDashboard();
-    unlockNav();
-
-    // ── Reset entity type to Organisation ──
-    currentEntityType = 'Organisation';
-    currentEntityRole = 'Admin';
-    document.getElementById('nav-org').style.display='block';
-    document.getElementById('nav-zzp').style.display='none';
-    const fiscalTab = document.getElementById('st5-tab');
-    if(fiscalTab) fiscalTab.style.display='none';
-    applyViewerRole(false);
-    updateInvoiceButtons();
-
     go('sc-app');
+    setTimeout(()=>{ setEnt('De Boer Timmerwerk', "ZZP'er", 'L', "ZZP'er"); }, 80);
+
+  } else {
+    // sanne@miyagami.com — existing org user with 3 entities
+    profileIncomplete = false;
+    idSetVerified();
+    const sUsername = document.getElementById('sidebar-username');
+    const sEmail    = document.getElementById('sidebar-email');
+    const sAv2      = document.getElementById('sidebar-av2');
+    const sEav      = document.getElementById('eav');
+    const sEco      = document.getElementById('eco');
+    if(sUsername) sUsername.textContent = 'Sanne Visser';
+    if(sEmail)    sEmail.textContent    = 'sanne@miyagami.com';
+    if(sAv2)      sAv2.textContent      = 'S';
+    if(sEav)      sEav.textContent      = 'G';
+    if(sEco)      sEco.textContent      = 'Miyagami Global';
+    const edd = document.getElementById('edd');
+    if(edd){
+      const switcher = edd.querySelector('.eds');
+      if(switcher) switcher.innerHTML = `
+        <div class="edl">Switch entity</div>
+        <div class="edi act" onclick="setEnt('Miyagami Global','Organisation','G','Legal Representative')"><div class="edav">G</div>Miyagami Global<span class="edd-role" style="margin-left:auto;font-size:10px;font-weight:600;color:var(--lime)">Legal Rep.</span></div>
+        <div class="edi" onclick="setEnt('Miyagami Netherlands','Organisation','N','Admin')"><div class="edav" style="background:#333333">N</div>Miyagami Netherlands<span class="edd-role" style="margin-left:auto;font-size:10px;font-weight:600;color:rgba(255,255,255,.35)">Admin</span></div>
+        <div class="edi" onclick="setEnt('Miyagami Spain','Organisation','E','Manager')"><div class="edav" style="background:#555555">E</div>Miyagami Spain<span class="edd-role" style="margin-left:auto;font-size:10px;font-weight:600;color:rgba(255,255,255,.35)">Manager</span></div>`;
+    }
+    const entList = document.getElementById('entities-list');
+    if(entList) entList.innerHTML = `
+      <div style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer" onclick="setEnt('Miyagami Global','Organisation','G','Legal Representative')">
+        <div style="padding:14px 18px;display:flex;align-items:center;gap:14px">
+          <div class="av" style="width:40px;height:40px;font-size:16px;flex-shrink:0">G</div>
+          <div style="flex:1;min-width:0">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+              <div style="font-size:14px;font-weight:600">Miyagami Global</div>
+              <span class="badge bgl">Current</span>
+              <span style="font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;background:#212121;color:#fff">Legal Representative</span>
+            </div>
+            <div style="font-size:12px;color:var(--t3);display:flex;gap:14px">
+              <span>Organisation</span><span>KVK 12345678</span><span>Annual plan</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer" onclick="setEnt('Miyagami Netherlands','Organisation','N','Admin')">
+        <div style="padding:14px 18px;display:flex;align-items:center;gap:14px">
+          <div class="av" style="width:40px;height:40px;font-size:16px;flex-shrink:0;background:#333333">N</div>
+          <div style="flex:1;min-width:0">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+              <div style="font-size:14px;font-weight:600">Miyagami Netherlands</div>
+              <span class="badge bgn2">Admin</span>
+            </div>
+            <div style="font-size:12px;color:var(--t3);display:flex;gap:14px">
+              <span>Organisation</span><span>KVK 22334455</span><span>Annual plan</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer" onclick="setEnt('Miyagami Spain','Organisation','E','Manager')">
+        <div style="padding:14px 18px;display:flex;align-items:center;gap:14px">
+          <div class="av" style="width:40px;height:40px;font-size:16px;flex-shrink:0;background:#555555">E</div>
+          <div style="flex:1;min-width:0">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+              <div style="font-size:14px;font-weight:600">Miyagami Spain</div>
+              <span class="badge bgn2">Manager</span>
+            </div>
+            <div style="font-size:12px;color:var(--t3);display:flex;gap:14px">
+              <span>Organisation</span><span>KVK 99887766</span><span>Flex plan</span>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    deactivateEmptyDashboard();
+    const sanneBanner = document.getElementById('profile-incomplete-banner');
+    if(sanneBanner) sanneBanner.style.display='none';
+    const sanneMembersTab = document.querySelector('[onclick*="st4"]');
+    if(sanneMembersTab) sanneMembersTab.style.display='';
+    go('sc-app');
+    setTimeout(()=>{ setEnt('Miyagami Global', 'Organisation', 'G', 'Legal Representative'); }, 80);
   }
+
 }
 
 function activateEmptyDashboard(){
   // Show empty state
   const emptyState = document.getElementById('dashboard-empty-state');
   if(emptyState) emptyState.style.display='flex';
-  // Hide normal dashboard content
-  document.querySelectorAll('#pg-dashboard > *:not(#dashboard-click-blocker):not(#dashboard-empty-state)').forEach(el=>{
+  // Hide normal dashboard content — exclude BOTH special states
+  document.querySelectorAll('#pg-dashboard > *:not(#dashboard-click-blocker):not(#dashboard-empty-state):not(#dashboard-intermediary-state)').forEach(el=>{
     el.dataset.hiddenForNew='1'; el.style.display='none';
   });
   // Block T&C upload button
@@ -4713,10 +5669,29 @@ function activateEmptyDashboard(){
 function deactivateEmptyDashboard(){
   const emptyState = document.getElementById('dashboard-empty-state');
   if(emptyState) emptyState.style.display='none';
-  // Restore dashboard content
+  // Restore dashboard content first
   document.querySelectorAll('#pg-dashboard > [data-hidden-for-new]').forEach(el=>{
     el.style.display=''; delete el.dataset.hiddenForNew;
   });
+  document.querySelectorAll('#pg-dashboard > [data-hidden-for-dennis]').forEach(el=>{
+    el.style.display=''; delete el.dataset.hiddenForDennis;
+  });
+  // Force-hide both special states AFTER restoring (in case they got marked)
+  const intState = document.getElementById('dashboard-intermediary-state');
+  if(intState){ intState.style.display='none'; delete intState.dataset.hiddenForNew; }
+  // Restore intermediary nav
+  const navInt = document.getElementById('nav-intermediary');
+  if(navInt) navInt.style.display='none';
+  // Restore nav-org visibility (in case Dennis hid it)
+  const navOrg = document.getElementById('nav-org');
+  if(navOrg) navOrg.style.display='block';
+  // Restore mc button based on entity type
+  const mc = document.getElementById('mc');
+  if(mc){
+    mc.textContent='+ New PO';
+    if(currentEntityType==="ZZP'er") mc.setAttribute('onclick','openZZPCreatePO()');
+    else mc.setAttribute('onclick','openPO()');
+  }
 }
 
 function lockNavForNewUser(){
@@ -5019,6 +5994,44 @@ function openContractDetail(title, contractor, type, value, status, expires){
   setBreadcrumb([{label:'Contracts',page:'contracts'},{label:title}], null);
 }
 
+function toggleRvDesc(){
+  const short  = document.getElementById('rv-desc-short');
+  const full   = document.getElementById('rv-desc-full');
+  const toggle = document.getElementById('rv-desc-toggle');
+  if(!short || !full || !toggle) return;
+  const isExpanded = full.style.display !== 'none';
+  short.style.display  = isExpanded ? '' : 'none';
+  full.style.display   = isExpanded ? 'none' : '';
+  toggle.textContent   = isExpanded ? 'Read more' : 'Read less';
+}
+
+function populateReview(){
+  const isFA = currentPOType === 'framework';
+  // Period row: show only for AA
+  const periodRow   = document.getElementById('rv-period-row');
+  const durationRow = document.getElementById('rv-duration-row');
+  if(periodRow)   periodRow.style.display   = isFA ? 'none' : '';
+  if(durationRow) durationRow.style.display = isFA ? '' : 'none';
+  // Type label
+  const typeEl = document.getElementById('rv-type');
+  if(typeEl) typeEl.textContent = isFA ? 'Framework Agreement' : 'Assignment Agreement';
+  // Project
+  const projSel = document.getElementById('po-project-select');
+  const newProj = document.getElementById('po-new-project-name');
+  const projEl  = document.getElementById('rv-project');
+  if(projEl){
+    const newMode = document.querySelector('input[name="po-proj-mode"][value="new"]')?.checked;
+    projEl.textContent = newMode ? (newProj?.value || '—') : (projSel?.options[projSel.selectedIndex]?.text || '—');
+  }
+  // Reset description toggle
+  const short = document.getElementById('rv-desc-short');
+  const full  = document.getElementById('rv-desc-full');
+  const tog   = document.getElementById('rv-desc-toggle');
+  if(short) short.style.display = '';
+  if(full)  full.style.display  = 'none';
+  if(tog)   tog.textContent     = 'Read more';
+}
+
 function toggleCreditAmount(){
   const sel = document.getElementById('credit-type-select');
   const row = document.getElementById('credit-partial-row');
@@ -5120,18 +6133,43 @@ function renderPO(){
 }
 function poNext(){
   if(poS===5){
+    // If "Create new project" mode selected, create the project on submit
+    const newMode = document.querySelector('input[name="po-proj-mode"][value="new"]')?.checked;
+    if(newMode){
+      const newName = document.getElementById('po-new-project-name')?.value.trim();
+      if(!newName){ toast('Please enter a project name'); return; }
+      // Add to project dropdown and grid
+      const sel = document.getElementById('po-project-select');
+      if(sel){ const opt=document.createElement('option'); opt.value=newName; opt.textContent=newName; sel.appendChild(opt); }
+      const grid = document.getElementById('projects-grid');
+      if(grid){
+        const card = document.createElement('div');
+        card.className='pc';
+        card.setAttribute('onclick',`openProject(${JSON.stringify(newName)},'Active','—','—','—','—','No description yet.')`);
+        card.innerHTML=`
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px">
+            <div class="pcn">${newName}</div>
+            <div style="display:flex;gap:4px;flex-shrink:0">
+              <button class="btn bw bx" style="font-size:11px" onclick="event.stopPropagation();openEditProject(${JSON.stringify(newName)})">Edit</button>
+              <span class="badge bgn" style="flex-shrink:0">Active</span>
+            </div>
+          </div>
+          <div class="pcd" style="margin-bottom:10px;color:var(--t3)">No description yet. Click Edit to add details.</div>
+          <div style="font-size:11px;color:var(--t3)">— · 0 purchase orders · 0 active contracts</div>`;
+        grid.appendChild(card);
+      }
+    }
     cl('m-po');
     const isExternal = document.getElementById('d-ext')?.checked;
     if(isExternal){
-      toast('📧 PO & offer sent — Klaas van den Berg will receive an email');
-      // Show the client email simulation
+      toast('PO & offer sent — Klaas van den Berg will receive an email');
       setTimeout(()=>go('sc-client-email'), 1800);
     } else {
-      toast('🚀 PO sent to contractors!');
+      toast('PO sent to contractors!');
     }
     return;
   }
-  poS=Math.min(poS+1,5);renderPO();if(poS===2)applyPOTypeFields();
+  poS=Math.min(poS+1,5);renderPO();if(poS===2)applyPOTypeFields();if(poS===5)populateReview();
 }
 function poBack(){poS=Math.max(poS-1,1);renderPO();}
 let currentPOType = 'assignment';
@@ -5237,8 +6275,8 @@ function openPODetailFromProject(key){
 
 function switchTCTab(t){
   const isUpload = t==='upload';
-  document.getElementById('tc-tab-upload').style.cssText='flex:1;padding:8px 14px;font-size:12px;cursor:pointer;text-align:center;border-right:1px solid var(--border);font-weight:'+(isUpload?'600':'500')+';color:'+(isUpload?'var(--t1)':'var(--t3)')+';background:'+(isUpload?'var(--white)':'var(--bg)');
-  document.getElementById('tc-tab-template').style.cssText='flex:1;padding:8px 14px;font-size:12px;cursor:pointer;text-align:center;font-weight:'+(isUpload?'500':'600')+';color:'+(isUpload?'var(--t3)':'var(--t1)')+';background:'+(isUpload?'var(--bg)':'var(--white)');
+  document.getElementById('tc-tab-upload').style.cssText='flex:1;padding:8px 14px;font-size:12px;cursor:pointer;text-align:center;font-weight:'+(isUpload?'600':'500')+';color:'+(isUpload?'var(--t1)':'var(--t3)')+';background:'+(isUpload?'var(--white)':'var(--bg)');
+  document.getElementById('tc-tab-template').style.cssText='flex:1;padding:8px 14px;font-size:12px;cursor:pointer;text-align:center;border-right:1px solid var(--border);font-weight:'+(isUpload?'500':'600')+';color:'+(isUpload?'var(--t3)':'var(--t1)')+';background:'+(isUpload?'var(--bg)':'var(--white)');
   document.getElementById('tc-panel-upload').style.display=isUpload?'block':'none';
   document.getElementById('tc-panel-template').style.display=isUpload?'none':'block';
 }
@@ -5250,12 +6288,27 @@ function addTCTemplate(){
   const list = document.getElementById('tc-templates-list');
   const row = document.createElement('div');
   row.id = id;
-  row.style.cssText = 'display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--white);border:2px dashed var(--border);border-radius:var(--r)';
+  row.style.cssText = 'background:var(--white);border:2px dashed var(--border);border-radius:var(--r);padding:14px 16px;display:flex;flex-direction:column;gap:10px';
   row.innerHTML = `
-    <div style=style="flex-shrink:0"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;flex-shrink:0"><path d="M4 2h5l3 3v9H4V2z"/><path d="M9 2v3h3"/></svg></div>
-    <input class="ii" placeholder="Template name" style="flex:1;margin:0">
-    <button class="btn bw bx" onclick="toast('📎 File picker opened — PDF or DOCX')">Upload file</button>
-    <button class="btn br bx" onclick="document.getElementById('${id}').remove()">✕</button>`;
+    <div style="display:flex;gap:10px;align-items:center">
+      <select class="ii" style="flex:1;margin:0">
+        <option value="">Select document type…</option>
+        <option>Terms &amp; Conditions</option>
+        <option>Passport</option>
+        <option>National ID card</option>
+        <option>Driver's licence</option>
+        <option>VCA certificate</option>
+        <option>Business liability insurance</option>
+        <option>Professional indemnity insurance</option>
+        <option>KVK extract</option>
+        <option>Other</option>
+      </select>
+      <button class="btn br bx" onclick="document.getElementById('${id}').remove()">✕</button>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <input class="ii" placeholder="Document name" style="flex:1;margin:0">
+      <button class="btn bw bx" onclick="toast('File picker opened — PDF or DOCX')">Upload file</button>
+    </div>`;
   list.appendChild(row);
 }
 
@@ -5417,6 +6470,29 @@ function openMakeOffer(){
 }
 
 
+// ── REQUESTED DOCUMENTS (offer step 2) ──
+function showChangeDoc(key){
+  const change = document.getElementById('req-'+key+'-change');
+  const upload = document.getElementById('req-'+key+'-upload');
+  if(change) change.style.display = change.style.display==='none' ? 'block' : 'none';
+  if(upload) upload.style.display = 'none';
+}
+function showUploadNewDoc(key){
+  const upload = document.getElementById('req-'+key+'-upload');
+  const change = document.getElementById('req-'+key+'-change');
+  if(upload) upload.style.display = upload.style.display==='none' ? 'block' : 'none';
+  if(change) change.style.display = 'none';
+}
+function removeReqDoc(key){
+  const card = document.getElementById('req-'+key);
+  if(!card) return;
+  card.innerHTML = `
+    <div style="padding:10px 12px;display:flex;align-items:center;gap:10px;background:var(--bg);opacity:.6">
+      <div style="flex:1;font-size:12px;color:var(--t3)">Document removed — will not be included in this offer</div>
+      <button class="btn bw bx" style="font-size:11px" onclick="zzpOfferReset()">Undo</button>
+    </div>`;
+}
+
 let zzpOfferStep = 1;
 let zzpOfferSigned = false;
 
@@ -5481,7 +6557,541 @@ function zzpDoSign(){
   document.getElementById('zzp-sign-txt').textContent='Signed by Jan Bakker · timestamp recorded';
 }
 
-// ── INVITE SUBCONTRACTOR ──
+// ── INTERMEDIARY INVITE (inline dashboard) ──
+function toggleIntermediaryInviteForm(show){
+  const form   = document.getElementById('int-invite-form');
+  const empty  = document.getElementById('int-orgs-empty');
+  if(form) form.style.display = show ? 'block' : 'none';
+  if(show){
+    // Clear fields
+    ['int-form-org-name','int-form-org-email','int-form-org-msg'].forEach(id=>{
+      const el=document.getElementById(id); if(el) el.value='';
+    });
+    form?.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+}
+
+function submitIntermediaryInviteInline(){
+  const name  = document.getElementById('int-form-org-name')?.value.trim();
+  const email = document.getElementById('int-form-org-email')?.value.trim();
+  if(!name){ toast('Please enter an organisation name'); return; }
+  if(!email){ toast('Please enter an email address'); return; }
+
+  // Hide form
+  toggleIntermediaryInviteForm(false);
+
+  // Hide empty state, show org list
+  const empty = document.getElementById('int-orgs-empty');
+  if(empty) empty.style.display='none';
+  const list = document.getElementById('int-orgs-list');
+  if(list){
+    list.style.display='flex';
+    const card = document.createElement('div');
+    card.style.cssText='display:flex;align-items:center;gap:14px;padding:14px 18px;border-top:1px solid var(--border)';
+    card.innerHTML=`
+      <div class="av" style="width:40px;height:40px;font-size:16px;flex-shrink:0;background:#333">${name[0].toUpperCase()}</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:14px;font-weight:600;margin-bottom:2px">${name}</div>
+        <div style="font-size:12px;color:var(--t3)">Invite sent to ${email}</div>
+      </div>
+      <span class="badge bga" style="flex-shrink:0">Awaiting profile completion</span>`;
+    list.appendChild(card);
+  }
+  toast('Invitation sent to ' + email + ' — they will receive a link to complete the profile');
+}
+
+
+let _signReqMember = '';
+let _signReqKey = '';
+
+// ── FRAMEWORK PO EDIT ──
+let _fwScopeChoice = 'all';
+let _fwProceedChoice = 'continue';
+let _fwChangedTC = false;
+let _fwChangedDesc = false;
+
+function openEditFWPO(){
+  const key = window._currentPOKey;
+  const d = poData[key]; if(!d) return;
+  // Prefill fields from current data
+  const tc=document.getElementById('fw-edit-tc');
+  const desc=document.getElementById('fw-edit-desc');
+  const loc=document.getElementById('fw-edit-location');
+  const ind=document.getElementById('fw-edit-industry');
+  if(tc && d.tc) { for(let i=0;i<tc.options.length;i++) if(tc.options[i].text===d.tc){tc.selectedIndex=i;break;} }
+  if(desc) desc.value = d.desc || '';
+  if(loc) loc.value = d.location || '';
+  if(ind && d.industry) { for(let i=0;i<ind.options.length;i++) if(ind.options[i].text===d.industry){ind.selectedIndex=i;break;} }
+  op('m-edit-fw-po');
+}
+
+function saveFWPOChanges(){
+  const key = window._currentPOKey;
+  const d = poData[key]; if(!d) return;
+  const newTC = document.getElementById('fw-edit-tc')?.value;
+  const newDesc = document.getElementById('fw-edit-desc')?.value;
+  const newEnd = document.getElementById('fw-edit-end')?.value;
+  const newInd = document.getElementById('fw-edit-industry')?.value;
+  const newLoc = document.getElementById('fw-edit-location')?.value;
+  _fwChangedTC   = newTC   !== d.tc;
+  _fwChangedDesc = newDesc !== d.desc;
+  const changedSensitive = _fwChangedTC || _fwChangedDesc;
+  // Apply non-sensitive changes immediately
+  if(newEnd) document.getElementById('pod-period').textContent = '1 Jan 2026 – ' + newEnd;
+  if(newInd) d.industry = newInd;
+  if(newLoc) d.location = newLoc;
+  cl('m-edit-fw-po');
+  if(changedSensitive){
+    // Show scope choice modal
+    const fields = [_fwChangedTC && 'Purchase conditions', _fwChangedDesc && 'Description'].filter(Boolean).join(' and ');
+    const el = document.getElementById('fw-scope-changed-fields');
+    if(el) el.textContent = fields;
+    _fwScopeChoice = 'all';
+    selectFWScope('all');
+    op('m-fw-scope');
+    // Stage changes — apply when confirmed
+    d._pendingTC   = _fwChangedTC   ? newTC   : null;
+    d._pendingDesc = _fwChangedDesc ? newDesc : null;
+  } else {
+    toast('Purchase Order updated');
+  }
+}
+
+function selectFWScope(val){
+  _fwScopeChoice = val;
+  const optNew = document.getElementById('fw-scope-opt-new');
+  const optAll = document.getElementById('fw-scope-opt-all');
+  const ctOpts = document.getElementById('fw-scope-contractor-options');
+  const ctNote = document.getElementById('fw-scope-contractor-note');
+  if(optNew){ optNew.style.border = val==='new' ? '2px solid var(--navy)' : '1.5px solid var(--border)'; optNew.style.background = val==='new' ? 'rgba(10,26,58,.03)' : ''; }
+  if(optAll){ optAll.style.border = val==='all' ? '2px solid var(--navy)' : '1.5px solid var(--border)'; optAll.style.background = val==='all' ? 'rgba(10,26,58,.03)' : ''; }
+  if(ctOpts) ctOpts.style.display = val==='all' ? 'flex' : 'none';
+  if(ctNote) ctNote.style.display = val==='all' ? '' : 'none';
+  // sync radio
+  const radios = document.querySelectorAll('input[name="fw-scope"]');
+  radios.forEach(r=>{ r.checked = r.value===val; });
+}
+
+function confirmFWScope(){
+  const key = window._currentPOKey;
+  const d = poData[key]; if(!d) return;
+  // Apply pending changes
+  if(d._pendingTC)   { d.tc   = d._pendingTC;   d._pendingTC   = null; }
+  if(d._pendingDesc) { d.desc = d._pendingDesc; document.getElementById('pod-desc').textContent = d._pendingDesc; d._pendingDesc = null; }
+  cl('m-fw-scope');
+  if(_fwScopeChoice === 'all'){
+    toast('Changes saved — contractors notified');
+    // Simulate contractor receiving notification after 2s
+    setTimeout(()=>{
+      const fields = [_fwChangedTC && 'Purchase conditions', _fwChangedDesc && 'Description'].filter(Boolean).join(' and ');
+      const el = document.getElementById('fw-proc-changed'); if(el) el.textContent = fields;
+      _fwProceedChoice = 'continue';
+      selectFWProceed('continue');
+      op('m-fw-contractor-proceed');
+    }, 2000);
+  } else {
+    toast('Changes saved — applies to new contractors only');
+  }
+}
+
+function selectFWProceed(val){
+  _fwProceedChoice = val;
+  const optCont  = document.getElementById('fw-proc-opt-continue');
+  const optRev   = document.getElementById('fw-proc-opt-review');
+  if(optCont){ optCont.style.border = val==='continue' ? '2px solid var(--navy)' : '1.5px solid var(--border)'; optCont.style.background = val==='continue' ? 'rgba(10,26,58,.03)' : ''; }
+  if(optRev) { optRev.style.border  = val==='review'   ? '2px solid var(--navy)' : '1.5px solid var(--border)'; optRev.style.background  = val==='review'   ? 'rgba(10,26,58,.03)' : ''; }
+  document.querySelectorAll('input[name="fw-proceed"]').forEach(r=>{ r.checked = r.value===val; });
+}
+
+function submitFWProceed(){
+  cl('m-fw-contractor-proceed');
+  if(_fwProceedChoice==='continue'){
+    toast('Response sent — your offer is unchanged. Client will sign the updated contract.');
+  } else {
+    toast('Response sent — you can now update your offer. Client will review before signing.');
+  }
+}
+
+function openEditFWPOModal(){ openEditFWPO(); }
+
+
+let _zzpPOStep = 1;
+let _zzpPORole = 'contractor';
+let _zzpClientType = 'pi';
+let _zzpPOType = 'assignment'; // for client path
+let _zzpDistrib = 'relations'; // for client path
+
+// Stepper configs
+const _zzpStepsContractor = ['Role','Details','Review'];
+const _zzpStepsClient     = ['Role','Type','Details','Documentation','Distribute','Review'];
+
+function selectZZPCType(type){
+  ['assign','fw'].forEach(t=>{
+    const el=document.getElementById('zzp-c-type-'+t);
+    if(el) el.classList.toggle('sel', t===type.replace('assignment','assign').replace('framework','fw'));
+  });
+  const aF=document.getElementById('zzp-c-assign-fields');
+  const fF=document.getElementById('zzp-c-fw-fields');
+  if(aF) aF.style.display = type==='assignment' ? 'block' : 'none';
+  if(fF) fF.style.display = type==='framework'  ? 'block' : 'none';
+}
+
+function openZZPCreatePO(){
+  _zzpPOStep=1; _zzpPORole='contractor'; _zzpClientType='pi'; _zzpPOType='assignment'; _zzpDistrib='relations';
+  renderZZPPOSteps();
+  op('m-zzp-create-po');
+}
+
+function selectZZPRole(role){
+  _zzpPORole = role;
+  ['contractor','client'].forEach(r=>{
+    const el=document.getElementById('zzp-role-'+r); if(!el) return;
+    el.classList.toggle('sel', r===role);
+    const radio=el.querySelector('input[type=radio]'); if(radio) radio.checked=(r===role);
+  });
+}
+
+function selZZPPT(el, type){
+  _zzpPOType = type;
+  document.querySelectorAll('#zzp-po-l2 .tc').forEach(c=>{ c.classList.remove('sel'); c.style.background=''; c.style.borderColor=''; });
+  el.classList.add('sel'); el.style.background='var(--blue-bg)'; el.style.borderColor='#aaaaaa';
+  document.getElementById('zzp-l3-assign').style.display = type==='assignment' ? 'block' : 'none';
+  document.getElementById('zzp-l3-fw').style.display     = type==='framework'  ? 'block' : 'none';
+}
+
+function setZZPDistrib(d){
+  _zzpDistrib = d;
+  ['relations','labels','marketplace','external'].forEach(k=>{
+    const el=document.getElementById('zzp-dist-'+k);
+    if(el) el.style.display = k===d ? 'block' : 'none';
+  });
+}
+
+function selectZZPClientType(type){
+  _zzpClientType = type;
+  const pi=document.getElementById('zzp-client-type-pi');
+  const org=document.getElementById('zzp-client-type-org');
+  const piF=document.getElementById('zzp-client-pi-fields');
+  const orF=document.getElementById('zzp-client-org-fields');
+  if(pi){  pi.style.border  = type==='pi'  ? '2px solid var(--navy)' : '1.5px solid var(--border)'; pi.style.background  = type==='pi'  ? 'rgba(10,26,58,.04)' : ''; }
+  if(org){ org.style.border = type==='org' ? '2px solid var(--navy)' : '1.5px solid var(--border)'; org.style.background = type==='org' ? 'rgba(10,26,58,.04)' : ''; }
+  if(piF) piF.style.display = type==='pi'  ? '' : 'none';
+  if(orF) orF.style.display = type==='org' ? '' : 'none';
+}
+
+function renderZZPPOSteps(){
+  const steps = _zzpPORole==='client' ? _zzpStepsClient : _zzpStepsContractor;
+  const total = steps.length;
+  // Rebuild stepper
+  const stepsEl = document.getElementById('zzp-po-steps');
+  if(stepsEl){
+    stepsEl.innerHTML = steps.map((label,i)=>{
+      const n=i+1;
+      const cls = n<_zzpPOStep ? 'step done' : n===_zzpPOStep ? 'step on' : 'step';
+      return `<div class="${cls}"><div class="sc2">${n}</div><div class="sl">${label}</div></div>${i<steps.length-1?'<div class="sline"></div>':''}`;
+    }).join('');
+  }
+  // Step label
+  const lbl=document.getElementById('zzp-po-step-label');
+  if(lbl) lbl.textContent=`Step ${_zzpPOStep} of ${total}`;
+  // All panels hidden first
+  ['zzp-po-s1','zzp-po-c2','zzp-po-c3','zzp-po-l2','zzp-po-l3','zzp-po-l4','zzp-po-l5','zzp-po-l6'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.style.display='none';
+  });
+  // Show correct panel
+  if(_zzpPORole==='contractor'){
+    const ids=['zzp-po-s1','zzp-po-c2','zzp-po-c3'];
+    const el=document.getElementById(ids[_zzpPOStep-1]); if(el) el.style.display='block';
+  } else {
+    const ids=['zzp-po-s1','zzp-po-l2','zzp-po-l3','zzp-po-l4','zzp-po-l5','zzp-po-l6'];
+    const el=document.getElementById(ids[_zzpPOStep-1]); if(el) el.style.display='block';
+  }
+  // Back button
+  const back=document.getElementById('zzp-po-back-btn'); if(back) back.style.display=_zzpPOStep>1?'':'none';
+  // Next button text
+  const next=document.getElementById('zzp-po-next-btn');
+  if(next) next.textContent=_zzpPOStep===total ? 'Submit PO →' : 'Continue →';
+  // Populate review
+  if(_zzpPORole==='contractor' && _zzpPOStep===3) populateZZPReview();
+  if(_zzpPORole==='client'     && _zzpPOStep===6) populateZZPClientReview();
+}
+
+function populateZZPReview(){
+  const name=document.getElementById('zzp-client-name')?.value||'—';
+  const email=document.getElementById('zzp-client-email')?.value||'—';
+  const rvType=document.getElementById('zzp-rv-client-type');
+  const rvClient=document.getElementById('zzp-rv-client');
+  if(rvType)   rvType.textContent   = _zzpClientType==='pi' ? 'Private Individual' : 'Organisation';
+  if(rvClient) rvClient.textContent = `${name} · ${email}`;
+  const piNote=document.getElementById('zzp-po-pi-note');
+  const orgNote=document.getElementById('zzp-po-org-note');
+  if(piNote)  piNote.style.display  = _zzpClientType==='pi'  ? 'block' : 'none';
+  if(orgNote) orgNote.style.display = _zzpClientType==='org' ? 'block' : 'none';
+}
+
+function toggleZZPCDesc(){
+  const s=document.getElementById('zzp-c-desc-short');
+  const f=document.getElementById('zzp-c-desc-full');
+  const t=document.getElementById('zzp-c-desc-toggle');
+  if(!s||!f||!t) return;
+  const exp=f.style.display!=='none';
+  s.style.display=exp?'':'none'; f.style.display=exp?'none':''; t.textContent=exp?'Read more':'Read less';
+}
+function toggleZZPLDesc(){
+  const s=document.getElementById('zzp-l-desc-short');
+  const f=document.getElementById('zzp-l-desc-full');
+  const t=document.getElementById('zzp-l-desc-toggle');
+  if(!s||!f||!t) return;
+  const exp=f.style.display!=='none';
+  s.style.display=exp?'':'none'; f.style.display=exp?'none':''; t.textContent=exp?'Read more':'Read less';
+}
+
+function populateZZPClientReview(){
+  const isFA = _zzpPOType==='framework';
+  const rvType=document.getElementById('zzp-rv-type');
+  const rvDist=document.getElementById('zzp-rv-dist');
+  const periodRow  =document.getElementById('zzp-l-period-row');
+  const durationRow=document.getElementById('zzp-l-duration-row');
+  if(rvType) rvType.textContent = isFA ? 'Framework Agreement' : 'Assignment Agreement';
+  if(periodRow)   periodRow.style.display   = isFA ? 'none' : '';
+  if(durationRow) durationRow.style.display = isFA ? '' : 'none';
+  const distLabels={relations:'Specific relations',labels:'Label group',marketplace:'Marketplace',external:'External user'};
+  if(rvDist) rvDist.textContent = distLabels[_zzpDistrib]||'—';
+  // Reset description toggles
+  ['zzp-l-desc-short','zzp-l-desc-full','zzp-l-desc-toggle'].forEach((id,i)=>{
+    const el=document.getElementById(id); if(!el) return;
+    if(i===0) el.style.display=''; else if(i===1) el.style.display='none'; else el.textContent='Read more';
+  });
+}
+
+
+function zzpPONext(){
+  const total = _zzpPORole==='client' ? 6 : 3;
+  if(_zzpPOStep===total){
+    cl('m-zzp-create-po');
+    if(_zzpPORole==='contractor'){
+      const name=document.getElementById('zzp-client-name')?.value||'the client';
+      toast(`PO sent to ${name} — they will receive an email to review and sign`);
+    } else {
+      toast('Purchase Order created — contractors will be notified');
+    }
+    return;
+  }
+  // On step 1 → after role selected, next step renders for correct path
+  _zzpPOStep = Math.min(_zzpPOStep+1, total);
+  renderZZPPOSteps();
+}
+function zzpPOBack(){ _zzpPOStep=Math.max(_zzpPOStep-1,1); renderZZPPOSteps(); }
+
+
+// ── INVITE MODAL — LABELS ──
+let _invLabels = new Set();
+
+function openInvLabelDropdown(){
+  const dd = document.getElementById('inv-label-dropdown');
+  if(dd) dd.style.display = 'block';
+  document.addEventListener('click', closeInvLabelDropdownOutside, {once:false});
+}
+function closeInvLabelDropdownOutside(e){
+  if(!e.target.closest('#inv-label-dropdown') && !e.target.closest('#inv-label-search')){
+    const dd = document.getElementById('inv-label-dropdown');
+    if(dd) dd.style.display='none';
+    document.removeEventListener('click', closeInvLabelDropdownOutside);
+  }
+}
+function filterInvLabels(q){
+  document.querySelectorAll('.inv-label-opt').forEach(opt=>{
+    opt.style.display = opt.dataset.label.toLowerCase().includes(q.toLowerCase()) ? '' : 'none';
+  });
+}
+function toggleInvLabel(label){
+  if(_invLabels.has(label)) _invLabels.delete(label);
+  else _invLabels.add(label);
+  // Update checkmarks in dropdown
+  document.querySelectorAll('.inv-label-opt').forEach(opt=>{
+    const check = opt.querySelector('.inv-lbl-check');
+    if(check) check.style.opacity = _invLabels.has(opt.dataset.label) ? '1' : '0';
+  });
+  renderInvLabelTags();
+}
+function renderInvLabelTags(){
+  const container = document.getElementById('inv-label-tags');
+  if(!container) return;
+  container.innerHTML = [..._invLabels].map(l=>
+    `<span class="tag">${l}<span class="tag-x" onclick="toggleInvLabel('${l}')">×</span></span>`
+  ).join('');
+}
+
+// ── RELATION DETAILS — LABELS ──
+let _relLabels = new Set(['Carpentry']); // pre-populated for Jan Bakker
+let _relLabelsBackup = new Set();
+
+function toggleRelLabelEdit(){
+  const view = document.getElementById('rel-labels-view');
+  const edit = document.getElementById('rel-labels-edit');
+  const btn  = document.getElementById('rel-label-edit-btn');
+  // Enter edit mode — backup current labels
+  _relLabelsBackup = new Set(_relLabels);
+  view.style.display = 'none';
+  edit.style.display = 'block';
+  btn.style.display  = 'none';
+  renderRelLabelTags();
+  syncRelLabelChecks();
+}
+function cancelRelLabelEdit(){
+  // Restore backup
+  _relLabels = new Set(_relLabelsBackup);
+  document.getElementById('rel-labels-view').style.display = '';
+  document.getElementById('rel-labels-edit').style.display = 'none';
+  document.getElementById('rel-label-edit-btn').style.display = '';
+  renderRelLabelsView();
+}
+function saveRelLabels(){
+  document.getElementById('rel-labels-view').style.display = '';
+  document.getElementById('rel-labels-edit').style.display = 'none';
+  document.getElementById('rel-label-edit-btn').style.display = '';
+  renderRelLabelsView();
+  toast('Labels updated');
+}
+function openRelLabelDropdown(){
+  const dd = document.getElementById('rel-label-dropdown');
+  if(dd) dd.style.display='block';
+  document.addEventListener('click', closeRelLabelDropdownOutside, {once:false});
+}
+function closeRelLabelDropdownOutside(e){
+  if(!e.target.closest('#rel-label-dropdown') && !e.target.closest('#rel-label-search')){
+    const dd = document.getElementById('rel-label-dropdown');
+    if(dd) dd.style.display='none';
+    document.removeEventListener('click', closeRelLabelDropdownOutside);
+  }
+}
+function filterRelLabels(q){
+  document.querySelectorAll('.rel-lbl-opt').forEach(opt=>{
+    opt.style.display = opt.dataset.label.toLowerCase().includes(q.toLowerCase()) ? '' : 'none';
+  });
+}
+function toggleRelLabel(label){
+  if(_relLabels.has(label)) _relLabels.delete(label);
+  else _relLabels.add(label);
+  syncRelLabelChecks();
+  renderRelLabelTags();
+}
+function syncRelLabelChecks(){
+  document.querySelectorAll('.rel-lbl-opt').forEach(opt=>{
+    const check = opt.querySelector('.rel-lbl-check');
+    if(check) check.style.opacity = _relLabels.has(opt.dataset.label) ? '1' : '0';
+  });
+}
+function removeRelLabel(label){
+  _relLabels.delete(label);
+  syncRelLabelChecks();
+  renderRelLabelTags();
+  renderRelLabelsView();
+}
+function renderRelLabelTags(){
+  const container = document.getElementById('rel-label-tags');
+  if(!container) return;
+  container.innerHTML = [..._relLabels].map(l=>
+    `<span class="tag">${l}<span class="tag-x" onclick="removeRelLabel('${l}')">×</span></span>`
+  ).join('');
+}
+function renderRelLabelsView(){
+  const view = document.getElementById('rel-labels-view');
+  if(!view) return;
+  if(_relLabels.size===0){
+    view.innerHTML = `<span style="font-size:12px;color:var(--t3)">No labels assigned</span>`;
+  } else {
+    view.innerHTML = [..._relLabels].map(l=>
+      `<span class="tag">${l}<span class="tag-x" onclick="removeRelLabel('${l}')">×</span></span>`
+    ).join('');
+  }
+}
+
+function requestSignPermission(name, key){
+  _signReqMember = name;
+  _signReqKey = key;
+  document.getElementById('sign-req-name').textContent = name;
+  document.getElementById('sign-req-reason').value = '';
+  op('m-request-sign');
+}
+
+function submitSignRequest(){
+  cl('m-request-sign');
+  // Show pending state on the member row
+  const pending = document.getElementById(_signReqKey + '-sign-pending');
+  const state   = document.getElementById(_signReqKey + '-sign-state');
+  if(pending) pending.style.display = 'block';
+  if(state){
+    const btn = state.querySelector('button');
+    if(btn){
+      btn.textContent = 'Pending…';
+      btn.disabled = true;
+      btn.style.opacity = '.5';
+    }
+    const label = state.querySelector('span');
+    if(label) label.textContent = 'Request sent';
+  }
+  toast('Request sent to Bárbara Mota — she will receive an email to approve');
+  // Simulate: after 3s the Legal Rep approves (demo)
+  setTimeout(()=>{
+    const reason = document.getElementById('sign-req-reason')?.value || 'Thomas will be handling contract signing while Bárbara is on leave.';
+    document.getElementById('approve-req-name').textContent = _signReqMember;
+    document.getElementById('approve-req-name2').textContent = _signReqMember;
+    document.getElementById('approve-req-reason').textContent = reason || 'No reason provided.';
+    op('m-approve-sign');
+  }, 3000);
+}
+
+function grantSignPermission(){
+  cl('m-approve-sign');
+  const key  = _signReqKey;
+  const name = _signReqMember;
+  // Update member row to show "Can sign"
+  const pending = document.getElementById(key + '-sign-pending');
+  if(pending) pending.style.display = 'none';
+  const state = document.getElementById(key + '-sign-state');
+  if(state){
+    state.innerHTML = `
+      <svg viewBox="0 0 16 16" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M13 4l-6 7-4-4"/></svg>
+      <span style="font-size:12px;font-weight:500">Can sign</span>
+      <button class="btn br bx manager-hide" style="font-size:11px" onclick="revokeSignPermission('${name}','${key}')">Revoke</button>`;
+  }
+  // Add to audit log
+  addSignAuditEntry(`${name} granted signing authority`, `Just now · Granted by Bárbara Mota (Legal Representative)`);
+  toast(`Signing authority granted to ${name} — they will receive a confirmation email`);
+}
+
+function denySignRequest(){
+  cl('m-approve-sign');
+  const key  = _signReqKey;
+  const name = _signReqMember;
+  const pending = document.getElementById(key + '-sign-pending');
+  if(pending) pending.innerHTML = `<strong>Request denied</strong> by Bárbara Mota (Legal Representative). ${name} will not have signing authority.`;
+  addSignAuditEntry(`Sign permission request for ${name} denied`, `Just now · Denied by Bárbara Mota (Legal Representative)`);
+  toast(`Request denied — ${name} will not have signing authority`);
+}
+
+function revokeSignPermission(name, key){
+  const state = document.getElementById(key + '-sign-state');
+  if(state){
+    state.innerHTML = `
+      <span style="font-size:12px;color:var(--t3)">No signing authority</span>
+      <button class="btn bw bx manager-hide" style="font-size:11px" onclick="requestSignPermission('${name}','${key}')">Request</button>`;
+  }
+  addSignAuditEntry(`${name} signing authority revoked`, `Just now · Revoked by Bárbara Mota (Legal Representative)`);
+  toast(`Signing authority revoked for ${name}`);
+}
+
+function addSignAuditEntry(title, meta){
+  const log = document.getElementById('sign-audit-log');
+  if(!log) return;
+  const entry = document.createElement('div');
+  entry.className = 'tli';
+  entry.innerHTML = `<div class="tldot"></div><div><div class="tlt">${title}</div><div class="tlm">${meta}</div></div>`;
+  log.insertBefore(entry, log.firstChild);
+}
+
+
 let _subInviteMode = 'existing';
 let _subInviteTab  = 'email';
 let _subRelSelected = null;
@@ -5654,6 +7264,61 @@ function createNewProjectFromPO(){
   op('m-project');
 }
 
+// ── SIGNUP TYPE SELECTOR ──
+function selectSignupType(type){
+  ['org','zzp','int'].forEach(t => {
+    const el = document.getElementById('stype-'+t);
+    if(el) el.classList.toggle('sel', t === (type === 'intermediary' ? 'int' : type));
+  });
+  const std = document.getElementById('signup-standard-fields');
+  const int = document.getElementById('signup-intermediary-fields');
+  if(type === 'intermediary'){
+    if(std) std.style.display = 'none';
+    if(int) int.style.display = 'block';
+  } else {
+    if(std) std.style.display = 'block';
+    if(int) int.style.display = 'none';
+  }
+}
+
+function sendIntermediaryInvite(){
+  const email = document.getElementById('int-org-email')?.value.trim() || 'director@company.nl';
+  const org   = document.getElementById('int-org-name')?.value.trim()  || 'the organisation';
+  const sentEmail = document.getElementById('int-sent-email');
+  const sentOrg   = document.getElementById('int-sent-org');
+  if(sentEmail) sentEmail.textContent = email;
+  if(sentOrg)   sentOrg.textContent   = org;
+  go('sc-intermediary-sent');
+}
+
+
+function togglePOProjectMode(mode){
+  const existing = document.getElementById('po-project-existing');
+  const newForm  = document.getElementById('po-project-new');
+  if(existing) existing.style.display = mode === 'existing' ? 'block' : 'none';
+  if(newForm)  newForm.style.display  = mode === 'new'      ? 'block' : 'none';
+}
+
+function openEditProject(name){
+  document.getElementById('edit-proj-modal-title').textContent = 'Edit — ' + name;
+  document.getElementById('edit-proj-name').value = name;
+  document.getElementById('edit-proj-start').value = '';
+  document.getElementById('edit-proj-end').value = '';
+  document.getElementById('edit-proj-desc').value = '';
+  op('m-edit-project');
+}
+
+function saveEditProject(){
+  const name = document.getElementById('edit-proj-name').value.trim();
+  if(!name){ toast('Please enter a project name'); return; }
+  cl('m-edit-project');
+  toast('Project updated');
+}
+
+// Intercept poNext to handle inline project creation
+const _origPoNext = window.poNext;
+
+
 function openNewProject(){
   _returnToPO = false;
   const n=document.getElementById('proj-name'); if(n) n.value='';
@@ -5681,7 +7346,7 @@ function saveProject(){
       <span class="badge bgn" style="flex-shrink:0">Active</span>
     </div>
     <div class="pcd" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-bottom:10px">${desc}</div>
-    <div style="font-size:11px;color:var(--t3)">${loc} · 0 purchase orders · 0 active contracts</div>`;
+    <div style="font-size:11px;color:var(--t3)">— · 0 purchase orders · 0 active contracts</div>`;
   grid.appendChild(card);
 
   // Add to PO project select
@@ -5837,6 +7502,23 @@ function adminApprove(btn){
 
 // ── PO DETAIL ──
 const poData = {
+  'fw-timmerwerk': {
+    title:'Raamopdracht Timmerwerk 2026', type:'Framework', deadline:'Ongoing', period:'1 Jan – 31 Dec 2026',
+    project:'Woningbouw Almere', sentTo:'Label: Carpentry (4 contractors)', badgeClass:'bgn', badgeText:'Active',
+    industry:'Construction', location:'Almere',
+    tc:'Inkoopvoorwaarden Standaard 2024',
+    desc:'Ongoing framework agreement for all carpentry and timber work across the Woningbouw Almere project. Contractors under this agreement may be assigned individual work orders throughout the year. VCA certification and liability insurance required. All work to comply with residential building standards.',
+    offers:[
+      {name:'Jan Bakker', company:'Bakker Timmerwerk', av:'J', status:'signed', badgeClass:'bgn', badgeText:'Active',
+       amount:'€85/hr', submitted:'15 Dec 2025', signed:'✓ 3 Jan 2026',
+       motivation:'"Experienced carpenter with 8 years in residential. VCA certified. Available for assignments year-round."',
+       q:['Yes','Yes','Yes','Yes','Yes','Partially','Yes']},
+      {name:'Wouter Prins', company:'WP Timmerwerk', av:'W', status:'signed', badgeClass:'bgn', badgeText:'Active',
+       amount:'€80/hr', submitted:'16 Dec 2025', signed:'✓ 5 Jan 2026',
+       motivation:'"Specialist in timber framing and finishing. Available for assignments with 48h notice."',
+       q:['Yes','Yes','Yes','Yes','Yes','Yes','Yes']},
+    ]
+  },
   'blok-d': {
     title:'Renovatie Blok D — Timmerwerk', type:'Assignment', deadline:'25 May 2026', period:'1 Jun – 31 Aug 2026',
     project:'Woningbouw Almere', sentTo:'Label: Carpentry (5 contractors)', badgeClass:'bga', badgeText:'2 offers received',
@@ -5897,6 +7579,10 @@ function openPODetail(key){
   document.getElementById('pod-project').textContent = d.project;
   document.getElementById('pod-sent').textContent = d.sentTo;
   document.getElementById('pod-desc').textContent = d.desc;
+  // Show Edit button only for active Framework Agreements
+  const editBtn = document.getElementById('pod-edit-btn');
+  if(editBtn) editBtn.style.display = (d.type==='Framework' && d.badgeText==='Active') ? '' : 'none';
+  window._currentPOKey = key;
   // Build offers list
   const list = document.getElementById('pod-offers-list');
   const title = document.getElementById('pod-offers-title');
@@ -6199,13 +7885,150 @@ function setDistrib(type){
   document.getElementById('d-ext').checked=type==='external';
 }
 const relTags=new Set(),lblTags=new Set();
+
+// Relations per label (demo data)
+const lblRelations = {
+  'Carpentry':    ['Jan Bakker', 'Marco Jansen'],
+  'Electrical':   ['Pieter Smit', 'Erik Visser'],
+  'IT':           ['Marco Jansen', 'Sophie Dekker'],
+  'Installation': ['Kees de Groot', 'Jan Bakker'],
+  'Painting':     ['Erik Visser', 'Sophie Dekker'],
+};
+
+// Per-label removed relations tracking
+const lblRemovedRelations = {};
+
+function addLblTag(name){
+  if(lblTags.has(name))return;
+  lblTags.add(name);
+  if(!lblRemovedRelations[name]) lblRemovedRelations[name]=new Set();
+  renderTags('lbl-tags',lblTags,'removeLblTag');
+  document.getElementById('lbl-search').value='';
+  document.getElementById('lbl-dropdown').style.display='none';
+  renderLblRelationLists();
+}
+
+function removeLblTag(name){
+  lblTags.delete(name);
+  renderTags('lbl-tags',lblTags,'removeLblTag');
+  renderLblRelationLists();
+}
+
+// Label name → human-readable "Send to X" titles
+const lblSendTitles = {
+  'Carpentry':    'Send to carpenters',
+  'Electrical':   'Send to electricians',
+  'IT':           'Send to IT contractors',
+  'Installation': 'Send to installers',
+  'Painting':     'Send to painters',
+};
+
+function renderLblRelationLists(){
+  const container = document.getElementById('lbl-relation-lists');
+  if(!container) return;
+  container.innerHTML = '';
+  lblTags.forEach(label => {
+    const key = label.replace(/\s/g,'_');
+    const allRels = lblRelations[label] || [];
+    if(!lblRemovedRelations[label]) lblRemovedRelations[label] = new Set();
+    const active = allRels.filter(r => !lblRemovedRelations[label].has(r));
+    const title = lblSendTitles[label] || 'Send to ' + label.toLowerCase();
+
+    const wrap = document.createElement('div');
+    wrap.innerHTML = `
+      <label class="lbl dk" style="margin-bottom:6px;display:block">${title}</label>
+      <div style="position:relative">
+        <input class="ii" id="lbl-input-${key}" placeholder="Search relations…"
+          onfocus="openLblRelDropdown('${label}')"
+          oninput="filterLblRelDropdown('${label}',this.value)"
+          style="width:100%">
+        <div id="lbl-dd-${key}" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--white);border:1px solid var(--border);border-top:none;border-radius:0 0 var(--rs) var(--rs);z-index:30;max-height:140px;overflow-y:auto">
+          ${allRels.map(r => `
+            <div class="rel-opt lbl-rel-opt-${key}" data-rel="${r}"
+              onclick="${active.includes(r) ? `removeLblRelation('${label}','${r}')` : `addLblRelation('${label}','${r}')`}"
+              style="${active.includes(r) ? 'opacity:.45' : ''}">
+              ${r}${active.includes(r) ? ' <span style="font-size:10px;color:var(--t3)">× remove</span>' : ''}
+            </div>`).join('')}
+          ${allRels.length === 0 ? '<div style="padding:8px 12px;font-size:12px;color:var(--t3)">No relations with this label</div>' : ''}
+        </div>
+      </div>
+      <div id="lbl-tags-${key}" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;min-height:28px">
+        ${active.map(r => `<span class="tag">${r}<span class="tag-x" onclick="event.stopPropagation();removeLblRelation('${label}',${JSON.stringify(r)})">×</span></span>`).join('')}
+      </div>`;
+    container.appendChild(wrap);
+  });
+}
+
+function openLblRelDropdown(label){
+  const key = label.replace(/\s/g,'_');
+  document.getElementById('lbl-dd-'+key).style.display='block';
+  document.getElementById('lbl-input-'+key).value='';
+}
+
+function filterLblRelDropdown(label, q){
+  const key = label.replace(/\s/g,'_');
+  document.getElementById('lbl-dd-'+key).style.display='block';
+  document.querySelectorAll('.lbl-rel-opt-'+key).forEach(o=>{
+    o.style.display = o.dataset.rel.toLowerCase().includes(q.toLowerCase()) ? '' : 'none';
+  });
+}
+
+function addLblRelation(label, rel){
+  if(!lblRemovedRelations[label]) lblRemovedRelations[label]=new Set();
+  lblRemovedRelations[label].delete(rel);  // ensure not in removed set
+  const key = label.replace(/\s/g,'_');
+  document.getElementById('lbl-dd-'+key).style.display='none';
+  document.getElementById('lbl-input-'+key).value='';
+  renderLblRelationLists();
+}
+
+function removeLblRelation(label, rel){
+  if(!lblRemovedRelations[label]) lblRemovedRelations[label]=new Set();
+  lblRemovedRelations[label].add(rel);
+  renderLblRelationLists();
+}
+
+function restoreLblRelation(label, rel){
+  if(lblRemovedRelations[label]) lblRemovedRelations[label].delete(rel);
+  renderLblRelationLists();
+}
+
+function showLblRelDropdown(label, input){
+  openLblRelDropdown(label);
+}
+
+
+function syncLblDropdownChecks(){
+  document.querySelectorAll('#lbl-dropdown .rel-opt').forEach(opt=>{
+    const val = opt.dataset.value;
+    const chk = opt.querySelector('.lbl-check');
+    if(chk) chk.style.opacity = lblTags.has(val) ? '1' : '0';
+    opt.style.fontWeight = lblTags.has(val) ? '600' : '';
+  });
+}
+
+function addLblTag(name){
+  if(lblTags.has(name)){ removeLblTag(name); return; }
+  lblTags.add(name);
+  if(!lblRemovedRelations[name]) lblRemovedRelations[name]=new Set();
+  renderTags('lbl-tags',lblTags,'removeLblTag');
+  document.getElementById('lbl-search').value='';
+  syncLblDropdownChecks();
+  renderLblRelationLists();
+}
+
+function removeLblTag(name){
+  lblTags.delete(name);
+  renderTags('lbl-tags',lblTags,'removeLblTag');
+  syncLblDropdownChecks();
+  renderLblRelationLists();
+}
+
 function addRelTag(name){if(relTags.has(name))return;relTags.add(name);renderTags('rel-tags',relTags,'removeRelTag');document.getElementById('rel-search').value='';document.getElementById('rel-dropdown').style.display='none';}
 function removeRelTag(name){relTags.delete(name);renderTags('rel-tags',relTags,'removeRelTag');}
-function addLblTag(name){if(lblTags.has(name))return;lblTags.add(name);renderTags('lbl-tags',lblTags,'removeLblTag');document.getElementById('lbl-search').value='';document.getElementById('lbl-dropdown').style.display='none';}
-function removeLblTag(name){lblTags.delete(name);renderTags('lbl-tags',lblTags,'removeLblTag');}
 function renderTags(cid,set,removeFn){const c=document.getElementById(cid);if(!c)return;c.innerHTML=[...set].map(n=>`<span class="tag">${n}<span class="tag-x" onclick="event.stopPropagation();${removeFn}(${JSON.stringify(n)})">×</span></span>`).join('');}
 function filterRelPicker(){const q=document.getElementById('rel-search').value.toLowerCase();document.getElementById('rel-dropdown').style.display='block';document.querySelectorAll('#rel-dropdown .rel-opt').forEach(o=>{o.style.display=o.textContent.toLowerCase().includes(q)?'':'none';});}
-function filterLblPicker(){const q=document.getElementById('lbl-search').value.toLowerCase();document.getElementById('lbl-dropdown').style.display='block';document.querySelectorAll('#lbl-dropdown .rel-opt').forEach(o=>{o.style.display=o.textContent.toLowerCase().includes(q)?'':'none';});}
+function filterLblPicker(){const q=document.getElementById('lbl-search').value.toLowerCase();document.getElementById('lbl-dropdown').style.display='block';syncLblDropdownChecks();document.querySelectorAll('#lbl-dropdown .rel-opt').forEach(o=>{o.style.display=o.textContent.trim().toLowerCase().includes(q)?'':'none';});}
 document.addEventListener('click',e=>{
   if(!e.target.closest('#rel-search')&&!e.target.closest('#rel-dropdown')){const d=document.getElementById('rel-dropdown');if(d)d.style.display='none';}
   if(!e.target.closest('#lbl-search')&&!e.target.closest('#lbl-dropdown')){const d=document.getElementById('lbl-dropdown');if(d)d.style.display='none';}
