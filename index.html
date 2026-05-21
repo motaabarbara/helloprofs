@@ -7,7 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 .viewer-hidden{display:none!important}
-.viewer-banner{display:none;background:var(--amber-bg);border-bottom:1px solid #fcd34d;padding:6px 20px;font-size:12px;color:var(--amber-t);align-items:center;gap:8px}
+.zzp-hide{display:none!important}
+.zzp-show{display:none}display:none;background:var(--amber-bg);border-bottom:1px solid #fcd34d;padding:6px 20px;font-size:12px;color:var(--amber-t);align-items:center;gap:8px}
 .viewer-banner.on{display:flex}
 :root{--navy:#212121;--navy-mid:#4a4a4a;--lime:#f2f2f2;--lime-dim:#989898;--white:#fff;--bg:#fafafa;--border:#e8e8e8;--border-s:#d4d4d4;--t1:#111;--t2:#555;--t3:#999;--green:#111111;--green-bg:#f4f4f4;--green-t:#111111;--amber:#f59e0b;--amber-bg:#fffbeb;--amber-t:#92400e;--red:#e5484d;--red-bg:#fff1f1;--red-t:#b91c1c;--blue-bg:#f4f4f4;--blue-t:#111111;--side:220px;--top:52px;--r:8px;--rs:5px}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -314,7 +315,7 @@ tbody tr:hover td{background:var(--bg)}
     <div class="tc" id="stype-int" onclick="selectSignupType('intermediary')">
       <div class="ti" style="display:flex;justify-content:center;color:rgba(255,255,255,.6)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg></div>
       <div class="tn">Intermediary</div>
-      <div class="td">Broker / accountant</div>
+      <div class="td">Broker</div>
     </div>
   </div>
 
@@ -626,7 +627,7 @@ tbody tr:hover td{background:var(--bg)}
   </div>
   <div class="eds">
     <div class="edl">Actions</div>
-    <div class="edi" onclick="closeEdd();openAddEntity()">+ Add entity</div>
+    <div class="edi zzp-hide" onclick="closeEdd();openAddEntity()">+ Add entity</div>
     <div class="edi" onclick="closeEdd();nav('settings')">Settings</div>
     <div class="edi" style="color:rgba(255,255,255,.4)" onclick="closeEdd();go('sc-login')">Sign out</div>
   </div>
@@ -731,13 +732,11 @@ tbody tr:hover td{background:var(--bg)}
         <svg class="ic" viewBox="0 0 16 16"><path d="M8 2a5 5 0 015 5v2l1 2H2l1-2V7a5 5 0 015-5z"/><path d="M6.5 13a1.5 1.5 0 003 0"/></svg>
         <div class="nd"></div>
       </div>
-      <button class="btn bk bs viewer-hide" id="mc" onclick="openPO()">+ New PO</button>
+      <button class="btn bk bs viewer-hide" id="mc" onclick="openPO()" style="display:none!important;visibility:hidden;pointer-events:none">+ New PO</button>
     </div>
   </div>
 
-  <div class="viewer-banner" id="viewer-banner">
-    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0"><path d="M1 8s2.5-5 7-5 7 5 7 5-2.5 5-7 5-7-5-7-5z"/><circle cx="8" cy="8" r="2"/></svg> You are a <strong>Viewer</strong> in this entity — read-only access. You cannot create, sign or invite.
-  </div>
+
 
   <div class="pw">
 
@@ -768,7 +767,7 @@ tbody tr:hover td{background:var(--bg)}
             </div>
             <div style="font-size:16px;font-weight:700;margin-bottom:8px;color:var(--t1)">Invite your first organisation</div>
             <div style="font-size:13px;color:var(--t3);line-height:1.7;max-width:360px;margin:0 auto 22px">As an intermediary you can create and manage organisations on behalf of your clients. Their Legal Representative or Admin will receive an email to complete the profile.</div>
-            <button class="btn bk bs" onclick="nav('invites')">+ New entity</button>
+            <button class="btn bk bs" onclick="nav('invites-new')">+ New entity</button>
           </div>
 
           <!-- Organisations list (shown after first invite) -->
@@ -2149,13 +2148,66 @@ tbody tr:hover td{background:var(--bg)}
 
     <!-- INVOICES -->
     <div class="sc" id="pg-invoices">
-      <div class="tw"><div class="th2"><div style="font-size:13px;font-weight:600">Invoices</div><div style="display:flex;gap:8px"><input class="src" placeholder="Search..."><button class="btn bw bs viewer-hide" id="inv-credit-btn" style="display:none" onclick="openCreditInvoice()">+ Credit invoice</button><button class="btn bk bs viewer-hide" id="inv-new-btn" style="display:none" onclick="openInv()">+ New invoice</button></div></div>
-      <table><thead><tr><th>Invoice</th><th>Contractor</th><th>Date</th><th>Excl. BTW</th><th>Total</th><th>Status</th></tr></thead><tbody>
-        <tr><td><span class="mono">#2026-014</span></td><td>Jan Bakker</td><td>19 May</td><td>€3,471</td><td>€4,200</td><td><span class="badge bgn">Paid</span></td></tr>
-        <tr><td><span class="mono">#2026-013</span></td><td>Pieter Smit</td><td>15 May</td><td>€2,851</td><td>€3,450</td><td><span class="badge bgr">Overdue</span></td></tr>
-        <tr><td><span class="mono">#2026-010</span></td><td>Marco Jansen</td><td>1 May</td><td>€3,000</td><td>€3,630</td><td><span class="badge bgn">Paid</span></td></tr>
-        <tr><td><span class="mono">#2026-009</span></td><td>Jan Bakker</td><td>1 May</td><td>€2,950</td><td>€3,570</td><td><span class="badge bgn">Paid</span></td></tr>
-      </tbody></table></div>
+      <div class="tw" style="margin-bottom:14px">
+        <div class="th2">
+          <div style="font-size:13px;font-weight:600">Invoices</div>
+          <div style="display:flex;gap:8px">
+            <input class="src" placeholder="Search...">
+            <button class="btn bw bs viewer-hide" id="inv-credit-btn" style="display:none" onclick="openCreditInvoice()">+ Credit invoice</button>
+            <button class="btn bk bs viewer-hide" id="inv-new-btn" style="display:none" onclick="openInv()">+ New invoice</button>
+          </div>
+        </div>
+
+        <!-- Draft invoices — only visible to organisation -->
+        <div id="inv-draft-section">
+          <div style="padding:10px 16px 6px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);display:flex;align-items:center;gap:8px;border-top:1px solid var(--border)">
+            Draft invoices
+            <span class="badge bga" id="inv-draft-count">2</span>
+          </div>
+          <table id="inv-draft-table">
+            <thead><tr><th>Invoice</th><th>Contractor</th><th>PO</th><th>Date</th><th>Excl. BTW</th><th>Total</th><th>Status</th><th></th></tr></thead>
+            <tbody id="inv-draft-tbody">
+              <tr id="inv-draft-row-1">
+                <td><span class="mono">#2026-015</span></td>
+                <td>Jan Bakker</td>
+                <td style="font-size:11px;color:var(--t3)">Renovatie Blok D</td>
+                <td>21 May</td>
+                <td>€3,800</td>
+                <td>€4,598</td>
+                <td><span class="badge bga">Draft</span></td>
+                <td style="text-align:right">
+                  <button class="btn bk bx" style="font-size:11px" onclick="openDraftInvoice('inv-draft-row-1','#2026-015','Jan Bakker','Renovatie Blok D','21 May 2026','€3,800','€4,598')">Review →</button>
+                </td>
+              </tr>
+              <tr id="inv-draft-row-2">
+                <td><span class="mono">#2026-016</span></td>
+                <td>Sophie van Dam</td>
+                <td style="font-size:11px;color:var(--t3)">Woningbouw Almere — Blok E</td>
+                <td>21 May</td>
+                <td>€5,100</td>
+                <td>€6,171</td>
+                <td><span class="badge bga">Draft</span></td>
+                <td style="text-align:right">
+                  <button class="btn bk bx" style="font-size:11px" onclick="openDraftInvoice('inv-draft-row-2','#2026-016','Sophie van Dam','Woningbouw Almere — Blok E','21 May 2026','€5,100','€6,171')">Review →</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Final invoices -->
+        <div style="padding:10px 16px 6px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);border-top:1px solid var(--border)">Final invoices</div>
+        <table>
+          <thead><tr><th>Invoice</th><th>Contractor</th><th>Date</th><th>Excl. BTW</th><th>Total</th><th>Status</th></tr></thead>
+          <tbody id="inv-final-tbody">
+            <tr><td><span class="mono">#2026-014</span></td><td>Jan Bakker</td><td>19 May</td><td>€3,471</td><td>€4,200</td><td><span class="badge bgn">Paid</span></td></tr>
+            <tr><td><span class="mono">#2026-013</span></td><td>Pieter Smit</td><td>15 May</td><td>€2,851</td><td>€3,450</td><td><span class="badge bgr">Overdue</span></td></tr>
+            <tr><td><span class="mono">#2026-010</span></td><td>Marco Jansen</td><td>1 May</td><td>€3,000</td><td>€3,630</td><td><span class="badge bgn">Paid</span></td></tr>
+            <tr><td><span class="mono">#2026-009</span></td><td>Jan Bakker</td><td>1 May</td><td>€2,950</td><td>€3,570</td><td><span class="badge bgn">Paid</span></td></tr>
+          </tbody>
+        </table>
+
+      </div>
     </div>
 
     <!-- PROJECTS -->
@@ -2256,6 +2308,15 @@ tbody tr:hover td{background:var(--bg)}
               <td style="font-size:12px;color:var(--t3)">Jul – Sep 2026</td>
               <td><button class="btn bk bx" onclick="event.stopPropagation();openZZPPOPage('received')">Make offer</button></td>
             </tr>
+            <tr onclick="nav('zzp-received-fw')" style="background:rgba(212,255,53,.03)">
+              <td><div class="tm">Raamopdracht Schilderwerk 2026</div><div class="ts2">Van der Berg Vastgoed</div></td>
+              <td><span class="badge bgl">Framework</span></td>
+              <td><span style="font-size:11px;color:var(--t2);font-weight:500">↓ Contractor</span></td>
+              <td>Van der Berg Vastgoed</td>
+              <td><span class="badge bgl">PO received</span></td>
+              <td style="font-size:12px;color:var(--t3)">Ongoing</td>
+              <td><button class="btn bk bx" onclick="event.stopPropagation();nav('zzp-received-fw')">Make offer</button></td>
+            </tr>
             <tr onclick="openZZPPOPage('framework')">
               <td><div class="tm">Raamopdracht Timmerwerk</div><div class="ts2">Miyagami B.V.</div></td>
               <td><span class="badge bgl">Framework</span></td>
@@ -2298,6 +2359,252 @@ tbody tr:hover td{background:var(--bg)}
     </div>
 
     <!-- ZZP: RECEIVED PO DETAIL — Make offer -->
+    <!-- ZZP: RECEIVED FRAMEWORK PO -->
+    <div class="sc" id="pg-zzp-received-fw">
+      <!-- PO header -->
+      <div class="panel" style="margin-bottom:16px">
+        <div class="ph2">
+          <div>
+            <div class="ptl2">Raamopdracht Schilderwerk 2026</div>
+            <div style="font-size:11px;color:var(--t3);margin-top:2px">Van der Berg Vastgoed · Framework Agreement</div>
+          </div>
+          <span class="badge bgl">PO received</span>
+        </div>
+        <div style="padding:12px 16px;display:flex;gap:28px;flex-wrap:wrap;border-top:1px solid var(--border)">
+          <div><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:2px">Client</div><div style="font-size:13px;font-weight:500">Van der Berg Vastgoed</div></div>
+          <div><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:2px">Type</div><div style="font-size:13px;font-weight:500">Framework Agreement</div></div>
+          <div><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:2px">Sector</div><div style="font-size:13px;font-weight:500">Construction / Painting</div></div>
+          <div><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:2px">Deadline to respond</div><div style="font-size:13px;font-weight:500;color:var(--amber)">28 May 2026</div></div>
+        </div>
+      </div>
+
+      <!-- PO details -->
+      <div class="tw" style="margin-bottom:16px">
+        <div class="th2"><div style="font-size:13px;font-weight:600">Framework Agreement details</div></div>
+        <div style="padding:16px">
+          <div style="font-size:13px;font-weight:600;margin-bottom:8px">Description</div>
+          <div style="font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:16px">Raamopdracht for all interior and exterior painting works across the Van der Berg Vastgoed property portfolio in 2026. Contractors under this agreement will be assigned individual work orders on a rolling basis. VCA certification and liability insurance required.</div>
+          <div class="div"></div>
+          <div class="ir"><span class="ik">T&amp;C</span><span class="iv">Inkoopvoorwaarden Van der Berg 2025</span></div>
+          <div class="ir"><span class="ik">Qualifications</span><span class="iv">VCA, business liability insurance</span></div>
+          <div class="ir"><span class="ik">Preferred duration</span><span class="iv">12 months</span></div>
+          <div style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;color:var(--t2);margin-top:12px;line-height:1.6;display:flex;align-items:flex-start;gap:8px">
+            <svg viewBox="0 0 16 16" fill="none" stroke="var(--t3)" stroke-width="1.2" stroke-linecap="round" style="width:13px;height:13px;flex-shrink:0;margin-top:1px"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5M8 10.5v.5"/></svg>
+            <span>This is a <strong>Framework Agreement</strong>. You will be assigned individual tasks throughout the year — your offer sets your hourly rate and availability. No fixed hours are agreed upfront.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div style="display:flex;gap:10px">
+        <button class="btn bg bs" onclick="nav('zzp-pos');toast('Invitation declined')">Decline invitation</button>
+        <button class="btn bk bs" onclick="nav('zzp-make-offer-fw')">Make your offer →</button>
+      </div>
+    </div>
+
+    <!-- ZZP: MAKE OFFER — FRAMEWORK -->
+    <div class="sc" id="pg-zzp-make-offer-fw">
+      <div class="tw">
+        <div class="th2"><div style="font-size:13px;font-weight:600">Make your offer</div><div style="font-size:12px;color:var(--t3)" id="fw-offer-step-label">Step 1 of 4</div></div>
+
+        <!-- Stepper -->
+        <div style="padding:14px 16px;border-bottom:1px solid var(--border)">
+          <div class="steps" id="fw-offer-steps">
+            <div class="step on"><div class="sc2">1</div><div class="sl">Offer</div></div><div class="sline"></div>
+            <div class="step"><div class="sc2">2</div><div class="sl">Attachments</div></div><div class="sline"></div>
+            <div class="step"><div class="sc2">3</div><div class="sl">Questionnaire</div></div><div class="sline"></div>
+            <div class="step"><div class="sc2">4</div><div class="sl">Preview</div></div>
+          </div>
+        </div>
+
+        <div id="fw-offer-form">
+
+          <!-- Step 1: Framework offer — offer items (no qty/date) + availability -->
+          <div id="fw-s1" style="padding:16px">
+            <div style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;color:var(--t2);margin-bottom:18px;line-height:1.6;display:flex;align-items:flex-start;gap:8px">
+              <svg viewBox="0 0 16 16" fill="none" stroke="var(--t3)" stroke-width="1.2" stroke-linecap="round" style="width:13px;height:13px;flex-shrink:0;margin-top:1px"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5M8 10.5v.5"/></svg>
+              <span>This is a <strong>Framework Agreement</strong>. No fixed number of hours is agreed upfront — individual tasks will be assigned throughout the year. Set your <strong>price per unit</strong> per line.</span>
+            </div>
+
+            <!-- Offer items (no Qty, no Date) -->
+            <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:10px">Offer items</div>
+
+            <!-- Column headers -->
+            <div style="display:grid;grid-template-columns:1fr 88px 70px 90px 78px 28px;gap:4px;padding:0 4px 6px;border-bottom:1px solid var(--border);margin-bottom:6px">
+              <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--t3)">Name</div>
+              <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--t3)">Type</div>
+              <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--t3)">Unit</div>
+              <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--t3)">Price/unit</div>
+              <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--t3)">BTW</div>
+              <div></div>
+            </div>
+
+            <!-- Framework line items container -->
+            <div id="fw-offer-lines" style="display:flex;flex-direction:column;gap:4px;margin-bottom:8px">
+              <div class="fw-offer-line" style="display:grid;grid-template-columns:1fr 88px 70px 90px 78px 28px;gap:4px;align-items:center">
+                <input class="ii" style="font-size:12px;padding:5px 8px" placeholder="e.g. Schilderwerk per uur">
+                <select class="ii" style="font-size:12px;padding:5px 4px">
+                  <option value="services">Diensten</option>
+                  <option value="goods">Goederen</option>
+                </select>
+                <select class="ii" style="font-size:12px;padding:5px 4px">
+                  <option value="h">h</option>
+                  <option value="stuk">stuk</option>
+                  <option value="m">m</option>
+                  <option value="m2">m²</option>
+                  <option value="km">km</option>
+                  <option value="kg">kg</option>
+                  <option value="cm">cm</option>
+                </select>
+                <input class="ii" type="number" placeholder="0.00" style="font-size:12px;padding:5px 8px" min="0" step="0.01">
+                <select class="ii" style="font-size:12px;padding:5px 4px">
+                  <option value="21">21%</option>
+                  <option value="9">9%</option>
+                  <option value="0">0%</option>
+                </select>
+                <button style="background:none;border:none;cursor:pointer;color:var(--t3);font-size:16px;padding:2px;line-height:1" onclick="removeFWOfferLine(this)" title="Remove">✕</button>
+              </div>
+            </div>
+
+            <div style="margin-bottom:18px">
+              <button class="btn bw bs" style="font-size:12px" onclick="addFWOfferLine()">+ Add item</button>
+            </div>
+
+            <div style="border-top:1px solid var(--border);margin-bottom:18px"></div>
+
+            <!-- Availability -->
+            <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:10px">Availability</div>
+            <div class="g2" style="margin-bottom:18px">
+              <div class="fld">
+                <label class="lbl dk">Available from *</label>
+                <input class="ii" type="date" id="fw-offer-start" value="2026-06-01">
+              </div>
+              <div class="fld">
+                <label class="lbl dk">Preferred contract end</label>
+                <select class="ii" id="fw-offer-duration">
+                  <option value="">No preference</option>
+                  <option value="3">3 months</option>
+                  <option value="6">6 months</option>
+                  <option selected value="12">12 months</option>
+                  <option value="24">24 months</option>
+                  <option value="0">Indefinite</option>
+                </select>
+              </div>
+              <div class="fld">
+                <label class="lbl dk">Max hours per week <span style="font-weight:400;color:var(--t3)">(optional)</span></label>
+                <input class="ii" type="number" id="fw-offer-max-hrs" placeholder="e.g. 32" min="1" max="60">
+              </div>
+              <div class="fld">
+                <label class="lbl dk">Notice period</label>
+                <select class="ii" id="fw-offer-notice">
+                  <option value="7" selected>7 days</option>
+                  <option value="14">14 days</option>
+                  <option value="30">30 days</option>
+                </select>
+              </div>
+            </div>
+
+            <div style="border-top:1px solid var(--border);margin-bottom:16px"></div>
+
+            <div class="fld" style="margin-bottom:0">
+              <label class="lbl dk">Motivation *</label>
+              <textarea class="ii" id="fw-offer-motivation" style="min-height:80px" placeholder="Why are you the right contractor for this framework? Describe your experience, availability and approach..."></textarea>
+            </div>
+          </div>
+
+          <!-- Step 2: Attachments (reuse same structure) -->
+          <div id="fw-s2" style="display:none;padding:16px">
+            <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:8px">Terms &amp; conditions</div>
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);margin-bottom:18px">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" style="width:14px;height:14px;flex-shrink:0"><path d="M4 2h5l3 3v9H4V2z"/><path d="M9 2v3h3"/></svg>
+              <div style="flex:1;font-size:12px"><div style="font-weight:500">AlgemeneVoorwaarden_Laurens.pdf</div><div style="color:var(--t3);margin-top:1px">From your profile · 245 KB</div></div>
+              <span class="badge bgn2" style="font-size:10px">Auto-attached</span>
+              <button class="btn bw bx" onclick="toast('Replace T&C file')">Replace</button>
+            </div>
+            <div class="div" style="margin-bottom:18px"></div>
+            <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:8px">Required by client</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden">
+                <div style="padding:10px 12px;display:flex;align-items:center;gap:10px">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" style="width:14px;height:14px;flex-shrink:0"><path d="M4 2h5l3 3v9H4V2z"/><path d="M9 2v3h3"/></svg>
+                  <div style="flex:1;min-width:0">
+                    <div style="font-size:11px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.4px">VCA certificate</div>
+                    <div style="font-size:13px;font-weight:500;margin-top:1px">VCA_Certificaat_Laurens.pdf</div>
+                    <div style="font-size:11px;color:var(--t3);margin-top:1px">From your profile · Valid until Dec 2027</div>
+                  </div>
+                  <span class="badge bgn2" style="font-size:10px;flex-shrink:0">Profile match</span>
+                </div>
+              </div>
+              <div style="border:1px dashed var(--border);border-radius:var(--r);padding:10px 12px;font-size:12px;color:var(--t3)">
+                <strong>Business liability insurance</strong> — not found in your profile.
+                <button class="btn bw bx" style="font-size:11px;margin-top:6px;display:block" onclick="toast('Upload business liability insurance')">Upload document</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3: Questionnaire -->
+          <div id="fw-s3" style="display:none;padding:16px">
+            <div style="font-size:12px;color:var(--t3);margin-bottom:14px;line-height:1.6">Confirm your working relationship with this client under Wet DBA.</div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px">
+                <div style="font-size:12px;color:var(--t2);margin-bottom:6px">Do you work for other clients besides this one?</div>
+                <div style="display:flex;gap:8px"><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="fw-q1" checked style="accent-color:var(--navy)"> Yes</label><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="fw-q1" style="accent-color:var(--navy)"> No</label></div>
+              </div>
+              <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px">
+                <div style="font-size:12px;color:var(--t2);margin-bottom:6px">Do you determine your own working hours and methods?</div>
+                <div style="display:flex;gap:8px"><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="fw-q2" checked style="accent-color:var(--navy)"> Yes</label><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="fw-q2" style="accent-color:var(--navy)"> No</label></div>
+              </div>
+              <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px">
+                <div style="font-size:12px;color:var(--t2);margin-bottom:6px">Do you bear your own financial risk for this work?</div>
+                <div style="display:flex;gap:8px"><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="fw-q3" checked style="accent-color:var(--navy)"> Yes</label><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="fw-q3" style="accent-color:var(--navy)"> No</label></div>
+              </div>
+              <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px">
+                <div style="font-size:12px;color:var(--t2);margin-bottom:6px">Do you have a KVK registration?</div>
+                <div style="display:flex;gap:8px"><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="fw-q4" checked style="accent-color:var(--navy)"> Yes</label><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="fw-q4" style="accent-color:var(--navy)"> No</label></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4: Preview & sign -->
+          <div id="fw-s4" style="display:none;padding:16px">
+            <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:16px">
+              <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:12px">Offer summary</div>
+              <div class="ir"><span class="ik">Framework</span><span class="iv">Raamopdracht Schilderwerk 2026</span></div>
+              <div class="ir"><span class="ik">Client</span><span class="iv">Van der Berg Vastgoed</span></div>
+              <div class="ir"><span class="ik">Price per hour</span><span class="iv" id="fw-preview-rate">—</span></div>
+              <div class="ir"><span class="ik">Available from</span><span class="iv" id="fw-preview-start">—</span></div>
+              <div class="ir"><span class="ik">Duration</span><span class="iv" id="fw-preview-duration">12 months</span></div>
+              <div class="ir" style="border:none"><span class="ik">Questionnaire</span><span class="iv" style="font-weight:500">Pre-filled from profile</span></div>
+            </div>
+            <!-- Sign box -->
+            <div class="sign" id="fw-sign-box" onclick="fwDoSign()" style="margin-bottom:14px">
+              <div id="fw-sign-ico" style="display:flex;justify-content:center;margin-bottom:4px"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;flex-shrink:0"><path d='M14 2l4 4-9 9H5v-4L14 2z'/><path d='M12 5l3 3'/></svg></div>
+              <div style="font-size:13px;color:var(--t2)" id="fw-sign-txt">Click to sign digitally as Laurens de Boer</div>
+              <div style="font-size:11px;color:var(--t3);margin-top:2px">Timestamp will be recorded · HelloProfs e-Sign</div>
+            </div>
+          </div>
+
+        </div><!-- /fw-offer-form -->
+
+        <!-- Sent state -->
+        <div id="fw-offer-sent" style="display:none;padding:32px;text-align:center">
+          <div style="font-size:20px;font-weight:700;margin-bottom:8px">Offer sent ✓</div>
+          <div style="font-size:13px;color:var(--t3);line-height:1.7;max-width:360px;margin:0 auto 20px">Your offer has been sent to Van der Berg Vastgoed. You will be notified when they respond.</div>
+          <button class="btn bk bs" onclick="nav('zzp-pos')">Back to Purchase Orders</button>
+        </div>
+
+      </div><!-- /tw -->
+
+      <!-- Footer -->
+      <div id="fw-offer-footer" style="display:flex;gap:8px;margin-top:16px">
+        <button class="btn bg bs" id="fw-back-btn" style="display:none" onclick="fwOfferBack()">← Back</button>
+        <button class="btn bg bs" onclick="nav('zzp-received-fw')">Cancel</button>
+        <button class="btn bk bs" id="fw-next-btn" onclick="fwOfferNext()">Continue →</button>
+      </div>
+
+    </div>
+
+    <!-- ZZP: RECEIVED PO (Assignment) -->
     <div class="sc" id="pg-zzp-received-po">
 
       <!-- PO header card -->
@@ -2339,7 +2646,7 @@ tbody tr:hover td{background:var(--bg)}
       <!-- CTA -->
       <div style="display:flex;gap:10px">
         <button class="btn bg bs" onclick="nav('zzp-pos');toast('Invitation declined')">Decline invitation</button>
-        <button class="btn bk bs" onclick="openMakeOffer()">Make your offer →</button>
+        <button class="btn bk bs" onclick="openMakeOffer('assignment','1 July 2026','30 September 2026')">Make your offer →</button>
       </div>
     </div>
 
@@ -2362,23 +2669,101 @@ tbody tr:hover td{background:var(--bg)}
 
             <!-- Step 1: Offer details -->
             <div id="zzp-s1" style="padding:16px">
-              <div class="g2">
-                <div class="fld"><label class="lbl dk">Pricing model *</label>
-                  <select class="ii" id="zzp-offer-pricing"><option>Fixed price</option><option>Hourly rate</option></select>
+
+              <!-- Assignment: locked dates from PO -->
+              <div id="zzp-offer-dates-locked">
+                <div style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;color:var(--t2);margin-bottom:14px;line-height:1.6;display:flex;align-items:flex-start;gap:8px">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="var(--t3)" stroke-width="1.2" stroke-linecap="round" style="width:13px;height:13px;flex-shrink:0;margin-top:1px"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5M8 10.5v.5"/></svg>
+                  <span>This is an <strong>Assignment Agreement</strong>. The start and end date are set by the client and cannot be modified.</span>
                 </div>
-                <div class="fld"><label class="lbl dk">Amount (excl. BTW) *</label>
-                  <input class="ii" id="zzp-offer-amount" placeholder="e.g. €8,500">
-                </div>
-                <div class="fld"><label class="lbl dk">Start date *</label>
-                  <input class="ii" type="date" id="zzp-offer-start" value="2026-07-01">
-                </div>
-                <div class="fld"><label class="lbl dk">End date *</label>
-                  <input class="ii" type="date" id="zzp-offer-end" value="2026-09-30">
+                <div class="g2" style="margin-bottom:14px">
+                  <div class="fld"><label class="lbl dk">Start date</label><input class="ii" id="zzp-offer-start-locked" value="1 July 2026" disabled style="opacity:.6;cursor:not-allowed"></div>
+                  <div class="fld"><label class="lbl dk">End date</label><input class="ii" id="zzp-offer-end-locked" value="30 September 2026" disabled style="opacity:.6;cursor:not-allowed"></div>
                 </div>
               </div>
+
+              <!-- Framework: editable dates set by ZZP'er -->
+              <div id="zzp-offer-dates-editable" style="display:none">
+                <div style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;color:var(--t2);margin-bottom:14px;line-height:1.6;display:flex;align-items:flex-start;gap:8px">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="var(--t3)" stroke-width="1.2" stroke-linecap="round" style="width:13px;height:13px;flex-shrink:0;margin-top:1px"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5M8 10.5v.5"/></svg>
+                  <span>This is a <strong>Framework Agreement</strong>. You set your own availability and preferred contract period.</span>
+                </div>
+                <div class="g2" style="margin-bottom:14px">
+                  <div class="fld"><label class="lbl dk">Start date *</label><input class="ii" type="date" id="zzp-offer-start" value="2026-07-01"></div>
+                  <div class="fld"><label class="lbl dk">End date *</label><input class="ii" type="date" id="zzp-offer-end" value="2026-09-30"></div>
+                </div>
+              </div>
+
+              <!-- Offer line items -->
+              <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:10px">Offer items</div>
+
+              <!-- Column headers -->
+              <div style="display:grid;grid-template-columns:1fr 88px 90px 70px 56px 70px 78px 28px;gap:4px;padding:0 4px 6px;border-bottom:1px solid var(--border);margin-bottom:6px">
+                <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--t3)">Name</div>
+                <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--t3)">Type</div>
+                <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--t3)">Date</div>
+                <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--t3)">Unit</div>
+                <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--t3)">Qty</div>
+                <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--t3)">Price/unit</div>
+                <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--t3)">BTW</div>
+                <div></div>
+              </div>
+
+              <!-- Line items container -->
+              <div id="offer-lines" style="display:flex;flex-direction:column;gap:4px;margin-bottom:8px">
+                <!-- Default first line -->
+                <div class="offer-line" style="display:grid;grid-template-columns:1fr 88px 90px 70px 56px 70px 78px 28px;gap:4px;align-items:center">
+                  <input class="ii" style="font-size:12px;padding:5px 8px" placeholder="e.g. Dakbedekking werkzaamheden" oninput="recalcOfferLine(this)">
+                  <select class="ii" style="font-size:12px;padding:5px 4px">
+                    <option value="services">Diensten</option>
+                    <option value="goods">Goederen</option>
+                  </select>
+                  <input class="ii" type="date" style="font-size:12px;padding:5px 6px" value="2026-07-01">
+                  <select class="ii" style="font-size:12px;padding:5px 4px" onchange="recalcOfferLine(this)">
+                    <option value="h">h</option>
+                    <option value="stuk">stuk</option>
+                    <option value="m">m</option>
+                    <option value="m2">m²</option>
+                    <option value="km">km</option>
+                    <option value="kg">kg</option>
+                    <option value="cm">cm</option>
+                  </select>
+                  <input class="ii" type="number" value="1" min="0" style="font-size:12px;padding:5px 6px" oninput="recalcOfferLine(this)">
+                  <input class="ii" type="number" placeholder="0.00" style="font-size:12px;padding:5px 6px" oninput="recalcOfferLine(this)">
+                  <select class="ii" style="font-size:12px;padding:5px 4px" onchange="recalcOfferLine(this)">
+                    <option value="21">21%</option>
+                    <option value="9">9%</option>
+                    <option value="0">0%</option>
+                  </select>
+                  <button style="background:none;border:none;cursor:pointer;color:var(--t3);font-size:16px;padding:2px;line-height:1" onclick="removeOfferLine(this)" title="Remove">✕</button>
+                </div>
+              </div>
+
+              <!-- Subtotals -->
+              <div style="display:flex;gap:6px;margin-bottom:14px">
+                <button class="btn bw bs" style="font-size:12px" onclick="addOfferLine()">+ Add item</button>
+              </div>
+
+              <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:12px 14px;font-size:12px">
+                <div style="display:flex;justify-content:space-between;margin-bottom:5px;color:var(--t2)">
+                  <span>Subtotaal (excl. BTW)</span>
+                  <span id="offer-subtotal">€ 0,00</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:5px;color:var(--t2)">
+                  <span>BTW</span>
+                  <span id="offer-btw">€ 0,00</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;font-weight:700;font-size:13px;border-top:1px solid var(--border);padding-top:8px;margin-top:4px;color:var(--t1)">
+                  <span>Totaal incl. BTW</span>
+                  <span id="offer-total">€ 0,00</span>
+                </div>
+              </div>
+
+              <div style="border-top:1px solid var(--border);margin:16px 0"></div>
+
               <div class="fld" style="margin-bottom:0">
                 <label class="lbl dk">Motivation *</label>
-                <textarea class="ii" id="zzp-offer-motivation" style="min-height:90px" placeholder="Why are you the right contractor for this job? Describe your experience and approach..."></textarea>
+                <textarea class="ii" id="zzp-offer-motivation" style="min-height:80px" placeholder="Why are you the right contractor for this job? Describe your experience and approach..."></textarea>
               </div>
             </div>
 
@@ -2564,7 +2949,7 @@ tbody tr:hover td{background:var(--bg)}
                 </div>
               </div>
               <div class="sign" id="zzp-sign-box" onclick="zzpDoSign()" style="margin-bottom:14px">
-                <div style=" id="zzp-sign-ico" style="display:flex;justify-content:center;margin-bottom:4px"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;flex-shrink:0"><path d='M14 2l4 4-9 9H5v-4L14 2z'/><path d='M12 5l3 3'/></svg></div>
+                <div id="zzp-sign-ico" style="display:flex;justify-content:center;margin-bottom:4px"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;flex-shrink:0"><path d='M14 2l4 4-9 9H5v-4L14 2z'/><path d='M12 5l3 3'/></svg></div>
                 <div style="font-size:13px;color:var(--t2)" id="zzp-sign-txt">Click to sign digitally as Jan Bakker</div>
                 <div style="font-size:11px;color:var(--t3);margin-top:2px">Timestamp will be recorded · HelloProfs e-Sign</div>
               </div>
@@ -3158,7 +3543,7 @@ tbody tr:hover td{background:var(--bg)}
                 <div style="font-size:13px;font-weight:600">Your entities</div>
                 <div style="font-size:12px;color:var(--t3);margin-top:2px">Your role and access level per entity</div>
               </div>
-              <button class="btn bk bs" onclick="openAddEntity()">+ Add entity</button>
+              <button class="btn bk bs zzp-hide" onclick="openAddEntity()">+ Add entity</button>
             </div>
 
             <div style="display:flex;flex-direction:column;gap:8px" id="entities-list">
@@ -3240,7 +3625,8 @@ tbody tr:hover td{background:var(--bg)}
 
           <!-- Members -->
           <div id="st4" style="display:none">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+            <!-- ORG: Members header (hidden for ZZP'er) -->
+            <div class="zzp-hide" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
               <div>
                 <div style="font-size:13px;font-weight:600">Members of Miyagami B.V.</div>
                 <div style="font-size:12px;color:var(--t3);margin-top:2px">3 active · 1 pending invite</div>
@@ -3248,12 +3634,34 @@ tbody tr:hover td{background:var(--bg)}
               <button class="btn bk bs manager-hide" onclick="op('m-invite-member')">+ Invite member</button>
             </div>
 
-            <!-- Sign permission info banner -->
-            <div style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;color:var(--t2);margin-bottom:16px;line-height:1.6">
+            <!-- ZZP'er: Intermediary invite section (hidden for org) -->
+            <div class="zzp-show" style="display:none;margin-bottom:20px">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+                <div>
+                  <div style="font-size:13px;font-weight:600">Intermediary</div>
+                  <div style="font-size:12px;color:var(--t3);margin-top:2px">An intermediary can manage your account on your behalf</div>
+                </div>
+                <button class="btn bk bs" onclick="op('m-invite-intermediary')">+ Add intermediary</button>
+              </div>
+              <div style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;color:var(--t2);margin-bottom:14px;line-height:1.6">
+                An <strong>Intermediary</strong> (e.g. accountant or broker) can create POs, manage contracts and send invoices on your behalf. You remain the legal entity — they act as your representative.
+              </div>
+              <!-- No intermediary yet -->
+              <div id="zzp-intermediary-empty" style="background:var(--white);border:1px dashed var(--border);border-radius:var(--r);padding:28px;text-align:center">
+                <div style="font-size:13px;font-weight:500;margin-bottom:6px;color:var(--t2)">No intermediary linked</div>
+                <div style="font-size:12px;color:var(--t3);margin-bottom:14px">Link an accountant or broker to manage your HelloProfs account on your behalf.</div>
+                <button class="btn bk bs" onclick="op('m-invite-intermediary')">+ Add intermediary</button>
+              </div>
+              <!-- Intermediary linked (shown after invite) -->
+              <div id="zzp-intermediary-linked" style="display:none;flex-direction:column;gap:8px"></div>
+            </div>
+
+            <!-- Sign permission info banner (org only) -->
+            <div class="zzp-hide" style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;color:var(--t2);margin-bottom:16px;line-height:1.6">
               <strong>Signing authority</strong> is a separate permission, independent of role. Only the <strong>Legal Representative</strong> can grant or revoke it. Admins can request it on behalf of a member.
             </div>
 
-            <div style="display:flex;flex-direction:column;gap:8px">
+            <div class="zzp-hide" style="display:flex;flex-direction:column;gap:8px">
 
               <!-- Bárbara — Admin + Legal Representative (you) -->
               <div style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden">
@@ -3336,8 +3744,8 @@ tbody tr:hover td{background:var(--bg)}
 
             </div>
 
-            <!-- Signing authority audit log -->
-            <div style="margin-top:22px">
+            <!-- Signing authority audit log (org only) -->
+            <div class="zzp-hide" style="margin-top:22px">
               <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:10px">Signing authority log</div>
               <div style="display:flex;flex-direction:column;gap:2px" id="sign-audit-log">
                 <div class="tli"><div class="tldot"></div><div><div class="tlt">Sophie van Dam granted signing authority</div><div class="tlm">12 May 2026 · Granted by Bárbara Mota (Legal Representative)</div></div></div>
@@ -4060,7 +4468,7 @@ tbody tr:hover td{background:var(--bg)}
 
     <!-- ── CONTRACTOR PATH ── -->
 
-    <!-- C-Step 2: Contractor details -->
+    <!-- C-Step 2: General information -->
     <div id="zzp-po-c2" style="display:none">
 
       <!-- Client type -->
@@ -4093,96 +4501,231 @@ tbody tr:hover td{background:var(--bg)}
 
       <div style="border-top:1px solid var(--border);margin:16px 0"></div>
 
-      <!-- Description -->
-      <div class="fld"><label class="lbl dk">Title *</label><input class="ii" placeholder="e.g. Bathroom renovation Almere"></div>
-      <div class="fld"><label class="lbl dk">Description *</label><textarea class="ii" style="min-height:80px" placeholder="Describe the work, scope, materials, and any specific requirements&#x2026;"></textarea></div>
-
-      <div style="border-top:1px solid var(--border);margin:16px 0"></div>
-
-      <!-- Agreement type -->
-      <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:10px">Agreement type</div>
-      <div style="display:flex;gap:8px;margin-bottom:16px">
-        <div id="zzp-c-type-assign" class="tc sel" style="flex:1;color:var(--t1);cursor:pointer" onclick="selectZZPCType('assignment')">
-          <div class="tn" style="color:var(--t1)">Assignment Agreement</div>
-          <div class="td" style="color:var(--t3)">Fixed scope and dates</div>
-        </div>
-        <div id="zzp-c-type-fw" class="tc" style="flex:1;color:var(--t1);cursor:pointer" onclick="selectZZPCType('framework')">
-          <div class="tn" style="color:var(--t1)">Framework Agreement</div>
-          <div class="td" style="color:var(--t3)">Ongoing arrangement</div>
-        </div>
-      </div>
-
-      <!-- Offer fields — Assignment -->
-      <div id="zzp-c-assign-fields">
-        <div class="g2">
-          <div class="fld"><label class="lbl dk">Start date *</label><input class="ii" type="date"></div>
-          <div class="fld"><label class="lbl dk">End date *</label><input class="ii" type="date"></div>
-          <div class="fld"><label class="lbl dk">Amount (excl. BTW) *</label><input class="ii" placeholder="e.g. &#x20AC;2,500"></div>
-          <div class="fld"><label class="lbl dk">Pricing type</label><select class="ii"><option>Fixed price</option><option>Hourly rate</option></select></div>
-        </div>
-      </div>
-      <!-- Offer fields — Framework -->
-      <div id="zzp-c-fw-fields" style="display:none">
-        <div class="g2">
-          <div class="fld"><label class="lbl dk">Hourly rate (excl. BTW) *</label><input class="ii" placeholder="e.g. &#x20AC;85"></div>
-          <div class="fld"><label class="lbl dk">Preferred duration</label><select class="ii"><option value="">Select&#x2026;</option><option>3 months</option><option>6 months</option><option>12 months</option><option>Indefinite</option></select></div>
-        </div>
-      </div>
-      <div class="fld"><label class="lbl dk">Motivation <span style="font-weight:400;color:var(--t3)">(optional)</span></label><textarea class="ii" style="min-height:56px" placeholder="Why you are the right person for this job&#x2026;"></textarea></div>
-
-      <div style="border-top:1px solid var(--border);margin:16px 0"></div>
-
-      <!-- Questionnaire -->
-      <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:10px">Wet DBA questionnaire</div>
-      <div style="font-size:12px;color:var(--t3);margin-bottom:12px;line-height:1.6">Confirm your working relationship with this client. Answers verify your independence under Wet DBA.</div>
-      <div style="display:flex;flex-direction:column;gap:6px">
-        <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px">
-          <div style="font-size:12px;color:var(--t2);margin-bottom:6px">Do you work for other clients besides this one?</div>
-          <div style="display:flex;gap:8px"><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-q1" checked style="accent-color:var(--navy)"> Yes</label><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-q1" style="accent-color:var(--navy)"> No</label></div>
-        </div>
-        <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px">
-          <div style="font-size:12px;color:var(--t2);margin-bottom:6px">Do you determine your own working hours and methods?</div>
-          <div style="display:flex;gap:8px"><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-q2" checked style="accent-color:var(--navy)"> Yes</label><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-q2" style="accent-color:var(--navy)"> No</label></div>
-        </div>
-        <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px">
-          <div style="font-size:12px;color:var(--t2);margin-bottom:6px">Do you bear your own financial risk for this work?</div>
-          <div style="display:flex;gap:8px"><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-q3" checked style="accent-color:var(--navy)"> Yes</label><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-q3" style="accent-color:var(--navy)"> No</label></div>
-        </div>
-        <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px">
-          <div style="font-size:12px;color:var(--t2);margin-bottom:6px">Are you responsible for the result, not just the effort?</div>
-          <div style="display:flex;gap:8px"><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-q4" checked style="accent-color:var(--navy)"> Yes</label><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-q4" style="accent-color:var(--navy)"> No</label></div>
-        </div>
-        <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px">
-          <div style="font-size:12px;color:var(--t2);margin-bottom:6px">Do you have a KVK registration?</div>
-          <div style="display:flex;gap:8px"><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-q5" checked style="accent-color:var(--navy)"> Yes</label><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-q5" style="accent-color:var(--navy)"> No</label></div>
-        </div>
-      </div>
+      <div class="fld"><label class="lbl dk">Title *</label><input class="ii" id="zzp-po-title" placeholder="e.g. Bathroom renovation Almere"></div>
+      <div class="fld" style="margin-bottom:0"><label class="lbl dk">Description *</label><textarea class="ii" id="zzp-po-desc" style="min-height:80px" placeholder="Describe the work, scope, materials, and any specific requirements…"></textarea></div>
 
     </div>
 
-    <!-- C-Step 3: Contractor review -->
+    <!-- C-Step 3: Agreement type -->
     <div id="zzp-po-c3" style="display:none">
-      <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:12px">
-        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:12px">Review your Purchase Order</div>
-        <div class="ir"><span class="ik">Your role</span><span class="iv">Contractor (on behalf of client)</span></div>
+      <div style="font-size:13px;color:var(--t2);margin-bottom:14px">What type of agreement are you creating with your client?</div>
+      <div style="display:flex;gap:8px">
+        <div id="zzp-c-type-assign" class="tc sel" style="flex:1;color:var(--t1);cursor:pointer" onclick="selectZZPCType('assignment')">
+          <div class="tn" style="color:var(--t1)">Assignment Agreement</div>
+          <div class="td" style="color:var(--t3)">Fixed scope, clear dates, defined price</div>
+        </div>
+        <div id="zzp-c-type-fw" class="tc" style="flex:1;color:var(--t1);cursor:pointer" onclick="selectZZPCType('framework')">
+          <div class="tn" style="color:var(--t1)">Framework Agreement</div>
+          <div class="td" style="color:var(--t3)">Ongoing arrangement, price per unit</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C-Step 4a: Offer — Assignment (offer items with all columns + dates) -->
+    <div id="zzp-po-c4-assign" style="display:none">
+      <div style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;color:var(--t2);margin-bottom:14px;line-height:1.6">
+        <strong>Assignment Agreement</strong> — set the start and end date and add your offer items below.
+      </div>
+      <div class="g2" style="margin-bottom:14px">
+        <div class="fld"><label class="lbl dk">Start date *</label><input class="ii" type="date" id="zzp-po-assign-start"></div>
+        <div class="fld"><label class="lbl dk">End date *</label><input class="ii" type="date" id="zzp-po-assign-end"></div>
+      </div>
+      <!-- Offer items (full columns) -->
+      <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:10px">Offer items</div>
+      <div style="display:grid;grid-template-columns:1fr 88px 90px 70px 56px 70px 78px 28px;gap:4px;padding:0 4px 6px;border-bottom:1px solid var(--border);margin-bottom:6px">
+        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--t3)">Name</div>
+        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--t3)">Type</div>
+        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--t3)">Date</div>
+        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--t3)">Unit</div>
+        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--t3)">Qty</div>
+        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--t3)">Price/unit</div>
+        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--t3)">BTW</div>
+        <div></div>
+      </div>
+      <div id="zzp-po-assign-lines" style="display:flex;flex-direction:column;gap:4px;margin-bottom:8px">
+        <div class="zzp-po-assign-line" style="display:grid;grid-template-columns:1fr 88px 90px 70px 56px 70px 78px 28px;gap:4px;align-items:center">
+          <input class="ii" style="font-size:12px;padding:5px 8px" placeholder="e.g. Timmerwerk" oninput="recalcZZPPOAssign()">
+          <select class="ii" style="font-size:12px;padding:5px 4px"><option value="services">Diensten</option><option value="goods">Goederen</option></select>
+          <input class="ii" type="date" style="font-size:12px;padding:5px 6px">
+          <select class="ii" style="font-size:12px;padding:5px 4px" onchange="recalcZZPPOAssign()"><option value="h">h</option><option value="stuk">stuk</option><option value="m">m</option><option value="m2">m²</option><option value="km">km</option><option value="kg">kg</option><option value="cm">cm</option></select>
+          <input class="ii" type="number" value="1" min="0" style="font-size:12px;padding:5px 6px" oninput="recalcZZPPOAssign()">
+          <input class="ii" type="number" placeholder="0.00" style="font-size:12px;padding:5px 6px" oninput="recalcZZPPOAssign()">
+          <select class="ii" style="font-size:12px;padding:5px 4px" onchange="recalcZZPPOAssign()"><option value="21">21%</option><option value="9">9%</option><option value="0">0%</option></select>
+          <button style="background:none;border:none;cursor:pointer;color:var(--t3);font-size:16px;padding:2px;line-height:1" onclick="removeZZPPOAssignLine(this)">✕</button>
+        </div>
+      </div>
+      <div style="margin-bottom:14px"><button class="btn bw bs" style="font-size:12px" onclick="addZZPPOAssignLine()">+ Add item</button></div>
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:12px 14px;font-size:12px;margin-bottom:14px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px;color:var(--t2)"><span>Subtotaal (excl. BTW)</span><span id="zzp-po-assign-subtotal">€ 0,00</span></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px;color:var(--t2)"><span>BTW</span><span id="zzp-po-assign-btw">€ 0,00</span></div>
+        <div style="display:flex;justify-content:space-between;font-weight:700;font-size:13px;border-top:1px solid var(--border);padding-top:8px;margin-top:4px"><span>Totaal incl. BTW</span><span id="zzp-po-assign-total">€ 0,00</span></div>
+      </div>
+      <div class="fld" style="margin-bottom:0"><label class="lbl dk">Motivation <span style="font-weight:400;color:var(--t3)">(optional)</span></label><textarea class="ii" id="zzp-po-assign-mot" style="min-height:60px" placeholder="Why you are the right person for this job…"></textarea></div>
+    </div>
+
+    <!-- C-Step 4b: Offer — Framework (offer items without Qty/Date + availability) -->
+    <div id="zzp-po-c4-fw" style="display:none">
+      <div style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;color:var(--t2);margin-bottom:14px;line-height:1.6">
+        <strong>Framework Agreement</strong> — no fixed hours agreed upfront. Set your price per unit and availability below.
+      </div>
+      <!-- Offer items (no Qty, no Date) -->
+      <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:10px">Offer items</div>
+      <div style="display:grid;grid-template-columns:1fr 88px 70px 90px 78px 28px;gap:4px;padding:0 4px 6px;border-bottom:1px solid var(--border);margin-bottom:6px">
+        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--t3)">Name</div>
+        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--t3)">Type</div>
+        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--t3)">Unit</div>
+        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--t3)">Price/unit</div>
+        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--t3)">BTW</div>
+        <div></div>
+      </div>
+      <div id="zzp-po-fw-lines" style="display:flex;flex-direction:column;gap:4px;margin-bottom:8px">
+        <div class="zzp-po-fw-line" style="display:grid;grid-template-columns:1fr 88px 70px 90px 78px 28px;gap:4px;align-items:center">
+          <input class="ii" style="font-size:12px;padding:5px 8px" placeholder="e.g. Schilderwerk per uur">
+          <select class="ii" style="font-size:12px;padding:5px 4px"><option value="services">Diensten</option><option value="goods">Goederen</option></select>
+          <select class="ii" style="font-size:12px;padding:5px 4px"><option value="h">h</option><option value="stuk">stuk</option><option value="m">m</option><option value="m2">m²</option><option value="km">km</option><option value="kg">kg</option><option value="cm">cm</option></select>
+          <input class="ii" type="number" placeholder="0.00" style="font-size:12px;padding:5px 8px" min="0" step="0.01">
+          <select class="ii" style="font-size:12px;padding:5px 4px"><option value="21">21%</option><option value="9">9%</option><option value="0">0%</option></select>
+          <button style="background:none;border:none;cursor:pointer;color:var(--t3);font-size:16px;padding:2px;line-height:1" onclick="removeZZPPOFWLine(this)">✕</button>
+        </div>
+      </div>
+      <div style="margin-bottom:18px"><button class="btn bw bs" style="font-size:12px" onclick="addZZPPOFWLine()">+ Add item</button></div>
+      <div style="border-top:1px solid var(--border);margin-bottom:14px"></div>
+      <div class="g2" style="margin-bottom:14px">
+        <div class="fld"><label class="lbl dk">Available from *</label><input class="ii" type="date" id="zzp-po-fw-start"></div>
+        <div class="fld"><label class="lbl dk">Preferred duration</label><select class="ii" id="zzp-po-fw-dur"><option value="">No preference</option><option value="3">3 months</option><option value="6">6 months</option><option selected value="12">12 months</option><option value="24">24 months</option><option value="0">Indefinite</option></select></div>
+      </div>
+      <div class="fld" style="margin-bottom:0"><label class="lbl dk">Motivation <span style="font-weight:400;color:var(--t3)">(optional)</span></label><textarea class="ii" id="zzp-po-fw-mot" style="min-height:60px" placeholder="Why you are the right person for this framework…"></textarea></div>
+    </div>
+
+    <!-- C-Step 5: Attachments -->
+    <div id="zzp-po-c5-attach" style="display:none">
+      <!-- T&C -->
+      <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:8px">Terms &amp; conditions</div>
+      <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);margin-bottom:18px">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" style="width:14px;height:14px;flex-shrink:0"><path d="M4 2h5l3 3v9H4V2z"/><path d="M9 2v3h3"/></svg>
+        <div style="flex:1;font-size:12px"><div style="font-weight:500">AlgemeneVoorwaarden_Laurens.pdf</div><div style="color:var(--t3);margin-top:1px">From your profile · 245 KB</div></div>
+        <span class="badge bgn2" style="font-size:10px">Auto-attached</span>
+        <button class="btn bw bx" onclick="toast('Replace T&C file')">Replace</button>
+      </div>
+      <div class="div" style="margin-bottom:18px"></div>
+      <!-- Additional documents -->
+      <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:8px">Additional documents</div>
+      <div style="font-size:12px;color:var(--t3);margin-bottom:12px;line-height:1.6">Upload any supporting documents your client may need to review before signing.</div>
+      <div id="zzp-po-attach-list" style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px"></div>
+      <button class="btn bw bs" style="font-size:12px" onclick="addZZPPOAttachment()">+ Add document</button>
+    </div>
+
+    <!-- C-Step 6: Questionnaire -->
+    <div id="zzp-po-c6-quest" style="display:none">
+      <div style="font-size:12px;color:var(--t3);margin-bottom:14px;line-height:1.6">Confirm your working relationship with this client under Wet DBA. These answers are included with the contract.</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px">
+          <div style="font-size:12px;color:var(--t2);margin-bottom:6px">Do you work for other clients besides this one?</div>
+          <div style="display:flex;gap:8px"><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-pq1" checked style="accent-color:var(--navy)"> Yes</label><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-pq1" style="accent-color:var(--navy)"> No</label></div>
+        </div>
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px">
+          <div style="font-size:12px;color:var(--t2);margin-bottom:6px">Do you determine your own working hours and methods?</div>
+          <div style="display:flex;gap:8px"><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-pq2" checked style="accent-color:var(--navy)"> Yes</label><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-pq2" style="accent-color:var(--navy)"> No</label></div>
+        </div>
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px">
+          <div style="font-size:12px;color:var(--t2);margin-bottom:6px">Do you bear your own financial risk for this work?</div>
+          <div style="display:flex;gap:8px"><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-pq3" checked style="accent-color:var(--navy)"> Yes</label><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-pq3" style="accent-color:var(--navy)"> No</label></div>
+        </div>
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px">
+          <div style="font-size:12px;color:var(--t2);margin-bottom:6px">Are you responsible for the result, not just the effort?</div>
+          <div style="display:flex;gap:8px"><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-pq4" checked style="accent-color:var(--navy)"> Yes</label><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-pq4" style="accent-color:var(--navy)"> No</label></div>
+        </div>
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px">
+          <div style="font-size:12px;color:var(--t2);margin-bottom:6px">Do you have a KVK registration?</div>
+          <div style="display:flex;gap:8px"><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-pq5" checked style="accent-color:var(--navy)"> Yes</label><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-pq5" style="accent-color:var(--navy)"> No</label></div>
+        </div>
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px">
+          <div style="font-size:12px;color:var(--t2);margin-bottom:6px">Do you use your own tools and equipment for this work?</div>
+          <div style="display:flex;gap:8px"><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-pq6" checked style="accent-color:var(--navy)"> Yes</label><label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer"><input type="radio" name="zzp-pq6" style="accent-color:var(--navy)"> No</label></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C-Step 7: Review — full overview -->
+    <div id="zzp-po-c5" style="display:none">
+
+      <!-- Section 1: Client -->
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;margin-bottom:10px">
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:10px">Client</div>
         <div class="ir"><span class="ik">Client type</span><span class="iv" id="zzp-rv-client-type">Private Individual</span></div>
-        <div class="ir"><span class="ik">Client</span><span class="iv" id="zzp-rv-client">—</span></div>
-        <!-- Description — truncated -->
-        <div class="ir" style="align-items:flex-start">
+        <div class="ir"><span class="ik">Name</span><span class="iv" id="zzp-rv-client-name">—</span></div>
+        <div class="ir" style="border:none"><span class="ik">Email</span><span class="iv" id="zzp-rv-client-email">—</span></div>
+      </div>
+
+      <!-- Section 2: PO details -->
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;margin-bottom:10px">
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:10px">Purchase Order</div>
+        <div class="ir"><span class="ik">Title</span><span class="iv" id="zzp-rv-title">—</span></div>
+        <div class="ir"><span class="ik">Agreement</span><span class="iv" id="zzp-rv-agreement">Assignment Agreement</span></div>
+        <!-- Description truncated -->
+        <div class="ir" style="align-items:flex-start;border:none">
           <span class="ik">Description</span>
           <span class="iv" style="flex-direction:column;align-items:flex-start;gap:4px">
-            <span id="zzp-c-desc-short" style="color:var(--t2);font-weight:400;line-height:1.5">Renovation of the bathroom including tiling, plumbing connections and finishing. All materials to be supplied by the contractor. Work must comply with local building regulations and...</span>
-            <span id="zzp-c-desc-full" style="display:none;color:var(--t2);font-weight:400;line-height:1.5">Renovation of the bathroom including tiling, plumbing connections and finishing. All materials to be supplied by the contractor. Work must comply with local building regulations and meet the agreed quality standard as specified in the scope document.</span>
-            <a id="zzp-c-desc-toggle" onclick="toggleZZPCDesc()" style="font-size:11px;color:var(--t3);cursor:pointer;text-decoration:underline">Read more</a>
+            <span id="zzp-rv-desc-short" style="color:var(--t2);font-weight:400;line-height:1.5">—</span>
+            <span id="zzp-rv-desc-full" style="display:none;color:var(--t2);font-weight:400;line-height:1.5">—</span>
+            <a id="zzp-rv-desc-toggle" onclick="toggleZZPRVDesc()" style="display:none;font-size:11px;color:var(--t3);cursor:pointer;text-decoration:underline">Read more</a>
           </span>
         </div>
-        <!-- Period (always shown for contractor path — they set start/end dates) -->
-        <div class="ir" id="zzp-c-period-row"><span class="ik">Period</span><span class="iv" id="zzp-rv-c-period">—</span></div>
-        <div class="ir"><span class="ik">Amount</span><span class="iv" id="zzp-rv-amount">—</span></div>
-        <div class="ir" style="border:none"><span class="ik">Questionnaire</span><span class="iv" style="font-weight:500">Pre-filled from profile</span></div>
       </div>
+
+      <!-- Section 3: Offer -->
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;margin-bottom:10px">
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:10px">Offer</div>
+
+        <!-- Assignment-specific -->
+        <div id="zzp-rv-assign-block">
+          <div class="ir"><span class="ik">Period</span><span class="iv" id="zzp-rv-c-period">—</span></div>
+        </div>
+        <!-- Framework-specific -->
+        <div id="zzp-rv-fw-block" style="display:none">
+          <div class="ir"><span class="ik">Available from</span><span class="iv" id="zzp-rv-fw-start">—</span></div>
+          <div class="ir"><span class="ik">Duration</span><span class="iv" id="zzp-rv-fw-dur">—</span></div>
+        </div>
+
+        <!-- Offer items table -->
+        <div style="margin-top:8px">
+          <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--t3);margin-bottom:6px">Offer items</div>
+          <div id="zzp-rv-lines" style="display:flex;flex-direction:column;gap:3px;margin-bottom:8px">
+            <!-- populated by JS -->
+          </div>
+          <div id="zzp-rv-totals" style="display:none;background:var(--white);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px;font-size:12px">
+            <div style="display:flex;justify-content:space-between;margin-bottom:4px;color:var(--t2)"><span>Subtotaal (excl. BTW)</span><span id="zzp-rv-sub">—</span></div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:4px;color:var(--t2)"><span>BTW</span><span id="zzp-rv-btw">—</span></div>
+            <div style="display:flex;justify-content:space-between;font-weight:700;font-size:13px;border-top:1px solid var(--border);padding-top:6px;margin-top:4px"><span>Totaal incl. BTW</span><span id="zzp-rv-total">—</span></div>
+          </div>
+        </div>
+
+        <!-- Motivation -->
+        <div class="ir" style="align-items:flex-start;border:none;margin-top:8px">
+          <span class="ik">Motivation</span>
+          <span class="iv" id="zzp-rv-mot" style="color:var(--t2);font-weight:400;line-height:1.5">—</span>
+        </div>
+      </div>
+
+      <!-- Section 4: Attachments -->
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;margin-bottom:10px">
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:10px">Attachments</div>
+        <div class="ir"><span class="ik">T&amp;C</span><span class="iv">AlgemeneVoorwaarden_Laurens.pdf <span class="badge bgn2" style="font-size:10px;margin-left:4px">Profile</span></span></div>
+        <div class="ir" id="zzp-rv-attach-row" style="border:none"><span class="ik">Additional</span><span class="iv" id="zzp-rv-attach-count">None</span></div>
+      </div>
+
+      <!-- Section 5: Questionnaire -->
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;margin-bottom:12px">
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:10px">Wet DBA questionnaire</div>
+        <div id="zzp-rv-quest" style="display:flex;flex-direction:column;gap:4px">
+          <!-- populated by JS -->
+        </div>
+      </div>
+
+      <!-- Acceptance note -->
       <div id="zzp-po-pi-note" style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px;font-size:12px;color:var(--t2);line-height:1.6">The client will receive an email with a link to review and sign. <strong>They can accept without creating a HelloProfs account.</strong></div>
       <div id="zzp-po-org-note" style="display:none;background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px;font-size:12px;color:var(--t2);line-height:1.6">The organisation will receive an email inviting them to create a HelloProfs account to review and sign.</div>
+
     </div>
 
     <!-- ── CLIENT PATH ── -->
@@ -4632,6 +5175,84 @@ tbody tr:hover td{background:var(--bg)}
 </div>
 </div>
 
+<!-- MODAL: REVIEW DRAFT INVOICE -->
+<div class="overlay" id="m-draft-invoice">
+<div class="modal" style="width:520px">
+  <div class="mh"><div class="mt">Review draft invoice</div><button class="mx" onclick="cl('m-draft-invoice')">✕</button></div>
+  <div class="mb">
+    <div style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;color:var(--t2);margin-bottom:16px;line-height:1.6">
+      The contractor has submitted this invoice as a <strong>draft</strong>. Review the details before accepting it as a final invoice. Once accepted, it will be sent for payment processing.
+    </div>
+
+    <!-- Invoice summary -->
+    <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:16px">
+      <div class="ir"><span class="ik">Invoice</span><span class="iv mono" id="di-number">—</span></div>
+      <div class="ir"><span class="ik">Contractor</span><span class="iv" id="di-contractor">—</span></div>
+      <div class="ir"><span class="ik">PO / Project</span><span class="iv" id="di-po">—</span></div>
+      <div class="ir"><span class="ik">Invoice date</span><span class="iv" id="di-date">—</span></div>
+      <div class="ir"><span class="ik">Amount excl. BTW</span><span class="iv" id="di-excl">—</span></div>
+      <div class="ir" style="border:none"><span class="ik">Total incl. BTW</span><span class="iv" id="di-total" style="font-weight:700;font-size:14px">—</span></div>
+    </div>
+
+    <!-- Line items preview -->
+    <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:8px">Invoice lines</div>
+    <div id="di-lines" style="display:flex;flex-direction:column;gap:4px;margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;padding:8px 10px;background:var(--bg);border:1px solid var(--border);border-radius:var(--rs)">
+        <span id="di-line1-name" style="color:var(--t2)">—</span>
+        <span id="di-line1-total" style="font-weight:500">—</span>
+      </div>
+    </div>
+
+    <!-- Dispute reason (shown when disputing) -->
+    <div id="di-dispute-section" style="display:none">
+      <div style="font-size:12px;font-weight:600;margin-bottom:6px;color:var(--t1)">Reason for dispute *</div>
+      <textarea class="ii" id="di-dispute-reason" style="min-height:70px" placeholder="Explain what needs to be corrected or clarified before you can accept this invoice..."></textarea>
+    </div>
+  </div>
+  <div class="mf">
+    <button class="btn bg bs" onclick="cl('m-draft-invoice')">Cancel</button>
+    <button class="btn bw bs" id="di-dispute-btn" onclick="toggleDisputeSection()">Dispute</button>
+    <button class="btn bk bs" id="di-accept-btn" onclick="acceptDraftInvoice()">Accept as final →</button>
+  </div>
+</div>
+</div>
+
+<!-- MODAL: INVITE INTERMEDIARY (ZZP'er) -->
+<div class="overlay" id="m-invite-intermediary">
+<div class="modal" style="width:460px">
+  <div class="mh"><div class="mt">Add intermediary</div><button class="mx" onclick="cl('m-invite-intermediary')">✕</button></div>
+  <div class="mb">
+    <div style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;color:var(--t2);margin-bottom:16px;line-height:1.6">
+      Invite your accountant or broker to manage your HelloProfs account on your behalf. They will receive an email with a link to create their Intermediary account and connect to yours.
+    </div>
+    <div class="fld">
+      <label class="lbl dk">Intermediary name *</label>
+      <input class="ii" id="int-inv-name" placeholder="e.g. Jan de Vries">
+    </div>
+    <div class="fld">
+      <label class="lbl dk">Intermediary email *</label>
+      <input class="ii" id="int-inv-email" type="email" placeholder="jan@accountancy.nl">
+    </div>
+    <div class="fld">
+      <label class="lbl dk">Company name <span style="font-weight:400;color:var(--t3)">(optional)</span></label>
+      <input class="ii" id="int-inv-company" placeholder="e.g. De Vries Advies B.V.">
+    </div>
+    <div class="fld" style="margin-bottom:0">
+      <label class="lbl dk">Permissions</label>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-top:8px">
+        <label style="display:flex;align-items:center;gap:8px;font-size:12px;cursor:pointer"><input type="checkbox" checked style="accent-color:var(--navy);width:14px;height:14px"> Manage purchase orders and contracts</label>
+        <label style="display:flex;align-items:center;gap:8px;font-size:12px;cursor:pointer"><input type="checkbox" checked style="accent-color:var(--navy);width:14px;height:14px"> Send and manage invoices</label>
+        <label style="display:flex;align-items:center;gap:8px;font-size:12px;cursor:pointer"><input type="checkbox" style="accent-color:var(--navy);width:14px;height:14px"> View compliance and fiscal information</label>
+      </div>
+    </div>
+  </div>
+  <div class="mf">
+    <button class="btn bg bs" onclick="cl('m-invite-intermediary')">Cancel</button>
+    <button class="btn bk bs" onclick="submitIntermediaryInviteZZP()">Send invite →</button>
+  </div>
+</div>
+</div>
+
 <!-- MODAL: APPROVE SIGN PERMISSION (Legal Rep view) -->
 <div class="overlay" id="m-approve-sign">
 <div class="modal" style="width:460px">
@@ -4857,7 +5478,7 @@ tbody tr:hover td{background:var(--bg)}
 <!-- MODAL: CREATE PO -->
 <div class="overlay" id="m-po">
 <div class="modal mlg">
-  <div class="mh"><div class="mt">New Purchase Order</div><button class="mx" onclick="cl('m-po')">✕</button></div>
+  <div class="mh"><div class="mt" id="po-modal-title">New Purchase Order</div><button class="mx" onclick="cl('m-po')">✕</button></div>
   <div class="mb">
     <div class="steps" id="psteps">
       <div class="step on"><div class="sc2">1</div><div class="sl">Type</div></div><div class="sline"></div>
@@ -5540,6 +6161,10 @@ function setEnt(co,type,av,role){
   const fiscalTab = document.getElementById('st5-tab');
   if(fiscalTab) fiscalTab.style.display = isZZP ? '' : 'none';
 
+  // Hide entity creation for ZZP'ers; show intermediary invite for ZZP'ers
+  document.querySelectorAll('.zzp-hide').forEach(el => el.style.display = isZZP ? 'none' : '');
+  document.querySelectorAll('.zzp-show').forEach(el => el.style.display = isZZP ? '' : 'none');
+
   // Toggle client vs contractor profile sections
   const clientSection = document.getElementById('profile-client-section');
   const contractorSection = document.getElementById('profile-contractor-section');
@@ -5616,11 +6241,9 @@ function setBreadcrumb(segments, cta){
       bar.appendChild(slash);
     }
   });
-  // CTA button — hide for viewers
+  // CTA button — permanently hidden per design
   const mc = document.getElementById('mc');
-  const isViewer = (currentEntityRole || '').toLowerCase() === 'viewer';
-  if(cta && !isViewer){mc.textContent=cta[0];mc.onclick=cta[1];mc.classList.remove('viewer-hidden');mc.style.display='';}
-  else mc.style.display='none';
+  if(mc) mc.style.display='none';
 }
 
 function nav(p){
@@ -5670,7 +6293,8 @@ function nav(p){
     'project-detail': {segs:[{label:'Projects',page:'projects'},{label:'—'}],                                 cta:null},
     settings:         {segs:[{label:'Settings'}],                                                             cta:null},
     notifications:    {segs:[{label:'Notifications'}],                                                        cta:null},
-    'zzp-received-po':  {segs:[{label:'Purchase Orders',page:'zzp-pos'},{label:'Dakbedekking Renovatie Blok C'}],  cta:null},
+    'zzp-received-fw':  {segs:[{label:'Purchase Orders',page:'zzp-pos'},{label:'Raamopdracht Schilderwerk 2026'}],  cta:null},
+    'zzp-make-offer-fw':{segs:[{label:'Purchase Orders',page:'zzp-pos'},{label:'Raamopdracht Schilderwerk 2026',page:'zzp-received-fw'},{label:'Make an offer'}], cta:null},
     'zzp-make-offer':   {segs:[{label:'Purchase Orders',page:'zzp-pos'},{label:'Dakbedekking Renovatie Blok C',page:'zzp-received-po'},{label:'Make an offer'}], cta:null},
     'zzp-po-detail':  {segs:[{label:'Purchase Orders',page:'zzp-pos'},{label:'—'}],                           cta:null},
     'zzp-tasks':      {segs:[{label:'Tasks'}],                                                                 cta:null},
@@ -5707,7 +6331,11 @@ function cl(id){document.getElementById(id).classList.remove('on');}
 function openPO(type){
   if(profileIncomplete){ op('m-profile-required'); return; }
   op('m-po');poS=1;
-  currentPOType = type || 'assignment';
+  const isSubcontractor = type === 'subcontractor';
+  // Set modal title
+  const titleEl = document.getElementById('po-modal-title');
+  if(titleEl) titleEl.textContent = isSubcontractor ? 'Purchase Order for Subcontractor' : 'New Purchase Order';
+  currentPOType = isSubcontractor ? 'assignment' : (type || 'assignment');
   // Pre-select the right type card if opening from framework nav
   if(type==='framework'){
     const cards=document.querySelectorAll('#ps1 .tc');
@@ -6471,18 +7099,18 @@ function openInvoiceByRole(){
 }
 function updateInvoiceButtons(){
   const isZZP = currentEntityType === "ZZP'er";
-  const newBtn = document.getElementById('inv-new-btn');
+  const newBtn    = document.getElementById('inv-new-btn');
   const creditBtn = document.getElementById('inv-credit-btn');
-  // Contractor: both buttons visible. Client: neither.
+  const draftSec  = document.getElementById('inv-draft-section');
+  // Contractor: both create buttons visible, no draft review section
+  // Client (org): no create buttons, draft review section visible
   if(newBtn)    newBtn.style.display    = isZZP ? '' : 'none';
   if(creditBtn) creditBtn.style.display = isZZP ? '' : 'none';
-  // Update topbar CTA — only show for contractors
+  if(draftSec)  draftSec.style.display  = isZZP ? 'none' : 'block';
   const mc = document.getElementById('mc');
-  if(mc && mc.style.display !== 'none'){
-    if(window._currentPage === 'invoices'){
-      if(isZZP) mc.textContent = '+ New invoice';
-      else mc.textContent = '+ New PO'; // revert to default for org
-    }
+  if(mc && window._currentPage === 'invoices'){
+    if(isZZP) mc.textContent = '+ New invoice';
+    else mc.textContent = '+ New PO';
   }
 }
 
@@ -6826,7 +7454,7 @@ function openZZPPOPage(key){
     pending: `<div style="background:var(--amber-bg);border:1px solid #fcd34d;border-radius:var(--rs);padding:10px 12px;font-size:12px;color:var(--amber-t);margin-top:12px">⏳ Awaiting review and signature from ${d.client}.</div>`,
     active:  `<div style="background:#f4f4f4;border:1px solid #d4d4d4;border-radius:var(--rs);padding:10px 12px;font-size:12px;color:#111111;margin-top:12px">Contract active — you can receive tasks under this agreement.</div>`
             + (isContractor ? `<div style="margin-top:12px">
-                <button class="btn bk bs" onclick="op('m-invite-subcontractor')">+ Invite subcontractor</button>
+                <button class="btn bk bs" onclick="openPO('subcontractor')">+ Invite subcontractor</button>
               </div>` : ''),
     done:    `<div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px;font-size:12px;color:var(--t3);margin-top:12px">This agreement has been completed.</div>`,
   };
@@ -6860,8 +7488,19 @@ function openZZPPOPage(key){
   setBreadcrumb([{label:'Purchase Orders',page:'zzp-pos'},{label:d.title}], null);
 }
 
-function openMakeOffer(){
+function openMakeOffer(type, startDate, endDate){
   zzpOfferReset();
+  const isFramework = type === 'framework';
+  const locked   = document.getElementById('zzp-offer-dates-locked');
+  const editable = document.getElementById('zzp-offer-dates-editable');
+  if(locked)   locked.style.display   = isFramework ? 'none' : 'block';
+  if(editable) editable.style.display = isFramework ? 'block' : 'none';
+  if(!isFramework){
+    const sl = document.getElementById('zzp-offer-start-locked');
+    const el = document.getElementById('zzp-offer-end-locked');
+    if(sl) sl.value = startDate || '1 July 2026';
+    if(el) el.value = endDate   || '30 September 2026';
+  }
   nav('zzp-make-offer');
   setBreadcrumb([
     {label:'Purchase Orders', page:'zzp-pos'},
@@ -6871,7 +7510,322 @@ function openMakeOffer(){
 }
 
 
-// ── REQUESTED DOCUMENTS (offer step 2) ──
+// ── ZZP'er: INVITE INTERMEDIARY ──
+function submitIntermediaryInviteZZP(){
+  const name    = document.getElementById('int-inv-name')?.value.trim();
+  const email   = document.getElementById('int-inv-email')?.value.trim();
+  const company = document.getElementById('int-inv-company')?.value.trim();
+  if(!name){ toast('Please enter the intermediary name'); return; }
+  if(!email){ toast('Please enter the intermediary email'); return; }
+  cl('m-invite-intermediary');
+  // Hide empty state, show linked card
+  const empty  = document.getElementById('zzp-intermediary-empty');
+  const linked = document.getElementById('zzp-intermediary-linked');
+  if(empty) empty.style.display='none';
+  if(linked){
+    linked.style.display='flex';
+    linked.innerHTML = `
+      <div style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden">
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--white)">
+          <div class="av" style="width:36px;height:36px;font-size:14px;background:#333">${name[0].toUpperCase()}</div>
+          <div style="flex:1;min-width:0">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span style="font-size:13px;font-weight:500">${name}</span>
+              <span class="badge bgn2">Intermediary</span>
+              <span class="badge bga">Pending acceptance</span>
+            </div>
+            <div style="font-size:11px;color:var(--t3);margin-top:1px">${email}${company ? ' · ' + company : ''}</div>
+          </div>
+          <button class="btn br bx" style="font-size:11px" onclick="toast('Invite withdrawn')">Withdraw</button>
+        </div>
+      </div>`;
+    // Remove the + Add intermediary button now one is pending
+    const addBtn = document.querySelector('#st4 .zzp-show button[onclick*="invite-intermediary"]');
+    if(addBtn) addBtn.style.display='none';
+  }
+  toast('Invite sent to ' + email + ' — they will receive a link to connect as your intermediary');
+}
+
+
+let _draftInvoiceRowId = '';
+let _disputeMode = false;
+
+function openDraftInvoice(rowId, number, contractor, po, date, excl, total){
+  _draftInvoiceRowId = rowId;
+  _disputeMode = false;
+  const el = id => document.getElementById(id);
+  if(el('di-number'))     el('di-number').textContent     = number;
+  if(el('di-contractor')) el('di-contractor').textContent = contractor;
+  if(el('di-po'))         el('di-po').textContent         = po;
+  if(el('di-date'))       el('di-date').textContent       = date;
+  if(el('di-excl'))       el('di-excl').textContent       = excl;
+  if(el('di-total'))      el('di-total').textContent      = total;
+  // Fake line items based on contractor
+  if(el('di-line1-name'))  el('di-line1-name').textContent  = contractor === 'Jan Bakker' ? 'Timmerwerk Blok D — 44h × €85' : 'Schilderwerk Blok E — werkzaamheden';
+  if(el('di-line1-total')) el('di-line1-total').textContent = excl + ' excl. BTW';
+  // Reset dispute section
+  if(el('di-dispute-section')) el('di-dispute-section').style.display='none';
+  if(el('di-dispute-reason'))  el('di-dispute-reason').value='';
+  const disputeBtn = el('di-dispute-btn');
+  const acceptBtn  = el('di-accept-btn');
+  if(disputeBtn){ disputeBtn.textContent='Dispute'; disputeBtn.style.color=''; disputeBtn.style.borderColor=''; }
+  if(acceptBtn)  acceptBtn.style.display='';
+  op('m-draft-invoice');
+}
+
+function toggleDisputeSection(){
+  _disputeMode = !_disputeMode;
+  const section    = document.getElementById('di-dispute-section');
+  const disputeBtn = document.getElementById('di-dispute-btn');
+  const acceptBtn  = document.getElementById('di-accept-btn');
+  if(section) section.style.display = _disputeMode ? 'block' : 'none';
+  if(disputeBtn){
+    disputeBtn.textContent  = _disputeMode ? 'Send dispute →' : 'Dispute';
+    disputeBtn.style.color  = _disputeMode ? '#b45309' : '';
+    disputeBtn.style.borderColor = _disputeMode ? '#fcd34d' : '';
+    if(_disputeMode){
+      disputeBtn.onclick = submitDispute;
+    } else {
+      disputeBtn.onclick = toggleDisputeSection;
+    }
+  }
+  if(acceptBtn) acceptBtn.style.display = _disputeMode ? 'none' : '';
+}
+
+function submitDispute(){
+  const reason = document.getElementById('di-dispute-reason')?.value.trim();
+  if(!reason){ toast('Please enter a reason for the dispute'); return; }
+  cl('m-draft-invoice');
+  // Update the row badge to "Disputed"
+  const row = document.getElementById(_draftInvoiceRowId);
+  if(row){
+    const badge = row.querySelector('.badge');
+    if(badge){ badge.textContent='Disputed'; badge.className='badge bgr'; }
+    const btn = row.querySelector('button');
+    if(btn){ btn.textContent='View'; btn.className='btn bw bx'; btn.style.fontSize='11px'; }
+  }
+  updateDraftCount();
+  toast('Dispute sent — the contractor has been notified');
+}
+
+function acceptDraftInvoice(){
+  cl('m-draft-invoice');
+  const row = document.getElementById(_draftInvoiceRowId);
+  if(row){
+    const number     = row.querySelector('.mono')?.textContent || '—';
+    const contractor = row.cells[1]?.textContent || '—';
+    const date       = row.cells[3]?.textContent || '—';
+    const excl       = row.cells[4]?.textContent || '—';
+    const total      = row.cells[5]?.textContent || '—';
+    // Move to final invoices table
+    const tbody = document.getElementById('inv-final-tbody');
+    if(tbody){
+      const newRow = tbody.insertRow(0);
+      newRow.innerHTML = `<td><span class="mono">${number}</span></td><td>${contractor}</td><td>${date}</td><td>${excl}</td><td>${total}</td><td><span class="badge bgl">Pending payment</span></td>`;
+    }
+    // Remove from draft table
+    row.remove();
+    updateDraftCount();
+  }
+  toast('Invoice accepted — it will be processed for payment');
+}
+
+function updateDraftCount(){
+  const remaining = document.querySelectorAll('#inv-draft-tbody tr').length;
+  const countBadge = document.getElementById('inv-draft-count');
+  if(countBadge) countBadge.textContent = remaining;
+  const section = document.getElementById('inv-draft-section');
+  if(section && remaining === 0) section.style.display = 'none';
+}
+
+
+function addFWOfferLine(){
+  const container = document.getElementById('fw-offer-lines');
+  if(!container) return;
+  const line = document.createElement('div');
+  line.className = 'fw-offer-line';
+  line.style.cssText = 'display:grid;grid-template-columns:1fr 88px 70px 90px 78px 28px;gap:4px;align-items:center';
+  line.innerHTML = `
+    <input class="ii" style="font-size:12px;padding:5px 8px" placeholder="Omschrijving...">
+    <select class="ii" style="font-size:12px;padding:5px 4px">
+      <option value="services">Diensten</option>
+      <option value="goods">Goederen</option>
+    </select>
+    <select class="ii" style="font-size:12px;padding:5px 4px">
+      <option value="h">h</option>
+      <option value="stuk">stuk</option>
+      <option value="m">m</option>
+      <option value="m2">m²</option>
+      <option value="km">km</option>
+      <option value="kg">kg</option>
+      <option value="cm">cm</option>
+    </select>
+    <input class="ii" type="number" placeholder="0.00" style="font-size:12px;padding:5px 8px" min="0" step="0.01">
+    <select class="ii" style="font-size:12px;padding:5px 4px">
+      <option value="21">21%</option>
+      <option value="9">9%</option>
+      <option value="0">0%</option>
+    </select>
+    <button style="background:none;border:none;cursor:pointer;color:var(--t3);font-size:16px;padding:2px;line-height:1" onclick="removeFWOfferLine(this)" title="Remove">✕</button>`;
+  container.appendChild(line);
+}
+
+function removeFWOfferLine(btn){
+  const line = btn.closest('.fw-offer-line');
+  if(!line) return;
+  const container = document.getElementById('fw-offer-lines');
+  if(container && container.querySelectorAll('.fw-offer-line').length > 1){
+    line.remove();
+  } else {
+    toast('At least one line item is required');
+  }
+}
+
+// ── FRAMEWORK OFFER FLOW ──
+let fwOfferStep = 1;
+let fwOfferSigned = false;
+
+function fwOfferNext(){
+  if(fwOfferStep === 1){
+    // Validate at least one line item has a price
+    const lines = document.querySelectorAll('#fw-offer-lines .fw-offer-line');
+    let hasItems = false;
+    lines.forEach(line=>{
+      const price = parseFloat(line.querySelectorAll('input,select')[3]?.value) || 0;
+      if(price > 0) hasItems = true;
+    });
+    const mot = document.getElementById('fw-offer-motivation')?.value.trim();
+    if(!hasItems){ toast('Please add at least one item with a price per unit'); return; }
+    if(!mot){ toast('Please fill in your motivation'); return; }
+    // Populate preview — show first line's price as representative rate
+    const firstLine = document.querySelector('#fw-offer-lines .fw-offer-line');
+    const firstPrice = firstLine?.querySelectorAll('input,select')[3]?.value || '—';
+    const firstUnit  = firstLine?.querySelectorAll('input,select')[2]?.value || 'h';
+    const btw = firstLine?.querySelectorAll('input,select')[4]?.value || '21';
+    const start = document.getElementById('fw-offer-start')?.value || '—';
+    const dur = document.getElementById('fw-offer-duration');
+    const durText = dur?.options[dur.selectedIndex]?.text || '—';
+    const el = id => document.getElementById(id);
+    if(el('fw-preview-rate'))     el('fw-preview-rate').textContent     = '€ ' + parseFloat(firstPrice).toFixed(2) + '/' + firstUnit + ' (excl. ' + btw + '% BTW)' + (lines.length > 1 ? ' + ' + (lines.length-1) + ' more' : '');
+    if(el('fw-preview-start'))    el('fw-preview-start').textContent    = start;
+    if(el('fw-preview-duration')) el('fw-preview-duration').textContent = durText;
+  }
+  if(fwOfferStep === 4){
+    if(!fwOfferSigned){ toast('Please sign before submitting'); return; }
+    fwSubmitOffer(); return;
+  }
+  document.getElementById('fw-s'+fwOfferStep).style.display='none';
+  fwOfferStep++;
+  document.getElementById('fw-s'+fwOfferStep).style.display='block';
+  fwRenderSteps();
+}
+
+function fwOfferBack(){
+  document.getElementById('fw-s'+fwOfferStep).style.display='none';
+  fwOfferStep--;
+  document.getElementById('fw-s'+fwOfferStep).style.display='block';
+  fwRenderSteps();
+}
+
+function fwRenderSteps(){
+  document.querySelectorAll('#fw-offer-steps .step').forEach((s,i)=>{
+    s.classList.remove('on','done');
+    if(i+1===fwOfferStep) s.classList.add('on');
+    if(i+1<fwOfferStep) s.classList.add('done');
+  });
+  const lbl=document.getElementById('fw-offer-step-label'); if(lbl) lbl.textContent='Step '+fwOfferStep+' of 4';
+  const back=document.getElementById('fw-back-btn'); if(back) back.style.display=fwOfferStep>1?'':'none';
+  const next=document.getElementById('fw-next-btn'); if(next) next.textContent=fwOfferStep===4?'Submit offer →':'Continue →';
+}
+
+function fwDoSign(){
+  fwOfferSigned = true;
+  const box = document.getElementById('fw-sign-box');
+  const ico  = document.getElementById('fw-sign-ico');
+  const txt  = document.getElementById('fw-sign-txt');
+  if(box) box.classList.add('ok');
+  if(ico) ico.innerHTML='<svg viewBox="0 0 20 20" fill="none" stroke="#111111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><circle cx="10" cy="10" r="8"/><path d="M6 10l3 3 5-5"/></svg>';
+  if(txt) txt.textContent='Signed as Laurens de Boer — ' + new Date().toLocaleTimeString('nl-NL',{hour:'2-digit',minute:'2-digit'});
+}
+
+function fwSubmitOffer(){
+  document.getElementById('fw-offer-form').style.display='none';
+  document.getElementById('fw-offer-footer').style.display='none';
+  document.getElementById('fw-offer-sent').style.display='block';
+  toast('Offer submitted to Van der Berg Vastgoed');
+}
+
+
+function addOfferLine(){
+  const container = document.getElementById('offer-lines');
+  if(!container) return;
+  const line = document.createElement('div');
+  line.className = 'offer-line';
+  line.style.cssText = 'display:grid;grid-template-columns:1fr 88px 90px 70px 56px 70px 78px 28px;gap:4px;align-items:center';
+  line.innerHTML = `
+    <input class="ii" style="font-size:12px;padding:5px 8px" placeholder="Omschrijving..." oninput="recalcOfferTotals()">
+    <select class="ii" style="font-size:12px;padding:5px 4px">
+      <option value="services">Diensten</option>
+      <option value="goods">Goederen</option>
+    </select>
+    <input class="ii" type="date" style="font-size:12px;padding:5px 6px">
+    <select class="ii" style="font-size:12px;padding:5px 4px" onchange="recalcOfferTotals()">
+      <option value="h">h</option>
+      <option value="stuk">stuk</option>
+      <option value="m">m</option>
+      <option value="m2">m²</option>
+      <option value="km">km</option>
+      <option value="kg">kg</option>
+      <option value="cm">cm</option>
+    </select>
+    <input class="ii" type="number" value="1" min="0" style="font-size:12px;padding:5px 6px" oninput="recalcOfferTotals()">
+    <input class="ii" type="number" placeholder="0.00" style="font-size:12px;padding:5px 6px" oninput="recalcOfferTotals()">
+    <select class="ii" style="font-size:12px;padding:5px 4px" onchange="recalcOfferTotals()">
+      <option value="21">21%</option>
+      <option value="9">9%</option>
+      <option value="0">0%</option>
+    </select>
+    <button style="background:none;border:none;cursor:pointer;color:var(--t3);font-size:16px;padding:2px;line-height:1" onclick="removeOfferLine(this)" title="Remove">✕</button>`;
+  container.appendChild(line);
+  recalcOfferTotals();
+}
+
+function removeOfferLine(btn){
+  const line = btn.closest('.offer-line');
+  if(!line) return;
+  const container = document.getElementById('offer-lines');
+  if(container && container.querySelectorAll('.offer-line').length > 1){
+    line.remove();
+    recalcOfferTotals();
+  } else {
+    toast('At least one line item is required');
+  }
+}
+
+function recalcOfferLine(el){ recalcOfferTotals(); }
+
+function recalcOfferTotals(){
+  let subtotal = 0;
+  let totalBTW = 0;
+  document.querySelectorAll('#offer-lines .offer-line').forEach(line=>{
+    const inputs = line.querySelectorAll('input,select');
+    const qty   = parseFloat(inputs[4]?.value) || 0;
+    const price = parseFloat(inputs[5]?.value) || 0;
+    const btw   = parseFloat(inputs[6]?.value) || 0;
+    const lineTotal = qty * price;
+    subtotal += lineTotal;
+    totalBTW += lineTotal * btw / 100;
+  });
+  const fmt = n => '€ ' + n.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  const sub = document.getElementById('offer-subtotal');
+  const btw = document.getElementById('offer-btw');
+  const tot = document.getElementById('offer-total');
+  if(sub) sub.textContent = fmt(subtotal);
+  if(btw) btw.textContent = fmt(totalBTW);
+  if(tot) tot.textContent = fmt(subtotal + totalBTW);
+}
+
+
 function showChangeDoc(key){
   const change = document.getElementById('req-'+key+'-change');
   const upload = document.getElementById('req-'+key+'-upload');
@@ -6909,7 +7863,6 @@ function zzpOfferReset(){
   if(el('zzp-back-btn'))     el('zzp-back-btn').style.display='none';
   if(el('zzp-next-btn'))     el('zzp-next-btn').textContent='Continue →';
   if(el('zzp-step-label'))   el('zzp-step-label').textContent='Step 1 of 4';
-  if(el('zzp-offer-amount')) el('zzp-offer-amount').value='';
   if(el('zzp-offer-motivation')) el('zzp-offer-motivation').value='';
   const box=el('zzp-sign-box');
   if(box){
@@ -6931,13 +7884,23 @@ function zzpRenderSteps(){
 }
 function zzpOfferNext(){
   if(zzpOfferStep===1){
-    const amount=document.getElementById('zzp-offer-amount').value.trim();
-    const motivation=document.getElementById('zzp-offer-motivation').value.trim();
-    if(!amount||!motivation){toast('⚠️ Please fill in the amount and motivation');return;}
-    document.getElementById('zzp-preview-amount').textContent=amount;
+    // Validate at least one line item has a price
+    const lines = document.querySelectorAll('#offer-lines .offer-line');
+    let hasItems = false;
+    lines.forEach(line=>{
+      const price = parseFloat(line.querySelectorAll('input,select')[5]?.value) || 0;
+      if(price > 0) hasItems = true;
+    });
+    const motivation = document.getElementById('zzp-offer-motivation')?.value.trim();
+    if(!hasItems){ toast('Please add at least one item with a price'); return; }
+    if(!motivation){ toast('Please fill in your motivation'); return; }
+    // Update preview total
+    const total = document.getElementById('offer-total')?.textContent || '—';
+    const prevAmt = document.getElementById('zzp-preview-amount');
+    if(prevAmt) prevAmt.textContent = total;
   }
   if(zzpOfferStep===4){
-    if(!zzpOfferSigned){toast('⚠️ Please sign the contract before submitting');return;}
+    if(!zzpOfferSigned){toast('Please sign the contract before submitting');return;}
     zzpSubmitOffer();return;
   }
   document.getElementById('zzp-s'+zzpOfferStep).style.display='none';
@@ -7131,25 +8094,55 @@ let _zzpPOType = 'assignment'; // for client path
 let _zzpDistrib = 'relations'; // for client path
 
 // Stepper configs
-const _zzpStepsContractor = ['Role','Details','Review'];
+const _zzpStepsContractor = ['Role','Info','Agreement','Offer','Attachments','Questionnaire','Review'];
 const _zzpStepsClient     = ['Role','Type','Details','Documentation','Distribute','Review'];
+let _zzpContractorType = 'assignment';
 
 function selectZZPCType(type){
+  _zzpContractorType = type;
   ['assign','fw'].forEach(t=>{
     const el=document.getElementById('zzp-c-type-'+t);
     if(el) el.classList.toggle('sel', t===type.replace('assignment','assign').replace('framework','fw'));
   });
-  const aF=document.getElementById('zzp-c-assign-fields');
-  const fF=document.getElementById('zzp-c-fw-fields');
-  if(aF) aF.style.display = type==='assignment' ? 'block' : 'none';
-  if(fF) fF.style.display = type==='framework'  ? 'block' : 'none';
 }
 
 function openZZPCreatePO(){
-  _zzpPOStep=1; _zzpPORole='contractor'; _zzpClientType='pi'; _zzpPOType='assignment'; _zzpDistrib='relations';
+  _zzpPOStep=1; _zzpPORole='contractor'; _zzpClientType='pi'; _zzpPOType='assignment'; _zzpDistrib='relations'; _zzpContractorType='assignment';
   renderZZPPOSteps();
   op('m-zzp-create-po');
 }
+
+// Assignment line items (contractor PO path)
+function addZZPPOAssignLine(){
+  const c=document.getElementById('zzp-po-assign-lines'); if(!c)return;
+  const l=document.createElement('div'); l.className='zzp-po-assign-line';
+  l.style.cssText='display:grid;grid-template-columns:1fr 88px 90px 70px 56px 70px 78px 28px;gap:4px;align-items:center';
+  l.innerHTML=`<input class="ii" style="font-size:12px;padding:5px 8px" placeholder="Omschrijving..." oninput="recalcZZPPOAssign()"><select class="ii" style="font-size:12px;padding:5px 4px"><option value="services">Diensten</option><option value="goods">Goederen</option></select><input class="ii" type="date" style="font-size:12px;padding:5px 6px"><select class="ii" style="font-size:12px;padding:5px 4px" onchange="recalcZZPPOAssign()"><option value="h">h</option><option value="stuk">stuk</option><option value="m">m</option><option value="m2">m²</option><option value="km">km</option><option value="kg">kg</option><option value="cm">cm</option></select><input class="ii" type="number" value="1" min="0" style="font-size:12px;padding:5px 6px" oninput="recalcZZPPOAssign()"><input class="ii" type="number" placeholder="0.00" style="font-size:12px;padding:5px 6px" oninput="recalcZZPPOAssign()"><select class="ii" style="font-size:12px;padding:5px 4px" onchange="recalcZZPPOAssign()"><option value="21">21%</option><option value="9">9%</option><option value="0">0%</option></select><button style="background:none;border:none;cursor:pointer;color:var(--t3);font-size:16px;padding:2px;line-height:1" onclick="removeZZPPOAssignLine(this)">✕</button>`;
+  c.appendChild(l); recalcZZPPOAssign();
+}
+function removeZZPPOAssignLine(btn){ const l=btn.closest('.zzp-po-assign-line'); const c=document.getElementById('zzp-po-assign-lines'); if(c&&c.querySelectorAll('.zzp-po-assign-line').length>1){l.remove();recalcZZPPOAssign();}else toast('At least one line item required'); }
+function recalcZZPPOAssign(){
+  let sub=0,btw=0;
+  document.querySelectorAll('#zzp-po-assign-lines .zzp-po-assign-line').forEach(l=>{
+    const ins=l.querySelectorAll('input,select');
+    const qty=parseFloat(ins[4]?.value)||0, price=parseFloat(ins[5]?.value)||0, btwR=parseFloat(ins[6]?.value)||0;
+    const lt=qty*price; sub+=lt; btw+=lt*btwR/100;
+  });
+  const fmt=n=>'€ '+n.toFixed(2).replace('.',',');
+  const s=document.getElementById('zzp-po-assign-subtotal'); if(s)s.textContent=fmt(sub);
+  const b=document.getElementById('zzp-po-assign-btw'); if(b)b.textContent=fmt(btw);
+  const t=document.getElementById('zzp-po-assign-total'); if(t)t.textContent=fmt(sub+btw);
+  return fmt(sub+btw);
+}
+// Framework line items (contractor PO path)
+function addZZPPOFWLine(){
+  const c=document.getElementById('zzp-po-fw-lines'); if(!c)return;
+  const l=document.createElement('div'); l.className='zzp-po-fw-line';
+  l.style.cssText='display:grid;grid-template-columns:1fr 88px 70px 90px 78px 28px;gap:4px;align-items:center';
+  l.innerHTML=`<input class="ii" style="font-size:12px;padding:5px 8px" placeholder="Omschrijving..."><select class="ii" style="font-size:12px;padding:5px 4px"><option value="services">Diensten</option><option value="goods">Goederen</option></select><select class="ii" style="font-size:12px;padding:5px 4px"><option value="h">h</option><option value="stuk">stuk</option><option value="m">m</option><option value="m2">m²</option><option value="km">km</option><option value="kg">kg</option><option value="cm">cm</option></select><input class="ii" type="number" placeholder="0.00" style="font-size:12px;padding:5px 8px" min="0" step="0.01"><select class="ii" style="font-size:12px;padding:5px 4px"><option value="21">21%</option><option value="9">9%</option><option value="0">0%</option></select><button style="background:none;border:none;cursor:pointer;color:var(--t3);font-size:16px;padding:2px;line-height:1" onclick="removeZZPPOFWLine(this)">✕</button>`;
+  c.appendChild(l);
+}
+function removeZZPPOFWLine(btn){ const l=btn.closest('.zzp-po-fw-line'); const c=document.getElementById('zzp-po-fw-lines'); if(c&&c.querySelectorAll('.zzp-po-fw-line').length>1)l.remove(); else toast('At least one line item required'); }
 
 function selectZZPRole(role){
   _zzpPORole = role;
@@ -7191,7 +8184,6 @@ function selectZZPClientType(type){
 function renderZZPPOSteps(){
   const steps = _zzpPORole==='client' ? _zzpStepsClient : _zzpStepsContractor;
   const total = steps.length;
-  // Rebuild stepper
   const stepsEl = document.getElementById('zzp-po-steps');
   if(stepsEl){
     stepsEl.innerHTML = steps.map((label,i)=>{
@@ -7200,43 +8192,181 @@ function renderZZPPOSteps(){
       return `<div class="${cls}"><div class="sc2">${n}</div><div class="sl">${label}</div></div>${i<steps.length-1?'<div class="sline"></div>':''}`;
     }).join('');
   }
-  // Step label
   const lbl=document.getElementById('zzp-po-step-label');
   if(lbl) lbl.textContent=`Step ${_zzpPOStep} of ${total}`;
-  // All panels hidden first
-  ['zzp-po-s1','zzp-po-c2','zzp-po-c3','zzp-po-l2','zzp-po-l3','zzp-po-l4','zzp-po-l5','zzp-po-l6'].forEach(id=>{
+  // Hide all contractor panels
+  ['zzp-po-s1','zzp-po-c2','zzp-po-c3','zzp-po-c4-assign','zzp-po-c4-fw','zzp-po-c5-attach','zzp-po-c6-quest','zzp-po-c5',
+   'zzp-po-l2','zzp-po-l3','zzp-po-l4','zzp-po-l5','zzp-po-l6'].forEach(id=>{
     const el=document.getElementById(id); if(el) el.style.display='none';
   });
-  // Show correct panel
   if(_zzpPORole==='contractor'){
-    const ids=['zzp-po-s1','zzp-po-c2','zzp-po-c3'];
-    const el=document.getElementById(ids[_zzpPOStep-1]); if(el) el.style.display='block';
+    // Step mapping: 1=role, 2=info, 3=agreement, 4=offer(assign|fw), 5=attachments, 6=questionnaire, 7=review
+    if(_zzpPOStep===1) { const el=document.getElementById('zzp-po-s1'); if(el)el.style.display='block'; }
+    else if(_zzpPOStep===2) { const el=document.getElementById('zzp-po-c2'); if(el)el.style.display='block'; }
+    else if(_zzpPOStep===3) { const el=document.getElementById('zzp-po-c3'); if(el)el.style.display='block'; }
+    else if(_zzpPOStep===4){
+      const id = _zzpContractorType==='framework' ? 'zzp-po-c4-fw' : 'zzp-po-c4-assign';
+      const el=document.getElementById(id); if(el)el.style.display='block';
+    }
+    else if(_zzpPOStep===5){ const el=document.getElementById('zzp-po-c5-attach'); if(el)el.style.display='block'; }
+    else if(_zzpPOStep===6){ const el=document.getElementById('zzp-po-c6-quest'); if(el)el.style.display='block'; }
+    else if(_zzpPOStep===7){ const el=document.getElementById('zzp-po-c5'); if(el)el.style.display='block'; populateZZPReview(); }
   } else {
     const ids=['zzp-po-s1','zzp-po-l2','zzp-po-l3','zzp-po-l4','zzp-po-l5','zzp-po-l6'];
     const el=document.getElementById(ids[_zzpPOStep-1]); if(el) el.style.display='block';
+    if(_zzpPOStep===6) populateZZPClientReview();
   }
-  // Back button
   const back=document.getElementById('zzp-po-back-btn'); if(back) back.style.display=_zzpPOStep>1?'':'none';
-  // Next button text
   const next=document.getElementById('zzp-po-next-btn');
   if(next) next.textContent=_zzpPOStep===total ? 'Submit PO →' : 'Continue →';
-  // Populate review
-  if(_zzpPORole==='contractor' && _zzpPOStep===3) populateZZPReview();
-  if(_zzpPORole==='client'     && _zzpPOStep===6) populateZZPClientReview();
+}
+
+function toggleZZPRVDesc(){
+  const s=document.getElementById('zzp-rv-desc-short');
+  const f=document.getElementById('zzp-rv-desc-full');
+  const t=document.getElementById('zzp-rv-desc-toggle');
+  if(!s||!f||!t) return;
+  const exp=f.style.display!=='none';
+  s.style.display=exp?'':'none'; f.style.display=exp?'none':''; t.textContent=exp?'Read more':'Read less';
 }
 
 function populateZZPReview(){
-  const name=document.getElementById('zzp-client-name')?.value||'—';
-  const email=document.getElementById('zzp-client-email')?.value||'—';
-  const rvType=document.getElementById('zzp-rv-client-type');
-  const rvClient=document.getElementById('zzp-rv-client');
-  if(rvType)   rvType.textContent   = _zzpClientType==='pi' ? 'Private Individual' : 'Organisation';
-  if(rvClient) rvClient.textContent = `${name} · ${email}`;
-  const piNote=document.getElementById('zzp-po-pi-note');
+  const isFW = _zzpContractorType==='framework';
+  const set  = (id,val)=>{ const el=document.getElementById(id); if(el)el.textContent=val; };
+
+  // ── Client ──
+  const name  = document.getElementById('zzp-client-name')?.value  || '—';
+  const email = document.getElementById('zzp-client-email')?.value || '—';
+  set('zzp-rv-client-type', _zzpClientType==='pi' ? 'Private Individual' : 'Organisation');
+  set('zzp-rv-client-name',  name);
+  set('zzp-rv-client-email', email);
+
+  // ── PO details ──
+  const title = document.getElementById('zzp-po-title')?.value || '—';
+  const desc  = document.getElementById('zzp-po-desc')?.value  || '—';
+  set('zzp-rv-title',     title);
+  set('zzp-rv-agreement', isFW ? 'Framework Agreement' : 'Assignment Agreement');
+  // Description — truncate at 120 chars
+  const descShort = document.getElementById('zzp-rv-desc-short');
+  const descFull  = document.getElementById('zzp-rv-desc-full');
+  const descTog   = document.getElementById('zzp-rv-desc-toggle');
+  if(descShort) descShort.textContent = desc.length > 120 ? desc.slice(0,120)+'…' : desc;
+  if(descFull)  descFull.textContent  = desc;
+  if(descTog){  descTog.style.display = desc.length > 120 ? '' : 'none'; descTog.textContent='Read more'; }
+  if(descShort) descShort.style.display=''; if(descFull) descFull.style.display='none';
+
+  // ── Offer ──
+  const assignBlock = document.getElementById('zzp-rv-assign-block');
+  const fwBlock     = document.getElementById('zzp-rv-fw-block');
+  if(assignBlock) assignBlock.style.display = isFW ? 'none' : 'block';
+  if(fwBlock)     fwBlock.style.display     = isFW ? 'block' : 'none';
+
+  if(!isFW){
+    const s=document.getElementById('zzp-po-assign-start')?.value||'—';
+    const e=document.getElementById('zzp-po-assign-end')?.value||'—';
+    set('zzp-rv-c-period', s + ' – ' + e);
+  } else {
+    const start = document.getElementById('zzp-po-fw-start')?.value||'—';
+    const dur   = document.getElementById('zzp-po-fw-dur');
+    set('zzp-rv-fw-start', start);
+    set('zzp-rv-fw-dur', dur?.options[dur.selectedIndex]?.text||'—');
+  }
+
+  // Offer items
+  const linesContainer = document.getElementById('zzp-rv-lines');
+  if(linesContainer){
+    linesContainer.innerHTML='';
+    const lineSelector = isFW ? '#zzp-po-fw-lines .zzp-po-fw-line' : '#zzp-po-assign-lines .zzp-po-assign-line';
+    document.querySelectorAll(lineSelector).forEach(line=>{
+      const inputs=line.querySelectorAll('input,select');
+      const lname  = isFW ? (inputs[0]?.value||'—')         : (inputs[0]?.value||'—');
+      const unit   = isFW ? (inputs[2]?.value||'h')          : (inputs[3]?.value||'h');
+      const price  = isFW ? parseFloat(inputs[3]?.value)||0  : parseFloat(inputs[5]?.value)||0;
+      const btw    = isFW ? (inputs[4]?.value||'21')         : (inputs[6]?.value||'21');
+      const qty    = isFW ? null : parseFloat(inputs[4]?.value)||0;
+      const fmt=n=>'€ '+n.toFixed(2).replace('.',',');
+      const lineTotal = isFW ? null : qty*price;
+      const row=document.createElement('div');
+      row.style.cssText='display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:var(--white);border:1px solid var(--border);border-radius:var(--rs);font-size:12px;gap:8px';
+      if(isFW){
+        row.innerHTML=`<span style="flex:1;color:var(--t2)">${lname}</span><span style="color:var(--t3)">${unit}</span><span style="font-weight:500">${fmt(price)}/${unit} <span style="color:var(--t3);font-weight:400">+ ${btw}% BTW</span></span>`;
+      } else {
+        row.innerHTML=`<span style="flex:1;color:var(--t2)">${lname}</span><span style="color:var(--t3)">${qty} ${unit}</span><span style="font-weight:500">${fmt(lineTotal)} <span style="color:var(--t3);font-weight:400">+ ${btw}% BTW</span></span>`;
+      }
+      linesContainer.appendChild(row);
+    });
+  }
+  // Totals (Assignment only)
+  const totalsEl=document.getElementById('zzp-rv-totals');
+  if(totalsEl) totalsEl.style.display = isFW ? 'none' : 'block';
+  if(!isFW){
+    set('zzp-rv-sub',   document.getElementById('zzp-po-assign-subtotal')?.textContent||'—');
+    set('zzp-rv-btw',   document.getElementById('zzp-po-assign-btw')?.textContent||'—');
+    set('zzp-rv-total', document.getElementById('zzp-po-assign-total')?.textContent||'—');
+  }
+  // Motivation
+  const mot = isFW
+    ? document.getElementById('zzp-po-fw-mot')?.value
+    : document.getElementById('zzp-po-assign-mot')?.value;
+  set('zzp-rv-mot', mot||'—');
+
+  // ── Attachments ──
+  const addDocs = document.querySelectorAll('#zzp-po-attach-list > div').length;
+  set('zzp-rv-attach-count', addDocs > 0 ? addDocs + ' document' + (addDocs>1?'s':'') + ' added' : 'None');
+
+  // ── Questionnaire ──
+  const questContainer=document.getElementById('zzp-rv-quest');
+  if(questContainer){
+    questContainer.innerHTML='';
+    const questions=[
+      'Works for other clients','Own working hours & methods','Bears own financial risk',
+      'Responsible for result','Has KVK registration','Uses own tools & equipment'
+    ];
+    questions.forEach((q,i)=>{
+      const radio=document.querySelector(`input[name="zzp-pq${i+1}"]:checked`);
+      const answer=radio?.value==='true'||(radio&&radio.closest('label')?.textContent.trim()==='Yes') ? 'Yes' : 'Yes'; // default Yes
+      const val=document.querySelector(`#zzp-po-c6-quest input[name="zzp-pq${i+1}"]:checked`)?.closest('label')?.textContent.trim()||'Yes';
+      const row=document.createElement('div');
+      row.className='ir';
+      row.style.borderBottom='none';
+      row.innerHTML=`<span class="ik" style="min-width:200px">${q}</span><span class="iv" style="font-weight:500;color:${val==='Yes'?'#166534':'#92400e'}">${val}</span>`;
+      questContainer.appendChild(row);
+    });
+  }
+
+  // ── Acceptance note ──
+  const piNote =document.getElementById('zzp-po-pi-note');
   const orgNote=document.getElementById('zzp-po-org-note');
   if(piNote)  piNote.style.display  = _zzpClientType==='pi'  ? 'block' : 'none';
   if(orgNote) orgNote.style.display = _zzpClientType==='org' ? 'block' : 'none';
 }
+
+function zzpPONext(){
+  const total = _zzpPORole==='client' ? 6 : 7;
+  if(_zzpPOStep===total){
+    cl('m-zzp-create-po');
+    if(_zzpPORole==='contractor'){
+      const name=document.getElementById('zzp-client-name')?.value||'the client';
+      toast(`PO sent to ${name} — they will receive an email to review and sign`);
+    } else {
+      toast('Purchase Order created — contractors will be notified');
+    }
+    return;
+  }
+  _zzpPOStep = Math.min(_zzpPOStep+1, total);
+  renderZZPPOSteps();
+}
+function addZZPPOAttachment(){
+  const list = document.getElementById('zzp-po-attach-list');
+  if(!list) return;
+  const row = document.createElement('div');
+  row.style.cssText='display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:var(--rs)';
+  row.innerHTML=`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" style="width:14px;height:14px;flex-shrink:0"><path d="M4 2h5l3 3v9H4V2z"/><path d="M9 2v3h3"/></svg><div style="flex:1;font-size:12px;color:var(--t3)">Document_${list.children.length+1}.pdf · Uploaded</div><button style="background:none;border:none;cursor:pointer;color:var(--t3);font-size:14px" onclick="this.closest('div').remove()">✕</button>`;
+  list.appendChild(row);
+  toast('Document added');
+}
+
+function zzpPOBack(){ _zzpPOStep=Math.max(_zzpPOStep-1,1); renderZZPPOSteps(); }
 
 // ── CONTRACT CANCELLATION ──
 function openCancellationRequest(){
@@ -7467,24 +8597,6 @@ function populateZZPClientReview(){
   });
 }
 
-
-function zzpPONext(){
-  const total = _zzpPORole==='client' ? 6 : 3;
-  if(_zzpPOStep===total){
-    cl('m-zzp-create-po');
-    if(_zzpPORole==='contractor'){
-      const name=document.getElementById('zzp-client-name')?.value||'the client';
-      toast(`PO sent to ${name} — they will receive an email to review and sign`);
-    } else {
-      toast('Purchase Order created — contractors will be notified');
-    }
-    return;
-  }
-  // On step 1 → after role selected, next step renders for correct path
-  _zzpPOStep = Math.min(_zzpPOStep+1, total);
-  renderZZPPOSteps();
-}
-function zzpPOBack(){ _zzpPOStep=Math.max(_zzpPOStep-1,1); renderZZPPOSteps(); }
 
 
 // ── INVITE MODAL — LABELS ──
