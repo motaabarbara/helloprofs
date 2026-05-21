@@ -7,7 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 .viewer-hidden{display:none!important}
-.zzp-hide{display:none!important}
+.lr-only{display:none}
+.zzp-hide{display:none}
 .zzp-show{display:none}display:none;background:var(--amber-bg);border-bottom:1px solid #fcd34d;padding:6px 20px;font-size:12px;color:var(--amber-t);align-items:center;gap:8px}
 .viewer-banner.on{display:flex}
 :root{--navy:#212121;--navy-mid:#4a4a4a;--lime:#f2f2f2;--lime-dim:#989898;--white:#fff;--bg:#fafafa;--border:#e8e8e8;--border-s:#d4d4d4;--t1:#111;--t2:#555;--t3:#999;--green:#111111;--green-bg:#f4f4f4;--green-t:#111111;--amber:#f59e0b;--amber-bg:#fffbeb;--amber-t:#92400e;--red:#e5484d;--red-bg:#fff1f1;--red-t:#b91c1c;--blue-bg:#f4f4f4;--blue-t:#111111;--side:220px;--top:52px;--r:8px;--rs:5px}
@@ -3625,16 +3626,8 @@ tbody tr:hover td{background:var(--bg)}
 
           <!-- Members -->
           <div id="st4" style="display:none">
-            <!-- ORG: Members header (hidden for ZZP'er) -->
-            <div class="zzp-hide" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
-              <div>
-                <div style="font-size:13px;font-weight:600">Members of Miyagami B.V.</div>
-                <div style="font-size:12px;color:var(--t3);margin-top:2px">3 active · 1 pending invite</div>
-              </div>
-              <button class="btn bk bs manager-hide" onclick="op('m-invite-member')">+ Invite member</button>
-            </div>
 
-            <!-- ZZP'er: Intermediary invite section (hidden for org) -->
+            <!-- ZZP'er: Intermediary invite section -->
             <div class="zzp-show" style="display:none;margin-bottom:20px">
               <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
                 <div>
@@ -3644,24 +3637,39 @@ tbody tr:hover td{background:var(--bg)}
                 <button class="btn bk bs" onclick="op('m-invite-intermediary')">+ Add intermediary</button>
               </div>
               <div style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;color:var(--t2);margin-bottom:14px;line-height:1.6">
-                An <strong>Intermediary</strong> (e.g. accountant or broker) can create POs, manage contracts and send invoices on your behalf. You remain the legal entity — they act as your representative.
+                An <strong>Intermediary</strong> (e.g. accountant or broker) can create POs, manage contracts and send invoices on your behalf. You remain the legal entity.
               </div>
-              <!-- No intermediary yet -->
               <div id="zzp-intermediary-empty" style="background:var(--white);border:1px dashed var(--border);border-radius:var(--r);padding:28px;text-align:center">
                 <div style="font-size:13px;font-weight:500;margin-bottom:6px;color:var(--t2)">No intermediary linked</div>
                 <div style="font-size:12px;color:var(--t3);margin-bottom:14px">Link an accountant or broker to manage your HelloProfs account on your behalf.</div>
                 <button class="btn bk bs" onclick="op('m-invite-intermediary')">+ Add intermediary</button>
               </div>
-              <!-- Intermediary linked (shown after invite) -->
               <div id="zzp-intermediary-linked" style="display:none;flex-direction:column;gap:8px"></div>
             </div>
 
-            <!-- Sign permission info banner (org only) -->
-            <div class="zzp-hide" style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;color:var(--t2);margin-bottom:16px;line-height:1.6">
-              <strong>Signing authority</strong> is a separate permission, independent of role. Only the <strong>Legal Representative</strong> can grant or revoke it. Admins can request it on behalf of a member.
-            </div>
+            <!-- ORG/INTERMEDIARY: Members content -->
+            <div class="zzp-hide" data-display="block">
 
-            <div class="zzp-hide" style="display:flex;flex-direction:column;gap:8px">
+              <!-- Header: title + invite button -->
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+                <div>
+                  <div style="font-size:13px;font-weight:600" id="members-entity-name">Members of Miyagami B.V.</div>
+                  <div style="font-size:12px;color:var(--t3);margin-top:2px">3 active · 1 pending invite</div>
+                </div>
+                <button class="btn bk bs manager-hide" onclick="op('m-invite-member')">+ Invite member</button>
+              </div>
+
+              <!-- Manager: read-only notice -->
+              <div id="manager-readonly-notice" style="display:none;background:#fff7ed;border:1px solid #fed7aa;border-radius:var(--rs);padding:8px 12px;font-size:12px;color:#9a3412;margin-bottom:12px">
+                As a <strong>Manager</strong> you can view members but cannot add, remove or change roles or sign permissions.
+              </div>
+
+              <!-- Admin/LR: signing authority info -->
+              <div class="manager-hide" style="background:#f4f4f4;border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;color:var(--t2);margin-bottom:16px;line-height:1.6">
+                <strong>Signing authority</strong> is a separate permission, independent of role. Only the <strong>Legal Representative</strong> can grant or revoke it. Admins can request it on behalf of a member.
+              </div>
+
+            <div style="display:flex;flex-direction:column;gap:8px">
 
               <!-- Bárbara — Admin + Legal Representative (you) -->
               <div style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden">
@@ -3697,7 +3705,8 @@ tbody tr:hover td{background:var(--bg)}
                   </select>
                   <div id="thomas-sign-state" style="display:flex;align-items:center;gap:6px;flex-shrink:0">
                     <span style="font-size:12px;color:var(--t3)">No signing authority</span>
-                    <button class="btn bw bx manager-hide" style="font-size:11px" onclick="requestSignPermission('Thomas Weiss','thomas')">Request</button>
+                    <button class="btn bw bx manager-hide lr-only" style="font-size:11px" onclick="grantSignPermission()">Grant</button>
+                    <button class="btn bw bx manager-hide" id="thomas-request-btn" style="font-size:11px;display:none" onclick="requestSignPermission('Thomas Weiss','thomas')">Request</button>
                   </div>
                   <button class="btn br bx manager-hide" onclick="removeMember('Thomas Weiss')" title="Remove">✕</button>
                 </div>
@@ -3724,7 +3733,7 @@ tbody tr:hover td{background:var(--bg)}
                   <div id="sophie-sign-state" style="display:flex;align-items:center;gap:5px;flex-shrink:0">
                     <svg viewBox="0 0 16 16" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M13 4l-6 7-4-4"/></svg>
                     <span style="font-size:12px;font-weight:500">Can sign</span>
-                    <button class="btn br bx manager-hide" style="font-size:11px" onclick="revokeSignPermission('Sophie van Dam','sophie')">Revoke</button>
+                    <button class="btn br bx manager-hide lr-only" style="font-size:11px" onclick="revokeSignPermission('Sophie van Dam','sophie')">Revoke</button>
                   </div>
                   <button class="btn br bx manager-hide" onclick="removeMember('Sophie van Dam')" title="Remove">✕</button>
                 </div>
@@ -3744,8 +3753,8 @@ tbody tr:hover td{background:var(--bg)}
 
             </div>
 
-            <!-- Signing authority audit log (org only) -->
-            <div class="zzp-hide" style="margin-top:22px">
+            <!-- Signing authority audit log -->
+            <div style="margin-top:22px">
               <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);margin-bottom:10px">Signing authority log</div>
               <div style="display:flex;flex-direction:column;gap:2px" id="sign-audit-log">
                 <div class="tli"><div class="tldot"></div><div><div class="tlt">Sophie van Dam granted signing authority</div><div class="tlm">12 May 2026 · Granted by Bárbara Mota (Legal Representative)</div></div></div>
@@ -3753,7 +3762,8 @@ tbody tr:hover td{background:var(--bg)}
               </div>
             </div>
 
-          </div>
+            </div><!-- /zzp-hide members content -->
+          </div><!-- /st4 Members -->
 
 
           <!-- Security -->
@@ -4035,16 +4045,16 @@ tbody tr:hover td{background:var(--bg)}
       <label class="lbl dk">Role *</label>
       <div style="display:flex;flex-direction:column;gap:8px;margin-top:6px">
         <label style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:var(--rs);cursor:pointer;transition:border-color .15s" class="tpl-row">
-          <input type="radio" name="member-role" value="viewer" style="width:14px;height:14px;accent-color:var(--navy);margin-top:1px;flex-shrink:0">
-          <div><div style="font-size:13px;font-weight:500">Viewer</div><div style="font-size:11px;color:var(--t3);margin-top:2px">Read-only access to all data. Cannot create, sign or invite.</div></div>
+          <input type="radio" name="member-role" value="legal-representative" style="width:14px;height:14px;accent-color:var(--navy);margin-top:1px;flex-shrink:0">
+          <div><div style="font-size:13px;font-weight:500">Legal Representative</div><div style="font-size:11px;color:var(--t3);margin-top:2px">Full access + can grant and revoke signing authority. Legally accountable for the entity.</div></div>
         </label>
         <label style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:var(--rs);cursor:pointer;transition:border-color .15s" class="tpl-row">
-          <input type="radio" name="member-role" value="manager" checked style="width:14px;height:14px;accent-color:var(--navy);margin-top:1px;flex-shrink:0">
-          <div><div style="font-size:13px;font-weight:500">Manager</div><div style="font-size:11px;color:var(--t3);margin-top:2px">Can create POs, invite relations, review offers and sign contracts. Cannot manage users or billing.</div></div>
+          <input type="radio" name="member-role" value="admin" checked style="width:14px;height:14px;accent-color:var(--navy);margin-top:1px;flex-shrink:0">
+          <div><div style="font-size:13px;font-weight:500">Admin</div><div style="font-size:11px;color:var(--t3);margin-top:2px">Full access including user management. Can request signing authority from the Legal Representative.</div></div>
         </label>
         <label style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:var(--rs);cursor:pointer;transition:border-color .15s" class="tpl-row">
-          <input type="radio" name="member-role" value="admin" style="width:14px;height:14px;accent-color:var(--navy);margin-top:1px;flex-shrink:0">
-          <div><div style="font-size:13px;font-weight:500">Admin</div><div style="font-size:11px;color:var(--t3);margin-top:2px">Full access including user management and billing. Use with care.</div></div>
+          <input type="radio" name="member-role" value="manager" style="width:14px;height:14px;accent-color:var(--navy);margin-top:1px;flex-shrink:0">
+          <div><div style="font-size:13px;font-weight:500">Manager</div><div style="font-size:11px;color:var(--t3);margin-top:2px">Can create POs, invite relations, review offers and sign contracts. Cannot manage members or billing.</div></div>
         </label>
       </div>
     </div>
@@ -6161,9 +6171,28 @@ function setEnt(co,type,av,role){
   const fiscalTab = document.getElementById('st5-tab');
   if(fiscalTab) fiscalTab.style.display = isZZP ? '' : 'none';
 
+  // Members tab: show for Org and Intermediary, hide for ZZP'er
+  const membersTab = document.querySelector('[onclick*="st4"]');
+  if(membersTab) membersTab.style.display = isZZP ? 'none' : '';
+
+  // lr-only: Grant/Revoke sign permission visible only for Legal Representative
+  const isLR = (role || '').toLowerCase().replace(/\s+/g,'') === 'legalrepresentative' || role === 'Legal Representative';
+  const isAdmin = (role || '').toLowerCase() === 'admin';
+  document.querySelectorAll('.lr-only').forEach(el=>{ el.style.display = isLR ? '' : 'none'; });
+  // Admin-only: Request sign permission button
+  const requestBtn = document.getElementById('thomas-request-btn');
+  if(requestBtn) requestBtn.style.display = (isAdmin && !isLR) ? '' : 'none';
+
   // Hide entity creation for ZZP'ers; show intermediary invite for ZZP'ers
-  document.querySelectorAll('.zzp-hide').forEach(el => el.style.display = isZZP ? 'none' : '');
-  document.querySelectorAll('.zzp-show').forEach(el => el.style.display = isZZP ? '' : 'none');
+  document.querySelectorAll('.zzp-hide').forEach(el=>{
+    if(isZZP){ el.style.display='none'; }
+    else {
+      // Restore original display — check for flex hint in inline style
+      const orig = el.getAttribute('data-display') || (el.style.cssText.includes('flex') ? 'flex' : 'block');
+      el.style.display = orig;
+    }
+  });
+  document.querySelectorAll('.zzp-show').forEach(el => el.style.display = isZZP ? 'block' : 'none');
 
   // Toggle client vs contractor profile sections
   const clientSection = document.getElementById('profile-client-section');
@@ -6355,6 +6384,8 @@ function applyManagerRole(isManager){
   document.querySelectorAll('.manager-hide').forEach(el=>{
     el.classList.toggle('viewer-hidden', isManager);
   });
+  const notice = document.getElementById('manager-readonly-notice');
+  if(notice) notice.style.display = isManager ? 'block' : 'none';
 }
 
 function applyViewerRole(isViewer){
@@ -6471,6 +6502,9 @@ function doLogin(){
       // Hide Subscription tab in Settings
       const subTab = document.querySelector('.tab[onclick*="st3"]');
       if(subTab) subTab.style.display='none';
+      // Show Members tab for Intermediary
+      const membersTabDennis = document.querySelector('.tab[onclick*="st4"]');
+      if(membersTabDennis) membersTabDennis.style.display='';
       // Hide Legal representative + its divider
       const lrSection = document.getElementById('profile-client-section');
       if(lrSection){
